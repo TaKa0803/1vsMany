@@ -110,50 +110,20 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\BackStep\BossBackStep.cpp" />
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\Punch\BossPunch.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\SumerSolt\BossSumerSolt.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\Down\BossDown.cpp" />
-    <ClCompile Include="Application\Game\Boss\UI\BossUI.cpp" />
-    <ClCompile Include="Application\Game\Effect\LargeDebris\EffectLargeDebris.cpp" />
-    <ClCompile Include="Application\Game\Effect\Normal\EffectNormal.cpp" />
-    <ClCompile Include="Application\Game\Player\AnimationManager\PlayerAnimationManager.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\Down\PlayerDown.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\hit\PlayerHit.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\Idle\PlayerIdle.cpp" />
-    <ClCompile Include="Application\Game\Player\InputManager\PlayerInputManager.cpp" />
-    <ClCompile Include="Application\Game\Player\Stamina\PlayerStamina.cpp" />
-    <ClCompile Include="Application\Game\Player\UI\PlayerUI.cpp" />
-    <ClCompile Include="Application\Game\Scene\GameClearScene.cpp" />
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\Charge\BossCharge.cpp" />
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\ShotBullet\BossShotBullet.cpp" />
-    <ClCompile Include="Application\Game\Boss\Boss.cpp" />
-    <ClCompile Include="Application\Game\Boss\BulletManager\BossBulletManager.cpp" />
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\IATK\IATK.cpp" />
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\BossNormalATKManager.cpp" />
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\BossATKTypeManager.cpp" />
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\Stump\BossStump.cpp" />
-    <ClCompile Include="Application\Game\Boss\Behavior\Idle\BossIdle.cpp" />
-    <ClCompile Include="Application\Game\Scene\InGameScene.cpp" />
-    <ClCompile Include="Application\Game\Scene\TitleScene.cpp" />
-    <ClCompile Include="Application\Game\Scene\GameOverScene.cpp" />
-    <ClCompile Include="Application\Game\CirccleShadow\CirccleShadow.cpp" />
-    <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp" />
-    <ClCompile Include="Application\Game\GameUI\GameUI.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\ATKData\PlayerPunch.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\PlayerATKManager\PlayerATKManager.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\PlayerRoll\PlayerRoll.cpp" />
-    <ClCompile Include="Application\Game\Effect\Move\EffectMove.cpp" />
-    <ClCompile Include="Application\Game\Player\Player.cpp" />
     <ClCompile Include="Application\Debug\DebugScene.cpp" />
-    <ClCompile Include="Application\Game\Plane\Plane.cpp" />
     <ClCompile Include="Application\AppScene\AppScene.cpp" />
+    <ClCompile Include="Application\Game\BrokenBody\BrokenBody.cpp" />
+    <ClCompile Include="Application\Game\Effect\dZoneE\DZone.cpp" />
+    <ClCompile Include="Application\Game\Effect\EffectExplosion.cpp" />
+    <ClCompile Include="Application\Game\Effect\EffectMove\EffectMove.cpp" />
+    <ClCompile Include="Application\Game\Effect\EffectSphereExplo\ESphereExplo.cpp" />
+    <ClCompile Include="Application\Game\Effect\Impact\Impact.cpp" />
+    <ClCompile Include="Application\Game\EnemyPopManager\EnemyPopManager.cpp" />
+    <ClCompile Include="Application\Game\Enemy\ALEnemy.cpp" />
+    <ClCompile Include="Application\Game\Plane\Plane.cpp" />
+    <ClCompile Include="Application\Game\Player\ALPlayer.cpp" />
+    <ClCompile Include="Application\Game\Scene\ALGameScene.cpp" />
+    <ClCompile Include="Application\Game\Scene\ALTitleScene.cpp" />
     <ClCompile Include="Application\SceneManager\SceneManager.cpp" />
     <ClCompile Include="Application\IScene\IScene.cpp" />
     <ClCompile Include="Engine\2d\SpriteManager\SpriteManager.cpp" />
@@ -400,54 +370,21 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\IATKManager\IBossATKTypeManager.h" />
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\BackStep\BossBackStep.h" />
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\Punch\BossPunch.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\SumerSolt\BossSumerSolt.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\Down\BossDown.h" />
-    <ClInclude Include="Application\Game\Boss\Behavior\IBossBehavior.h" />
-    <ClInclude Include="Application\Game\Boss\UI\BossUI.h" />
-    <ClInclude Include="Application\Game\Effect\LargeDebris\EffectLargeDebris.h" />
-    <ClInclude Include="Application\Game\Effect\Normal\EffectNormal.h" />
-    <ClInclude Include="Application\Game\Player\AnimationManager\PlayerAnimationManager.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\ATKData\BasePlayerATK.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\Down\PlayerDown.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\Idle\PlayerIdle.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\IPlayerBehavior.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\hit\PlayerHit.h" />
-    <ClInclude Include="Application\Game\Player\InputManager\PlayerInputManager.h" />
-    <ClInclude Include="Application\Game\Player\Stamina\PlayerStamina.h" />
-    <ClInclude Include="Application\Game\Player\UI\PlayerUI.h" />
-    <ClInclude Include="Application\Game\Scene\GameClearScene.h" />
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\Charge\BossCharge.h" />
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\ShotBullet\BossShotBullet.h" />
-    <ClInclude Include="Application\Game\Boss\Boss.h" />
-    <ClInclude Include="Application\Game\Boss\BulletManager\BossBulletManager.h" />
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\IATK\IATK.h" />
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\BossNormalATKManager.h" />
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\BossATKTypeManager.h" />
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\Stump\BossStump.h" />
-    <ClInclude Include="Application\Game\Boss\Behavior\Idle\BossIdle.h" />
-    <ClInclude Include="Application\Game\Scene\InGameScene.h" />
-    <ClInclude Include="Application\Game\Scene\TitleScene.h" />
-    <ClInclude Include="Application\Game\Scene\GameOverScene.h" />
-    <ClInclude Include="Application\Game\CirccleShadow\CirccleShadow.h" />
-    <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h" />
-    <ClInclude Include="Application\Game\GameUI\GameUI.h" />
-    <ClInclude Include="Application\Game\Player\Player.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\ATKData\PlayerPunch.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\PlayerATKManager\PlayerATKManager.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\PlayerRoll\PlayerRoll.h" />
     <ClInclude Include="Application\Debug\DebugScene.h" />
-    <ClInclude Include="Application\Game\Effect\Move\EffectMove.h" />
-    <ClInclude Include="Application\Game\Plane\Plane.h" />
     <ClInclude Include="Application\AppScene\AppScene.h" />
+    <ClInclude Include="Application\Game\BrokenBody\BrokenBody.h" />
+    <ClInclude Include="Application\Game\Effect\dZoneE\DZone.h" />
+    <ClInclude Include="Application\Game\Effect\EffectExplosion.h" />
+    <ClInclude Include="Application\Game\Effect\EffectMove\EffectMove.h" />
+    <ClInclude Include="Application\Game\Effect\EffectSphereExplo\ESphereExplo.h" />
+    <ClInclude Include="Application\Game\Effect\Impact\Impact.h" />
+    <ClInclude Include="Application\Game\EnemyPopManager\EnemyPopManager.h" />
+    <ClInclude Include="Application\Game\Enemy\ALEnemy.h" />
+    <ClInclude Include="Application\Game\items.h" />
+    <ClInclude Include="Application\Game\Plane\Plane.h" />
+    <ClInclude Include="Application\Game\Player\ALPlayer.h" />
+    <ClInclude Include="Application\Game\Scene\ALGameScene.h" />
+    <ClInclude Include="Application\Game\Scene\ALTitleScene.h" />
     <ClInclude Include="Application\IScene\IScene.h" />
     <ClInclude Include="Application\SceneFactory\SceneFactory.h" />
     <ClInclude Include="Application\SceneManager\SceneManager.h" />
@@ -543,6 +480,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\GlobalVariables\StageWall.json" />
+    <None Include="resources\jsonfile\enemyPopData.json" />
+    <None Include="resources\jsonfile\PlayerATKData.json" />
     <None Include="resources\jsonfile\resourcePath.json" />
     <None Include="resources\jsonfile\modelPathFile.json" />
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli" />

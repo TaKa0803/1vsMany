@@ -44,7 +44,7 @@ void DebugScnene::Initialize()
 	//object->Initialize("AnimeCube");
 	//object->Initialize("sphere");
 	//object->Initialize("walk");
-	object->Initialize("human");
+	object->Initialize("Player");
 	//object->Initialize("Boss");
 
 	//山初期化

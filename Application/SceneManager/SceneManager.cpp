@@ -4,13 +4,6 @@
 
 #include"SceneFactory/SceneFactory.h"
 
-#pragma region シーンのh
-#include"Debug/DebugScene.h"
-#include"Game/Scene/TitleScene.h"
-#include"Game/Scene/InGameScene.h"
-#include"Game/Scene/GameOverScene.h"
-#include"Game/Scene/GameClearScene.h"
-#pragma endregion
 
 #include<cassert>
 

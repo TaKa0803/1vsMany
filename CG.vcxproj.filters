@@ -97,50 +97,8 @@
     <ClCompile Include="Application\AppScene\AppScene.cpp">
       <Filter>Application\AppScene</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Boss.cpp">
-      <Filter>Application\Game\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\BossATKTypeManager.cpp">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\BackStep\BossBackStep.cpp">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\BackStep</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\BulletManager\BossBulletManager.cpp">
-      <Filter>Application\Game\Boss\BossBulletManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\Charge\BossCharge.cpp">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\Charge</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\Down\BossDown.cpp">
-      <Filter>Application\Game\Boss\Behavior\Down</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\Idle\BossIdle.cpp">
-      <Filter>Application\Game\Boss\Behavior\Idle</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\BossNormalATKManager.cpp">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\Punch\BossPunch.cpp">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\Punch</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\ShotBullet\BossShotBullet.cpp">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\ShotBullet</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\Stump\BossStump.cpp">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\Stump</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\Normal\SumerSolt\BossSumerSolt.cpp">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\SumerSolt</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\UI\BossUI.cpp">
-      <Filter>Application\Game\Boss\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Camera\Camera.cpp">
       <Filter>Engine\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\CirccleShadow\CirccleShadow.cpp">
-      <Filter>Application\Game\Effect\CircleShadow</Filter>
     </ClCompile>
     <ClCompile Include="Application\Debug\DebugScene.cpp">
       <Filter>Application\DebugScene</Filter>
@@ -157,41 +115,14 @@
     <ClCompile Include="Engine\base\DXC\DXCManager.cpp">
       <Filter>Engine\base\DXCManager</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\Effect\LargeDebris\EffectLargeDebris.cpp">
-      <Filter>Application\Game\Effect\LargeDebris</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Effect\Move\EffectMove.cpp">
-      <Filter>Application\Game\Effect\Move</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Effect\Normal\EffectNormal.cpp">
-      <Filter>Application\Game\Effect\Normal</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\ExtractionScene\ExtractionScene.cpp">
       <Filter>Engine\PostEffect\ExtractionScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp">
-      <Filter>Application\Game\FollowCamera</Filter>
     </ClCompile>
     <ClCompile Include="Engine\base\functions\function.cpp">
       <Filter>Engine\base\function</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\Scene\GameClearScene.cpp">
-      <Filter>Application\Game\Scenes\ClearScene</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\3d\SingleGameObjects\GameObject.cpp">
       <Filter>Engine\3D\SingleObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Scene\GameOverScene.cpp">
-      <Filter>Application\Game\Scenes\OverScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Scene\InGameScene.cpp">
-      <Filter>Application\Game\Scenes\InGameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\GameUI\GameUI.cpp">
-      <Filter>Application\Game\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Boss\Behavior\ATK\IATK\IATK.cpp">
-      <Filter>Application\Game\Boss\Behavior\BaseATK</Filter>
     </ClCompile>
     <ClCompile Include="externals\Imgui\imgui.cpp">
       <Filter>external\imgui</Filter>
@@ -280,27 +211,6 @@
     <ClCompile Include="Engine\ParticleData\Update\ParticleUpdateCS.cpp">
       <Filter>Engine\GPUParticle</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\Plane\Plane.cpp">
-      <Filter>Application\Game\Plane</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Player.cpp">
-      <Filter>Application\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\PlayerATKManager\PlayerATKManager.cpp">
-      <Filter>Application\Game\Player\Behavior\ATKManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\hit\PlayerHit.cpp">
-      <Filter>Application\Game\Player\Behavior\Hit</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\ATKData\PlayerPunch.cpp">
-      <Filter>Application\Game\Player\Behavior\ATKManager\ATKs\Punch</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\PlayerRoll\PlayerRoll.cpp">
-      <Filter>Application\Game\Player\Behavior\Roll</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Stamina\PlayerStamina.cpp">
-      <Filter>Application\Game\Player\Stamina</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\PostEffect\PEs\PEBloom.cpp">
       <Filter>Engine\PostEffect\Effects</Filter>
     </ClCompile>
@@ -385,9 +295,6 @@
     <ClCompile Include="Engine\base\TextureManager\TextureManager.cpp">
       <Filter>Engine\base\TextureManager</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\Scene\TitleScene.cpp">
-      <Filter>Application\Game\Scenes\TitleScene</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\base\UAVManager\UAVManager.cpp">
       <Filter>Engine\base\UAVManager</Filter>
     </ClCompile>
@@ -415,21 +322,18 @@
     <ClCompile Include="Engine\GlobalVariable\Manager\GlobalVaribleManager.cpp">
       <Filter>Engine\GlobalVariable\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\Player\AnimationManager\PlayerAnimationManager.cpp">
-      <Filter>Application\Game\Player\AnimationManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\Down\PlayerDown.cpp">
-      <Filter>Application\Game\Player\Behavior\Down</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\Idle\PlayerIdle.cpp">
-      <Filter>Application\Game\Player\Behavior\Idle</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\InputManager\PlayerInputManager.cpp">
-      <Filter>Application\Game\Player\InputManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Game\Player\UI\PlayerUI.cpp">
-      <Filter>Application\Game\Player\UI</Filter>
-    </ClCompile>
+    <ClCompile Include="Application\Game\Player\ALPlayer.cpp" />
+    <ClCompile Include="Application\Game\EnemyPopManager\EnemyPopManager.cpp" />
+    <ClCompile Include="Application\Game\Plane\Plane.cpp" />
+    <ClCompile Include="Application\Game\Effect\EffectExplosion.cpp" />
+    <ClCompile Include="Application\Game\Effect\Impact\Impact.cpp" />
+    <ClCompile Include="Application\Game\Effect\EffectSphereExplo\ESphereExplo.cpp" />
+    <ClCompile Include="Application\Game\Effect\EffectMove\EffectMove.cpp" />
+    <ClCompile Include="Application\Game\Effect\dZoneE\DZone.cpp" />
+    <ClCompile Include="Application\Game\BrokenBody\BrokenBody.cpp" />
+    <ClCompile Include="Application\Game\Scene\ALGameScene.cpp" />
+    <ClCompile Include="Application\Game\Scene\ALTitleScene.cpp" />
+    <ClCompile Include="Application\Game\Enemy\ALEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -438,50 +342,8 @@
     <ClInclude Include="Application\AppScene\AppScene.h">
       <Filter>Application\AppScene</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Boss.h">
-      <Filter>Application\Game\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\BossATKTypeManager.h">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\BackStep\BossBackStep.h">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\BackStep</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\BulletManager\BossBulletManager.h">
-      <Filter>Application\Game\Boss\BossBulletManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\Charge\BossCharge.h">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\Charge</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\Down\BossDown.h">
-      <Filter>Application\Game\Boss\Behavior\Down</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\Idle\BossIdle.h">
-      <Filter>Application\Game\Boss\Behavior\Idle</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\BossNormalATKManager.h">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\Punch\BossPunch.h">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\Punch</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\ShotBullet\BossShotBullet.h">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\ShotBullet</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\Stump\BossStump.h">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\Stump</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\Normal\SumerSolt\BossSumerSolt.h">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\SumerSolt</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\UI\BossUI.h">
-      <Filter>Application\Game\Boss\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Camera\Camera.h">
       <Filter>Engine\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\CirccleShadow\CirccleShadow.h">
-      <Filter>Application\Game\Effect\CircleShadow</Filter>
     </ClInclude>
     <ClInclude Include="Application\Debug\DebugScene.h">
       <Filter>Application\DebugScene</Filter>
@@ -498,44 +360,14 @@
     <ClInclude Include="Engine\base\DXC\DXCManager.h">
       <Filter>Engine\base\DXCManager</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Game\Effect\LargeDebris\EffectLargeDebris.h">
-      <Filter>Application\Game\Effect\LargeDebris</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Effect\Move\EffectMove.h">
-      <Filter>Application\Game\Effect\Move</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Effect\Normal\EffectNormal.h">
-      <Filter>Application\Game\Effect\Normal</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\ExtractionScene\ExtractionScene.h">
       <Filter>Engine\PostEffect\ExtractionScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h">
-      <Filter>Application\Game\FollowCamera</Filter>
     </ClInclude>
     <ClInclude Include="Engine\base\functions\function.h">
       <Filter>Engine\base\function</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Game\Scene\GameClearScene.h">
-      <Filter>Application\Game\Scenes\ClearScene</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\3d\SingleGameObjects\GameObject.h">
       <Filter>Engine\3D\SingleObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Scene\GameOverScene.h">
-      <Filter>Application\Game\Scenes\OverScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Scene\InGameScene.h">
-      <Filter>Application\Game\Scenes\InGameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\GameUI\GameUI.h">
-      <Filter>Application\Game\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\IATK\IATK.h">
-      <Filter>Application\Game\Boss\Behavior\BaseATK</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\IBossBehavior.h">
-      <Filter>Application\Game\Boss\Behavior</Filter>
     </ClInclude>
     <ClInclude Include="externals\Imgui\imgui.h">
       <Filter>external\imgui</Filter>
@@ -581,9 +413,6 @@
     </ClInclude>
     <ClInclude Include="Engine\PostEffect\IPipelineStateObject.h">
       <Filter>Engine\PostEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\IPlayerBehavior.h">
-      <Filter>Application\Game\Player\Behavior</Filter>
     </ClInclude>
     <ClInclude Include="Application\IScene\IScene.h">
       <Filter>Application\Game\IScene</Filter>
@@ -638,27 +467,6 @@
     </ClInclude>
     <ClInclude Include="Engine\ParticleData\ParticlePSO\ParticlePSO.h">
       <Filter>Engine\GPUParticle</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Plane\Plane.h">
-      <Filter>Application\Game\Plane</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Player.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\PlayerATKManager\PlayerATKManager.h">
-      <Filter>Application\Game\Player\Behavior\ATKManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\hit\PlayerHit.h">
-      <Filter>Application\Game\Player\Behavior\Hit</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\ATKData\PlayerPunch.h">
-      <Filter>Application\Game\Player\Behavior\ATKManager\ATKs\Punch</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\PlayerRoll\PlayerRoll.h">
-      <Filter>Application\Game\Player\Behavior\Roll</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Stamina\PlayerStamina.h">
-      <Filter>Application\Game\Player\Stamina</Filter>
     </ClInclude>
     <ClInclude Include="Engine\PostEffect\PEs\PEBloom.h">
       <Filter>Engine\PostEffect\Effects</Filter>
@@ -744,9 +552,6 @@
     <ClInclude Include="Engine\base\TextureManager\TextureManager.h">
       <Filter>Engine\base\TextureManager</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Game\Scene\TitleScene.h">
-      <Filter>Application\Game\Scenes\TitleScene</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\base\UAVManager\UAVManager.h">
       <Filter>Engine\base\UAVManager</Filter>
     </ClInclude>
@@ -777,30 +582,22 @@
     <ClInclude Include="Engine\GlobalVariable\Manager\GlobalVaribleManager.h">
       <Filter>Engine\GlobalVariable\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\ATKData\BasePlayerATK.h">
-      <Filter>Application\Game\Player\Behavior\ATKManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Boss\Behavior\ATK\IATKManager\IBossATKTypeManager.h">
-      <Filter>Application\Game\Boss\Behavior\ATKTypeManager\ATKType</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\AnimationManager\PlayerAnimationManager.h">
-      <Filter>Application\Game\Player\AnimationManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\Down\PlayerDown.h">
-      <Filter>Application\Game\Player\Behavior\Down</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\Idle\PlayerIdle.h">
-      <Filter>Application\Game\Player\Behavior\Idle</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\InputManager\PlayerInputManager.h">
-      <Filter>Application\Game\Player\InputManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\UI\PlayerUI.h">
-      <Filter>Application\Game\Player\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Application\SceneFactory\SceneFactory.h">
       <Filter>Application\SceneManager</Filter>
     </ClInclude>
+    <ClInclude Include="Application\Game\Player\ALPlayer.h" />
+    <ClInclude Include="Application\Game\Enemy\ALEnemy.h" />
+    <ClInclude Include="Application\Game\EnemyPopManager\EnemyPopManager.h" />
+    <ClInclude Include="Application\Game\Plane\Plane.h" />
+    <ClInclude Include="Application\Game\items.h" />
+    <ClInclude Include="Application\Game\Effect\EffectExplosion.h" />
+    <ClInclude Include="Application\Game\Effect\Impact\Impact.h" />
+    <ClInclude Include="Application\Game\Effect\EffectSphereExplo\ESphereExplo.h" />
+    <ClInclude Include="Application\Game\Effect\EffectMove\EffectMove.h" />
+    <ClInclude Include="Application\Game\Effect\dZoneE\DZone.h" />
+    <ClInclude Include="Application\Game\BrokenBody\BrokenBody.h" />
+    <ClInclude Include="Application\Game\Scene\ALGameScene.h" />
+    <ClInclude Include="Application\Game\Scene\ALTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">
@@ -830,6 +627,8 @@
     <None Include="resources\GlobalVariables\StageWall.json">
       <Filter>resources\json</Filter>
     </None>
+    <None Include="resources\jsonfile\enemyPopData.json" />
+    <None Include="resources\jsonfile\PlayerATKData.json" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
