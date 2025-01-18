@@ -1,0 +1,760 @@
+{
+    "name": "scene",
+    "objects": [
+        {
+            "type": "MESH",
+            "name": "立方体",
+            "transform": {
+                "translation": [
+                    0.0,
+                    -10.0,
+                    2.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    11.0,
+                    1.0,
+                    2.0
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.001",
+            "transform": {
+                "translation": [
+                    -10.0,
+                    0.0,
+                    2.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "scaling": [
+                    10.0,
+                    1.0,
+                    2.0
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.002",
+            "transform": {
+                "translation": [
+                    10.0,
+                    0.0,
+                    2.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "scaling": [
+                    10.0,
+                    1.0,
+                    2.0
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.001",
+            "transform": {
+                "translation": [
+                    0.0,
+                    107.16656494140625,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    500.0,
+                    500.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    0.009999990463256836
+                ]
+            },
+            "file_name": "plane"
+        },
+        {
+            "type": "SpawnPoint",
+            "name": "ICO球",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "player"
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.003",
+            "transform": {
+                "translation": [
+                    -108.95999908447266,
+                    10.0,
+                    2.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    100.0,
+                    1.0,
+                    2.0
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.004",
+            "transform": {
+                "translation": [
+                    108.95999908447266,
+                    10.0,
+                    2.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    100.0,
+                    1.0,
+                    2.0
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.005",
+            "transform": {
+                "translation": [
+                    -208.61935424804688,
+                    159.0,
+                    2.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "scaling": [
+                    150.0,
+                    1.0,
+                    2.0
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.006",
+            "transform": {
+                "translation": [
+                    208.0,
+                    159.0,
+                    2.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "scaling": [
+                    150.0,
+                    1.0,
+                    2.0
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.007",
+            "transform": {
+                "translation": [
+                    0.0,
+                    307.9367980957031,
+                    2.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    209.55999755859375,
+                    1.0,
+                    50.0
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "SpawnPoint",
+            "name": "ICO球.001",
+            "transform": {
+                "translation": [
+                    -120.36653137207031,
+                    111.32839965820312,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "EnemySpawn",
+            "PopAreaSize": 30.0,
+            "PangeWithPopStarting": 80.0,
+            "PopInterval": 5.0,
+            "maxAreaPopCount": 50.0
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.008",
+            "transform": {
+                "translation": [
+                    0.0,
+                    225.29122924804688,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    50.0,
+                    50.0,
+                    30.0
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.009",
+            "transform": {
+                "translation": [
+                    0.0,
+                    169.84274291992188,
+                    -12.124781608581543
+                ],
+                "rotation": [
+                    37.59999465942383,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    50.0,
+                    29.999998092651367,
+                    29.999998092651367
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "SpawnPoint",
+            "name": "ICO球.002",
+            "transform": {
+                "translation": [
+                    113.1402587890625,
+                    108.49457550048828,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "EnemySpawn",
+            "PopAreaSize": 30.0,
+            "PangeWithPopStarting": 80.0,
+            "PopInterval": 5.0,
+            "maxAreaPopCount": 50.0
+        },
+        {
+            "type": "SpawnPoint",
+            "name": "ICO球.003",
+            "transform": {
+                "translation": [
+                    95.00381469726562,
+                    189.54183959960938,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "EnemySpawn",
+            "PopAreaSize": 30.0,
+            "PangeWithPopStarting": 80.0,
+            "PopInterval": 5.0,
+            "maxAreaPopCount": 50.0
+        },
+        {
+            "type": "SpawnPoint",
+            "name": "ICO球.004",
+            "transform": {
+                "translation": [
+                    0.9209747314453125,
+                    82.42343139648438,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "EnemySpawn",
+            "PopAreaSize": 30.0,
+            "PangeWithPopStarting": 80.0,
+            "PopInterval": 5.0,
+            "maxAreaPopCount": 50.0
+        },
+        {
+            "type": "SpawnPoint",
+            "name": "ICO球.005",
+            "transform": {
+                "translation": [
+                    -122.06683349609375,
+                    60.31963348388672,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "EnemySpawn",
+            "PopAreaSize": 30.0,
+            "PangeWithPopStarting": 80.0,
+            "PopInterval": 5.0,
+            "maxAreaPopCount": 50.0
+        },
+        {
+            "type": "SpawnPoint",
+            "name": "ICO球.008",
+            "transform": {
+                "translation": [
+                    113.1402587890625,
+                    52.951698303222656,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "EnemySpawn",
+            "PopAreaSize": 30.0,
+            "PangeWithPopStarting": 80.0,
+            "PopInterval": 5.0,
+            "maxAreaPopCount": 50.0
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.010",
+            "transform": {
+                "translation": [
+                    99.68917083740234,
+                    257.7453308105469,
+                    24.366073608398438
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    50.0,
+                    17.40999984741211,
+                    5.700000762939453
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.011",
+            "transform": {
+                "translation": [
+                    -100.21064758300781,
+                    257.7453308105469,
+                    24.366073608398438
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    50.0,
+                    17.40999984741211,
+                    5.700000762939453
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.012",
+            "transform": {
+                "translation": [
+                    -143.04928588867188,
+                    195.3804473876953,
+                    -5.426212310791016
+                ],
+                "rotation": [
+                    32.999996185302734,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    7.299999237060547,
+                    57.18000030517578,
+                    5.230000972747803
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.013",
+            "transform": {
+                "translation": [
+                    142.8472900390625,
+                    195.3804473876953,
+                    -5.426212310791016
+                ],
+                "rotation": [
+                    32.999996185302734,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    7.299999237060547,
+                    57.18000030517578,
+                    5.230000972747803
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "file_name": "Wall"
+        },
+        {
+            "type": "SpawnPoint",
+            "name": "ICO球.006",
+            "transform": {
+                "translation": [
+                    -98.82949829101562,
+                    185.0077362060547,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "EnemySpawn",
+            "PopAreaSize": 30.0,
+            "PangeWithPopStarting": 80.0,
+            "PopInterval": 5.0,
+            "maxAreaPopCount": 50.0
+        },
+        {
+            "type": "SpawnPoint",
+            "name": "ICO球.007",
+            "transform": {
+                "translation": [
+                    0.9209747314453125,
+                    242.8176727294922,
+                    30.275733947753906
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "EnemySpawn",
+            "PopAreaSize": 30.0,
+            "PangeWithPopStarting": 80.0,
+            "PopInterval": 5.0,
+            "maxAreaPopCount": 50.0
+        }
+    ]
+}
