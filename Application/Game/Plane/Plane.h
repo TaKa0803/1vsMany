@@ -1,19 +1,17 @@
 #pragma once
 #include "SingleGameObjects/GameObject.h"
-#include"Camera/Camera.h"
+
 class Plane :public GameObject {
 
-public:
+public://**パブリック関数**//
 
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
 	Plane();
-	~Plane();
+	~Plane()=default;
 
-	//void CaluclateInit();
-
-	void Initialize();
-
-	void DebagWindow();
-
+	//更新
 	void Draw();
 
 

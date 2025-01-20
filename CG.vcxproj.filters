@@ -334,6 +334,7 @@
     <ClCompile Include="Application\Game\Scene\ALGameScene.cpp" />
     <ClCompile Include="Application\Game\Scene\ALTitleScene.cpp" />
     <ClCompile Include="Application\Game\Enemy\ALEnemy.cpp" />
+    <ClCompile Include="Application\Game\Scene\ClearScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -598,6 +599,7 @@
     <ClInclude Include="Application\Game\BrokenBody\BrokenBody.h" />
     <ClInclude Include="Application\Game\Scene\ALGameScene.h" />
     <ClInclude Include="Application\Game\Scene\ALTitleScene.h" />
+    <ClInclude Include="Application\Game\Scene\ClearScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">

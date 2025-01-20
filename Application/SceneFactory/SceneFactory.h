@@ -5,6 +5,7 @@
 #include"Debug/DebugScene.h"
 #include"Game/Scene/ALTitleScene.h"
 #include"Game/Scene/ALGameScene.h"
+#include"Game/Scene/ClearScene.h"
 #pragma endregion
 
 #include<iostream>
@@ -33,11 +34,8 @@ public://**パブリック関数**//
 		case SCENE::GAME://ゲームシーンを返す処理
 			return std::make_unique<ALGameScene>();
 
-		case SCENE::GAMEOVER://ゲームオーバーシーンを帰す処理
-			//return std::make_unique<GameOverScene>();
-
 		case SCENE::GAMECLEAR://ゲームクリアシーンを返す処理
-			//return std::make_unique<GameClearScene>();
+			return std::make_unique<ClearScene>();
 
 		case SCENE::SceneCount:
 			return nullptr;

@@ -124,6 +124,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Game\Player\ALPlayer.cpp" />
     <ClCompile Include="Application\Game\Scene\ALGameScene.cpp" />
     <ClCompile Include="Application\Game\Scene\ALTitleScene.cpp" />
+    <ClCompile Include="Application\Game\Scene\ClearScene.cpp" />
     <ClCompile Include="Application\SceneManager\SceneManager.cpp" />
     <ClCompile Include="Application\IScene\IScene.cpp" />
     <ClCompile Include="Engine\2d\SpriteManager\SpriteManager.cpp" />
@@ -385,6 +386,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Game\Player\ALPlayer.h" />
     <ClInclude Include="Application\Game\Scene\ALGameScene.h" />
     <ClInclude Include="Application\Game\Scene\ALTitleScene.h" />
+    <ClInclude Include="Application\Game\Scene\ClearScene.h" />
     <ClInclude Include="Application\IScene\IScene.h" />
     <ClInclude Include="Application\SceneFactory\SceneFactory.h" />
     <ClInclude Include="Application\SceneManager\SceneManager.h" />

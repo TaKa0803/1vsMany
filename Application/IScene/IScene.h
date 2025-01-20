@@ -6,7 +6,6 @@ enum class SCENE {
 	Debug,
 	TITLE,
 	GAME,
-	GAMEOVER,
 	GAMECLEAR,
 	SceneCount	//使うな
 };

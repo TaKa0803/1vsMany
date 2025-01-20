@@ -7,9 +7,7 @@
 #include"AudioManager/AudioManager.h"
 #include"RandomNum/RandomNum.h"
 #include"PostEffect/PostEffectManager/PostEffectManager.h"
-#include"MapLoader/MapLoader.h"
-#include"PostEffect/PEs/PEHSVFilter.h"
-#include"PostEffect/PEs/PEVignetting.h"
+
 #include"ColliderOBB/OBBCollider.h"
 
 ALGameScene::ALGameScene() {
@@ -20,19 +18,19 @@ ALGameScene::ALGameScene() {
 
 	plane_ = std::make_unique<Plane>();
 
-	MapLoader::GetInstance()->LoadLevelEditor("untitled", ".json");
-	MapLoader::GetInstance()->CreateModel(0);
-	std::vector<std::unique_ptr<OBBCollider>>& datas = MapLoader::GetInstance()->GetColliderData();
-
-	for (auto& data : datas) {
-		if (data->colliderTag_ == "plane c") {
-			data->isActive_ = false;
-			break;
-		}
-	}
+	//MapLoader::GetInstance()->LoadLevelEditor("untitled", ".json");
+	//MapLoader::GetInstance()->CreateModel(0);
+	
+	//std::vector<std::unique_ptr<OBBCollider>>& datas = MapLoader::GetInstance()->GetColliderData();
+	//for (auto& data : datas) {
+	//	if (data->colliderTag_ == "plane c") {
+	//		data->isActive_ = false;
+	//		break;
+	//	}
+	//}
 
 	enemyPopManager_ = std::make_unique<EnemyPopManager>();
-	enemyPopManager_->LoadMapItem("EnemySpawn", MapLoader::GetInstance()->GetLevelData());
+	//enemyPopManager_->LoadMapItem("EnemySpawn", MapLoader::GetInstance()->GetLevelData());
 
 
 
@@ -94,8 +92,6 @@ ALGameScene::ALGameScene() {
 
 	bgmClear_ = AudioManager::LoadSoundNum("clear");
 
-
-
 	peM_ = std::make_unique<ParticleManager>();
 	EmiterSphere*emit = peM_->GetEmiterData();
 	emit->speed = { 0.1f,1.5f };
@@ -112,7 +108,6 @@ void ALGameScene::Initialize() {
 	limitMinute = maxmilitMinute;
 
 	player_->Initialize();
-	plane_->Initialize();
 
 	//初期化
 	camera_->Initialize();
@@ -153,11 +148,6 @@ void ALGameScene::Initialize() {
 
 	AudioManager::GetInstance()->StopAllSounds();
 	AudioManager::PlaySoundData(bgmGame_, 0.08f);
-
-	PEHSVFilter::materialData_->effective = 1.0f;
-	PEHSVFilter::materialData_->saturation = 0.3f;
-
-	PEVignetting::materialData_->darkness = 0.3f;
 
 	peM_->Initialize(TextureManager::LoadTex("resources/Texture/CG/circle.png"));
 	peM_->SetOnlyImpact(true);
@@ -214,7 +204,7 @@ void ALGameScene::Update() {
 			}
 		}
 
-		MapLoader::GetInstance()->UpdateLevelData();
+		//MapLoader::GetInstance()->UpdateLevelData();
 
 		Collision();
 
@@ -243,7 +233,7 @@ void ALGameScene::Update() {
 void ALGameScene::Draw() {
 
 	//地面
-	MapLoader::GetInstance()->DrawLevelData();
+	plane_->Draw();
 
 	//敵の旗
 	enemyPopManager_->Draw();
