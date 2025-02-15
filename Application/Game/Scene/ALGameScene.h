@@ -8,7 +8,7 @@
 #include"Input/Input.h"
 #include"Camera/Camera.h"
 
-#include"Game/Player/ALPlayer.h"
+#include"Game/Player/Player.h"
 #include"Game/Plane/Plane.h"
 #include"Game/Enemy/ALEnemy.h"
 #include"Game/EnemyPopManager/EnemyPopManager.h"

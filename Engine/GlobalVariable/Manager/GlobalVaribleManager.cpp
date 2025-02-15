@@ -284,7 +284,7 @@ GlobalVariableManager* GlobalVariableManager::GetInstance()
 void GlobalVariableManager::SetGroup(const std::string& group, GroupData& data)
 {
 	//グループを設定
-	datas_[group] = data;
+	setDatas_[group] = data;
 }
 
 void GlobalVariableManager::Update()
@@ -295,7 +295,7 @@ void GlobalVariableManager::Update()
 	ImGui::Begin(baseName_.c_str());
 	if (ImGui::BeginTabBar("LWP")) {
 		//各グループで表示
-		for (auto& data : datas_) {
+		for (auto& data : setDatas_) {
 
 			//タブを作成
 			if (ImGui::BeginTabItem(data.first.c_str())) {
@@ -517,9 +517,9 @@ void ProcessTree(nlohmann::json& jsonNode, const std::map<std::string, TreeData>
 void GlobalVariableManager::SaveGroupItemData(const std::string& groupName)
 {
 	//グループを検索
-	std::map<std::string, GroupData>::iterator itGroup = datas_.find(groupName);
+	std::map<std::string, GroupData>::iterator itGroup = setDatas_.find(groupName);
 	//未登録チェック
-	assert(itGroup != datas_.end());
+	assert(itGroup != setDatas_.end());
 
 	nlohmann::json root;
 	root = nlohmann::json::object();
@@ -618,13 +618,13 @@ void SetLoadTreeData(TreeData& groupData, SavedTreeData& saveData) {
 void GlobalVariableManager::SetLoadGroupData(const std::string& groupName)
 {
 	//現在のパラメータデータ
-	GroupData& groupdata = datas_[groupName];
+	GroupData& groupdata = setDatas_[groupName];
 
 	//保存データ
 	SavedGroupData& saveData = saveDatas_[groupName];
 
 	//同グループ名所持が一致しない場合
-	if (datas_.end() == datas_.find(groupName) || saveDatas_.end() == saveDatas_.find(groupName)) {
+	if (setDatas_.end() == setDatas_.find(groupName) || saveDatas_.end() == saveDatas_.find(groupName)) {
 		return;
 	}
 
@@ -685,7 +685,7 @@ void GlobalVariableManager::SetLoadGroupData(const std::string& groupName)
 void GlobalVariableManager::ClearSetData()
 {
 	//データをクリア
-	datas_.clear();
+	setDatas_.clear();
 }
 
 void LoadTreeData(SavedTreeData& treeData, const nlohmann::json& jsonNode) {
@@ -829,7 +829,7 @@ void GlobalVariableManager::LoadAllSaveData()
 void GlobalVariableManager::SetLoadAllData()
 {
 
-	for (auto& data : datas_) {
+	for (auto& data : setDatas_) {
 		std::string name = data.first;
 
 		SetLoadGroupData(name);

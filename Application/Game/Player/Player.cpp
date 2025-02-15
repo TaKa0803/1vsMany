@@ -1,4 +1,4 @@
-#include"ALPlayer.h"
+#include"Player.h"
 
 #include"AudioManager/AudioManager.h"
 #include"TextureManager/TextureManager.h"
@@ -72,8 +72,6 @@ void ALPlayer::LoadATKDatas() {
 	Index++;
 
 }
-
-
 
 ALPlayer::ALPlayer() {
 	//一回しかしない初期化情報

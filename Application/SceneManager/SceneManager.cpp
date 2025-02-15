@@ -37,6 +37,10 @@ void SceneManager::Update()
 
 		//シーンを読み込み
 		scene_ = SceneFactory::CreateScene((SCENE)currentSceneNo_);
+
+		//保存したパラメータをセット
+		GvariM::GetInstance()->SetLoadAllData();
+
 		scene_->Initialize();
 	}
 

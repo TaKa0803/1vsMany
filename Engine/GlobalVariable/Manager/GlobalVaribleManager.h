@@ -72,7 +72,7 @@ private: //**プライベート変数**//
 	std::string baseName_ = "Game";
 	
 	//グループのデータ群
-	std::map<std::string, GroupData> datas_;
+	std::map<std::string, GroupData> setDatas_;
 
 	//保存データ群
 	std::map<std::string, SavedGroupData> saveDatas_;
