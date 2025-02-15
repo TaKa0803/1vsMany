@@ -11,11 +11,12 @@
 #include"Game/Player/Player.h"
 #include"Game/Plane/Plane.h"
 #include"Game/Enemy/ALEnemy.h"
-#include"Game/EnemyPopManager/EnemyPopManager.h"
+
 #include"Sprite/Sprite.h"
 #include"Game/BrokenBody/BrokenBody.h"
 #include"ParticleData/ParticleManager.h"
 
+#include"Game/CountTimer/CountTimer.h"
 
 
 class ALGameScene : public IScene {
@@ -64,7 +65,7 @@ private:
 
 	std::list<std::unique_ptr<ALEnemy>>enemies_;
 
-	std::unique_ptr<EnemyPopManager>enemyPopManager_;
+	std::unique_ptr<CountTimer>countTimer_;
 
 	int limitMinute = 0;
 	const int maxmilitMinute = 60 * 60;
@@ -102,8 +103,6 @@ private:
 	ButtonState BState_ = Wait;
 
 
-	std::unique_ptr<Sprite>num1_;
-	std::unique_ptr<Sprite>num10_;
 
 
 	std::unique_ptr<Sprite>num100_;

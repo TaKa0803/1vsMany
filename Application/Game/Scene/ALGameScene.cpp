@@ -18,6 +18,8 @@ ALGameScene::ALGameScene() {
 
 	plane_ = std::make_unique<Plane>();
 
+	countTimer_ = std::make_unique<CountTimer>();
+
 	//MapLoader::GetInstance()->LoadLevelEditor("untitled", ".json");
 	//MapLoader::GetInstance()->CreateModel(0);
 	
@@ -29,7 +31,6 @@ ALGameScene::ALGameScene() {
 	//	}
 	//}
 
-	enemyPopManager_ = std::make_unique<EnemyPopManager>();
 	//enemyPopManager_->LoadMapItem("EnemySpawn", MapLoader::GetInstance()->GetLevelData());
 
 
@@ -68,12 +69,8 @@ ALGameScene::ALGameScene() {
 	texture = TextureManager::LoadTex("resources/Texture/AL/ult.png");
 	ultSp_.reset(Sprite::Create(texture, { 180,90 }, { 90,90 }, { 90,90 }, { 1070,650 }));
 
-
 	texture = TextureManager::LoadTex("resources/Texture/AL/number64x90.png");
-	num1_.reset(Sprite::Create(texture, { 640,90 }, { 64,90 }, { 90,90 }, { 680,90 }));
-	num10_.reset(Sprite::Create(texture, { 640,90 }, { 64,90 }, { 90,90 }, { 610,90 }));
 	num100_.reset(Sprite::Create(texture, { 640,90 }, { 64,90 }, { 90,90 }, { 540,90 }));
-
 
 	texture = TextureManager::LoadTex("resources/Texture/AL/black.png");
 	backScreen_.reset(Sprite::Create(texture, { 64,64 }, { 64,64 }, { 1280,720 }));
@@ -116,9 +113,7 @@ void ALGameScene::Initialize() {
 	camera_->SetCameraDirection(-40.0f);
 	player_->SetCamera(camera_);
 
-	enemyPopManager_->Initialzie();
-	enemyPopManager_->SetPlayerWorld(&player_->world_);
-
+	
 	enemies_.clear();
 
 	backScreen_->SetColorAlpha(0);
@@ -127,11 +122,7 @@ void ALGameScene::Initialize() {
 	alphaNum_ = 0;
 	nowFrameCountEnemy_ = 0;
 
-	num1_->SetPosition({ 680,90 });
-	num1_->SetScale({ 90,90 });
 
-	num10_->SetPosition({ 610,90 });
-	num10_->SetScale({ 90,90 });
 
 	num100_->SetPosition({ 540,90 });
 	num100_->SetScale({ 90,90 });
@@ -170,6 +161,8 @@ void ALGameScene::Update() {
 		//デバッグウィンドウ表示
 		DebugWindows();
 
+		countTimer_->Update();
+
 		//プレイヤー更新
 		player_->Update();
 
@@ -192,11 +185,10 @@ void ALGameScene::Update() {
 
 
 
-		enemyPopManager_->Update();
 		//敵の生成処理
-		if (std::unique_ptr<ALEnemy>newEnemy = enemyPopManager_->PopEnemy()) {
-			enemies_.push_back(std::move(newEnemy));
-		}
+		//if (std::unique_ptr<ALEnemy>newEnemy = enemyPopManager_->PopEnemy()) {
+		//	enemies_.push_back(std::move(newEnemy));
+		//}
 
 		for (auto& enemy : enemies_) {
 			if (!enemy->GetDead()) {
@@ -224,7 +216,8 @@ void ALGameScene::Update() {
 		break;
 	default:
 		break;
-	}
+	};
+
 	camera_->Update();
 
 	SceneChange();
@@ -235,9 +228,7 @@ void ALGameScene::Draw() {
 	//地面
 	plane_->Draw();
 
-	//敵の旗
-	enemyPopManager_->Draw();
-
+	
 	//敵
 	for (auto& enemy : enemies_) {
 		if (!enemy->GetDead()) {
@@ -255,7 +246,7 @@ void ALGameScene::Draw() {
 
 	peM_->Draw();
 	player_->DrawParticle();
-	enemyPopManager_->DrawParticle();
+
 
 	//PostEffectManager::GetInstance()->PostEffectDraw(PostEffectManager::kVinetting, true);
 
@@ -279,6 +270,8 @@ void ALGameScene::Draw() {
 		if (Count >= 200) {
 			PostEffectManager::GetInstance()->PostEffectDraw(PostEffectManager::kRadialBlur, true);
 		}
+
+		countTimer_->Draw();
 
 		UIUpdateDraw();
 		break;
@@ -351,26 +344,8 @@ void ALGameScene::Collision() {
 			}
 		}
 
-		//マップの押し出し
-		Vector3 backV;
-		if (MapLoader::GetInstance()->IsCollisionMap(enemy->GetCollider(), backV)) {
-			enemy->PushBack(backV);
-		}
-
 		e1Num++;
 	}
-
-	//あたらなくなるまで処理
-
-	Vector3 backV;
-	if (MapLoader::GetInstance()->IsCollisionMap(player_->GetCollider(), backV)) {
-
-		player_->OnCollisionBack(backV);
-
-	}
-
-
-
 
 }
 
@@ -378,7 +353,7 @@ void ALGameScene::SceneChange() {
 
 	switch (scene_) {
 	case ALGameScene::Game:
-		if (limitMinute-- <= 0) {
+		if (countTimer_->isCountEnd()) {
 			scene_ = Clear;
 			AudioManager::GetInstance()->StopAllSounds();
 			AudioManager::PlaySoundData(bgmClear_, 0.08f);
@@ -523,8 +498,7 @@ void ALGameScene::UIUpdateDraw() {
 
 
 
-	num1_->Draw();
-	num10_->Draw();
+
 
 }
 
@@ -535,11 +509,11 @@ void ALGameScene::ClearUIUpdate() {
 #pragma region 数計算
 	if (!serchComplete_) {
 
-		num1_->SetPosition({ 368,285 });
-		num1_->SetScale({ 160,160 });
+		//num1_->SetPosition({ 368,285 });
+		//num1_->SetScale({ 160,160 });
 
-		num10_->SetPosition({ 238,285 });
-		num10_->SetScale({ 160,160 });
+		//num10_->SetPosition({ 238,285 });
+		//num10_->SetScale({ 160,160 });
 
 		num100_->SetPosition({ 114,285 });
 		num100_->SetScale({ 160,160 });
@@ -567,7 +541,7 @@ void ALGameScene::ClearUIUpdate() {
 
 		//一桁目決定
 
-		num1_->SetTVTranslate({ ((float)num1 / 10.0f) - 0.1f ,0 });
+		//num1_->SetTVTranslate({ ((float)num1 / 10.0f) - 0.1f ,0 });
 
 		int count2 = (int)(Count - num1) / 10;
 
@@ -575,7 +549,7 @@ void ALGameScene::ClearUIUpdate() {
 
 		if (Count >= 10) {
 
-			num10_->SetTVTranslate({ ((float)num2 / 10.0f) - 0.1f ,0 });
+			//num10_->SetTVTranslate({ ((float)num2 / 10.0f) - 0.1f ,0 });
 
 			if (Count >= 100) {
 				int count3 = (int)(Count - (num1 + num2 * 10)) / 100;
@@ -590,7 +564,7 @@ void ALGameScene::ClearUIUpdate() {
 		}
 		else {
 			num100_->SetTVTranslate({ 0.9f, 0 });
-			num10_->SetTVTranslate({ 0.9f, 0 });
+			//num10_->SetTVTranslate({ 0.9f, 0 });
 		}
 
 
@@ -627,29 +601,14 @@ void ALGameScene::ClearUIUpdate() {
 	backScreen_->Draw();
 	resultText_->Draw();
 
-	num1_->Draw();
-	num10_->Draw();
+
 	num100_->Draw();
 
 }
 
 void ALGameScene::LimitUI() {
 
-	//分に変換
-	int minute = limitMinute / 60;
 
-	int second = (int)minute % 10;
-
-	num1_->SetTVTranslate({ ((float)second / 10.0f) - 0.1f, 0 });
-
-	//二桁目のみの情報取得
-	minute = minute - second;
-
-	int minute2 = minute / 10;
-
-
-
-	num10_->SetTVTranslate({ ((float)minute2 / 10.0f) - 0.1f,0 });
 }
 
 void ALGameScene::ShakeStart(int count)
