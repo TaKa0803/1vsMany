@@ -81,6 +81,9 @@ ALPlayer::ALPlayer() {
 
 	peM_ = std::make_unique<EffectMove>();
 
+	//UIクラス生成
+	ui_ = std::make_unique<PlayerUI>(GetConboCount());
+
 	collider_ = std::make_unique<SphereCollider>();
 	collider_->Initialize("player", world_);
 	collider_->SetRadius(1.5f);
@@ -124,10 +127,11 @@ void ALPlayer::Initialize() {
 
 	peM_->Initialize({ 1,1,1,1 });
 
+	ui_->Init();
 
 	moveState_ = NoneS;
 
-	ATKConboCount = 1;
+	ATKConboCount = 0;
 	ATKAnimationSetup_ = false;
 
 	shadow->Initialize("DZone");
@@ -176,6 +180,7 @@ void ALPlayer::Update() {
 	collider_->Update();
 	shadow->Update();
 	impactE_->Update();
+	ui_->Update();
 }
 
 void (ALPlayer::* ALPlayer::BehaviorInitialize[])() = {
@@ -209,6 +214,12 @@ void ALPlayer::Draw() {
 void ALPlayer::DrawParticle()
 {
 	peM_->Draw();
+}
+
+void ALPlayer::DrawUI()
+{
+	//UIの描画
+	ui_->Draw();
 }
 
 void ALPlayer::DebugWindow(const char* name) {

@@ -70,6 +70,12 @@ public://**パブリック関数**//
 public:///セッター
 
 	/// <summary>
+	/// テクスチャを設定
+	/// </summary>
+	/// <param name="texNum"></param>
+	void SetTexture(const int texNum);
+
+	/// <summary>
 	/// 座標代入
 	/// </summary>
 	/// <param name="pos">代入座標</param>
@@ -97,7 +103,7 @@ public:///セッター
 	/// uvの平行移動代入
 	/// </summary>
 	/// <param name="uvPos">代入する</param>
-	void SetTVTranslate(const Vector2 uvPos) { uvWorld_.translate_.x = uvPos.x; uvWorld_.translate_.y = uvPos.y; }
+	void SetUVTranslate(const Vector2 uvPos) { uvWorld_.translate_.x = uvPos.x; uvWorld_.translate_.y = uvPos.y; }
 
 	/// <summary>
 	/// 画像のカラーを設定

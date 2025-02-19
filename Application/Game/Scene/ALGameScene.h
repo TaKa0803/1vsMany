@@ -17,7 +17,7 @@
 #include"ParticleData/ParticleManager.h"
 
 #include"Game/CountTimer/CountTimer.h"
-
+#include"Game/EnemySpawnManager/EnemySpawnManager.h"
 
 class ALGameScene : public IScene {
 
@@ -63,9 +63,11 @@ private:
 
 	std::unique_ptr<Plane>plane_;
 
-	std::list<std::unique_ptr<ALEnemy>>enemies_;
-
+	//時間カウント
 	std::unique_ptr<CountTimer>countTimer_;
+
+	//敵出現マネージャ
+	std::unique_ptr<EnemySpawnManager>enemySpawnManager_;
 
 	int limitMinute = 0;
 	const int maxmilitMinute = 60 * 60;
@@ -77,30 +79,11 @@ private:
 
 	Scene scene_ = Game;
 
-	std::unique_ptr<Sprite>skillSp_;
 
-	std::unique_ptr<Sprite>BButton_;
 
-	std::unique_ptr<Sprite>punchSp_;
 
-	std::unique_ptr<Sprite>kickSp_;
 
-	std::unique_ptr<Sprite>ultSp_;
 
-	Vector3 waitATKpos = { 1000,622,0 };
-	Vector3 waitATKscale = { 90,90 };
-
-	Vector3 ATKpos = { 1085,560 };
-	Vector3 ATKscale = { 200,200 };
-
-	enum ButtonState {
-		Wait,
-		Punch,
-		Kick,
-		Ult
-	};
-
-	ButtonState BState_ = Wait;
 
 
 

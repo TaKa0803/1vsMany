@@ -237,5 +237,10 @@ void Sprite::Draw(D3D12_GPU_DESCRIPTOR_HANDLE tex)
 	DXF_->GetCMDList()->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }
 
+void Sprite::SetTexture(const int texNum)
+{
+	texture_ = texNum;
+}
+
 
 

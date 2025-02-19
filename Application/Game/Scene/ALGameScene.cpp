@@ -16,9 +16,15 @@ ALGameScene::ALGameScene() {
 	camera_ = Camera::GetInstance();
 	player_ = std::make_unique<ALPlayer>();
 
+	//地面
 	plane_ = std::make_unique<Plane>();
 
+	//時間カウント処理
 	countTimer_ = std::make_unique<CountTimer>();
+
+	//敵出現マネージャ生成
+	enemySpawnManager_ = std::make_unique<EnemySpawnManager>();
+	enemySpawnManager_->SetPWorld(player_->world_);
 
 	//MapLoader::GetInstance()->LoadLevelEditor("untitled", ".json");
 	//MapLoader::GetInstance()->CreateModel(0);
@@ -50,25 +56,6 @@ ALGameScene::ALGameScene() {
 	//}
 
 	int texture;
-	texture = TextureManager::LoadTex("resources/Texture/AL/skill.png");
-	skillSp_.reset(Sprite::Create(texture, { 90,90 }, { 90,90 }, { 90,90 }, { 1000,600 }));
-
-
-
-	texture = TextureManager::LoadTex("resources/Texture/AL/B.png");
-	BButton_.reset(Sprite::Create(texture, { 180,90 }, { 90,90 }, { 64,64 }, { 1045, 650 }));
-
-
-	texture = TextureManager::LoadTex("resources/Texture/AL/punch.png");
-	punchSp_.reset(Sprite::Create(texture, { 180,90 }, { 90,90 }, { 90,90 }, { 1070,650 }));
-
-	texture = TextureManager::LoadTex("resources/Texture/AL/kick.png");
-	kickSp_.reset(Sprite::Create(texture, { 180,90 }, { 90,90 }, { 90,90 }, { 1070,650 }));
-
-
-	texture = TextureManager::LoadTex("resources/Texture/AL/ult.png");
-	ultSp_.reset(Sprite::Create(texture, { 180,90 }, { 90,90 }, { 90,90 }, { 1070,650 }));
-
 	texture = TextureManager::LoadTex("resources/Texture/AL/number64x90.png");
 	num100_.reset(Sprite::Create(texture, { 640,90 }, { 64,90 }, { 90,90 }, { 540,90 }));
 
@@ -95,7 +82,7 @@ ALGameScene::ALGameScene() {
 }
 
 ALGameScene::~ALGameScene() {
-	enemies_.clear();
+
 	brokenBody_->Finalize();
 }
 
@@ -112,9 +99,6 @@ void ALGameScene::Initialize() {
 	camera_->SetTarget(&player_->world_);
 	camera_->SetCameraDirection(-40.0f);
 	player_->SetCamera(camera_);
-
-	
-	enemies_.clear();
 
 	backScreen_->SetColorAlpha(0);
 	resultText_->SetColorAlpha(0);
@@ -190,11 +174,7 @@ void ALGameScene::Update() {
 		//	enemies_.push_back(std::move(newEnemy));
 		//}
 
-		for (auto& enemy : enemies_) {
-			if (!enemy->GetDead()) {
-				enemy->Update();
-			}
-		}
+
 
 		//MapLoader::GetInstance()->UpdateLevelData();
 
@@ -228,13 +208,8 @@ void ALGameScene::Draw() {
 	//地面
 	plane_->Draw();
 
-	
-	//敵
-	for (auto& enemy : enemies_) {
-		if (!enemy->GetDead()) {
-			enemy->Draw();
-		}
-	}
+	//敵の出現地点と敵描画
+	enemySpawnManager_->Draw();
 
 	//プレイヤー
 	player_->Draw();
@@ -262,7 +237,7 @@ void ALGameScene::Draw() {
 		PostEffectManager::GetInstance()->PostEffectDraw(PostEffectManager::kHSV, true);
 
 
-		for (auto& enemy : enemies_) {
+		for (auto& enemy : enemySpawnManager_->GetEnemies()) {
 			if (enemy->GetDead()) {
 				Count++;
 			}
@@ -320,7 +295,7 @@ void ALGameScene::Collision() {
 
 
 	int e1Num = 0;
-	for (auto& enemy : enemies_) {
+	for (auto& enemy : enemySpawnManager_->GetEnemies()) {
 		if (!enemy->GetDead()) {
 
 			//プレイヤーの攻撃ヒット処理
@@ -335,7 +310,7 @@ void ALGameScene::Collision() {
 
 			//敵同士の当たり判定
 			int e2Num = 0;
-			for (auto& enemy2 : enemies_) {
+			for (auto& enemy2 : enemySpawnManager_->GetEnemies()) {
 				if (!enemy2->GetDead() && !enemy2->isHit() && e1Num != e2Num) {
 					Vector3 backV = enemy->OshiDashi(enemy2->GetCollider());
 					enemy2->AddTranslate(-backV);
@@ -419,84 +394,9 @@ void ALGameScene::SceneChange() {
 
 void ALGameScene::UIUpdateDraw() {
 
-	if (player_->GetConboCount() == 0) {
-		BState_ = Wait;
-	}
-	if (player_->GetConboCount() == 1) {
-		BState_ = Punch;
-	}if (player_->GetConboCount() == 2) {
-		BState_ = Kick;
-	}
-	if (player_->GetConboCount() == 3) {
-		BState_ = Ult;
-	}
 
-	switch (BState_) {
-	case ALGameScene::Wait:
-		skillSp_->SetPosition(ATKpos);
-		skillSp_->SetScale(ATKscale);
-
-		BButton_->SetPosition({ 1155,635 });
-
-		punchSp_->SetTVTranslate({ 0.5f,0 });
-		punchSp_->SetPosition(waitATKpos);
-		punchSp_->SetScale(waitATKscale);
-
-
-		skillSp_->Draw();
-
-		punchSp_->Draw();
-
-
-		break;
-	case ALGameScene::Punch:
-
-		punchSp_->SetTVTranslate({ 0.0f,0.0f });
-		punchSp_->SetPosition(ATKpos);
-		punchSp_->SetScale(ATKscale);
-
-		kickSp_->SetTVTranslate({ 0.5f,0.0f });
-		kickSp_->SetPosition(waitATKpos);
-		kickSp_->SetScale(waitATKscale);
-
-		punchSp_->Draw();
-
-		kickSp_->Draw();
-
-		break;
-	case ALGameScene::Kick:
-		kickSp_->SetTVTranslate({ 0.0f,0.0f });
-		kickSp_->SetPosition(ATKpos);
-		kickSp_->SetScale(ATKscale);
-
-		ultSp_->SetTVTranslate({ 0.5f,0.0f });
-		ultSp_->SetPosition(waitATKpos);
-		ultSp_->SetScale(waitATKscale);
-
-		kickSp_->Draw();
-
-		ultSp_->Draw();
-
-
-		break;
-	case ALGameScene::Ult:
-		ultSp_->SetTVTranslate({ 0.0f,0.0f });
-		ultSp_->SetPosition(ATKpos);
-		ultSp_->SetScale(ATKscale);
-
-
-		ultSp_->Draw();
-
-
-
-		break;
-	default:
-		break;
-	}
-
-	BButton_->Draw();
-
-
+	//プレイヤーUIの描画
+	player_->DrawUI();
 
 
 
@@ -524,7 +424,7 @@ void ALGameScene::ClearUIUpdate() {
 
 		serchComplete_ = true;
 		int Count = 0;
-		for (auto& enemy : enemies_) {
+		for (auto& enemy : enemySpawnManager_->GetEnemies()) {
 			if (enemy->GetDead()) {
 				Count++;
 
@@ -556,14 +456,14 @@ void ALGameScene::ClearUIUpdate() {
 
 				int num3 = count3 % 10;
 
-				num100_->SetTVTranslate({ ((float)num3 / 10.0f) - 0.1f ,0 });
+				num100_->SetUVTranslate({ ((float)num3 / 10.0f) - 0.1f ,0 });
 			}
 			else {
-				num100_->SetTVTranslate({ 0.9f, 0 });
+				num100_->SetUVTranslate({ 0.9f, 0 });
 			}
 		}
 		else {
-			num100_->SetTVTranslate({ 0.9f, 0 });
+			num100_->SetUVTranslate({ 0.9f, 0 });
 			//num10_->SetTVTranslate({ 0.9f, 0 });
 		}
 

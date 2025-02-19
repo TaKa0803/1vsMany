@@ -34,14 +34,14 @@ void CountTimer::Update()
 
 	int second = (int)minute % 10;
 
-	num1_->SetTVTranslate({ ((float)second / 10.0f) - 0.1f, 0 });
+	num1_->SetUVTranslate({ ((float)second / 10.0f) - 0.1f, 0 });
 
 	//二桁目のみの情報取得
 	minute = minute - second;
 
 	int minute2 = minute / 10;
 
-	num10_->SetTVTranslate({ ((float)minute2 / 10.0f) - 0.1f,0 });
+	num10_->SetUVTranslate({ ((float)minute2 / 10.0f) - 0.1f,0 });
 }
 
 void CountTimer::Draw()

@@ -6,6 +6,7 @@
 #include"Game/Effect/Impact/Impact.h"
 #include"Game/items.h"
 #include"Game/Effect/EffectMove/EffectMove.h"
+#include"Game/Player/UI/PlayerUI.h"
 
 #include<vector>
 
@@ -52,6 +53,11 @@ public:
 
 	void DrawParticle();
 
+	/// <summary>
+	/// UIの描画
+	/// </summary>
+	void DrawUI();
+
 	void DebugWindow(const char* name);
 
 	void SetCamera(Camera* camera) { camera_ = camera; }
@@ -61,7 +67,7 @@ public:
 
 	SphereCollider* GetCollider() { return collider_.get(); }
 
-	int GetConboCount() { return ATKConboCount; }
+	int& GetConboCount() { return ATKConboCount; }
 
 	bool IsPlayerATK() {
 		if (behavior_ == State::ATK) { return true; }
@@ -124,6 +130,10 @@ private:
 	std::unique_ptr<SphereCollider> collider_;
 
 	std::unique_ptr<EffectMove>peM_;
+
+	//プレイヤー関連のUI
+	std::unique_ptr<PlayerUI>ui_;
+
 #pragma region モデルに関する
 
 	//タグ軍

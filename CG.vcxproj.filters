@@ -339,6 +339,7 @@
     <ClCompile Include="Application\Game\Player\Behavior\Stand\PlayerStand.cpp" />
     <ClCompile Include="Application\Game\EnemySpawnManager\EnemySpawnManager.cpp" />
     <ClCompile Include="Application\Game\CountTimer\CountTimer.cpp" />
+    <ClCompile Include="Application\Game\Player\UI\PlayerUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -609,6 +610,7 @@
     <ClInclude Include="Application\Game\Player\Behavior\PlayerBaseBehavior.h" />
     <ClInclude Include="Application\Game\EnemySpawnManager\EnemySpawnManager.h" />
     <ClInclude Include="Application\Game\CountTimer\CountTimer.h" />
+    <ClInclude Include="Application\Game\Player\UI\PlayerUI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">
