@@ -2,27 +2,48 @@
 #include"Vector3.h"
 #include"InstancingGameObject/InstancingGameObject.h"
 #include"Game/Enemy/ALEnemy.h"
+#include"Game/BrokenBody/BrokenBody.h"
 #include<vector>
+#include<list>
 
-//敵の出現管理マネージャ
-class EnemySpawnManager {
+//敵の管理マネージャ
+class EnemyManager {
 
 public:
 
-	EnemySpawnManager();
-	~EnemySpawnManager();
+	EnemyManager();
+	~EnemyManager();
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize();
 
-	void Update();
+	/// <summary>
+	/// ゲーム側の更新
+	/// </summary>
+	void GameUpdate();
 
+	/// <summary>
+	/// オブジェクトの更新
+	/// </summary>
+	void ObjectUpdate();
+
+	/// <summary>
+	/// 描画
+	/// </summary>
 	void Draw();
 
 	void SetPWorld(const EulerWorldTransform& pWorld) { pWorld_ = &pWorld; };
 public:
 
-	std::vector<std::unique_ptr<ALEnemy>>&GetEnemies() { return enemies_; }
+	std::list<std::unique_ptr<Enemy>>&GetEnemies() { return enemies_; }
 
+	/// <summary>
+	/// キルカウント取得
+	/// </summary>
+	/// <returns></returns>
+	const int GetKillCount() { return killCount_; }
 private:
 
 	const EulerWorldTransform* pWorld_;
@@ -38,15 +59,23 @@ private:
 	//敵生成
 	std::vector<SpawnObject>spawnPoints_;
 
-	std::vector<std::unique_ptr<ALEnemy>>enemies_;
+	std::list<std::unique_ptr<Enemy>>enemies_;
+
+	//壊れた体のエフェクト
+	std::unique_ptr<BrokenBody> brokenBody_;
 
 	//最大HP
-	int maxHp_;
+	int maxHp_ = 10;
 
 	//修繕時間
-	float maxFixCount_;
+	float maxFixCount_=10.0f;
 
 	//出現時間
-	float maxSpawnCount_;
+	float maxSpawnCount_= 10.0f;
 
+	//同時出現数
+	int maxSpawnNum_ = 1;
+
+
+	int killCount_ = 0;
 };

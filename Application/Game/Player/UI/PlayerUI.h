@@ -27,12 +27,17 @@ public:
 
 private://**プライベート変数**//
 
+
+	//ベーススキルアイコン
 	std::unique_ptr<Sprite>baseSkillSp_;
 
+	//次の技アイコン
 	std::unique_ptr<Sprite>preSkillSprite_;
 
+	//技アイコン
 	std::unique_ptr<Sprite>skillSp_;
 
+	//Bボタンアイコン
 	std::unique_ptr<Sprite>BButton_;
 
 	

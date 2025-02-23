@@ -26,7 +26,6 @@ void SceneManager::Update()
 	if (prevSceneNo_ != currentSceneNo_)
 	{
 		//変更していたら		
-
 		//過去のデバッグデータをクリア
 		GlobalVariableManager::GetInstance()->ClearSetData();
 
@@ -41,6 +40,7 @@ void SceneManager::Update()
 		//保存したパラメータをセット
 		GvariM::GetInstance()->SetLoadAllData();
 
+		//シーンの初期化
 		scene_->Initialize();
 	}
 

@@ -79,7 +79,7 @@ ALPlayer::ALPlayer() {
 
 	input_->SetDeadLine(0.3f);
 
-	peM_ = std::make_unique<EffectMove>();
+	effectMove_ = std::make_unique<EffectMove>();
 
 	//UIクラス生成
 	ui_ = std::make_unique<PlayerUI>(GetConboCount());
@@ -125,7 +125,7 @@ void ALPlayer::Initialize() {
 
 	//model_->ChangeAnimation(3,0);
 
-	peM_->Initialize({ 1,1,1,1 });
+	effectMove_->Initialize({ 1,1,1,1 });
 
 	ui_->Init();
 
@@ -147,9 +147,7 @@ void ALPlayer::Initialize() {
 	collider_->Update();
 }
 
-void ALPlayer::Update() {
-
-
+void ALPlayer::GameUpdate() {
 
 	//状態の初期化処理
 	if (behaviorRequest_) {
@@ -160,7 +158,7 @@ void ALPlayer::Update() {
 		(this->*BehaviorInitialize[(int)behavior_])();
 	}
 
-	peM_->Update();
+	effectMove_->Update();
 
 	//落下の処理
 	addFallSpd_ -= fallSpd_;
@@ -173,8 +171,10 @@ void ALPlayer::Update() {
 	//状態の更新
 	(this->*BehaviorUpdate[(int)behavior_])();
 
+}
 
-
+void ALPlayer::ObjectUpdate()
+{
 	//更新
 	world_.UpdateMatrix();
 	collider_->Update();
@@ -213,7 +213,7 @@ void ALPlayer::Draw() {
 
 void ALPlayer::DrawParticle()
 {
-	peM_->Draw();
+	effectMove_->Draw();
 }
 
 void ALPlayer::DrawUI()
@@ -276,7 +276,7 @@ void ALPlayer::Move() {
 	move.y = 0.0f;
 
 	if (move != Vector3(0, 0, 0)) {
-		peM_->SpawnE(world_.GetWorldTranslate());
+		effectMove_->SpawnE(world_.GetWorldTranslate());
 		world_.rotate_.y = GetYRotate({ move.x,move.z })+((float)std::numbers::pi);
 	}
 	//加算

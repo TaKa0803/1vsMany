@@ -2,12 +2,10 @@
 #include"RandomNum/RandomNum.h"
 #include"TextureManager/TextureManager.h"
 
-BrokenBody* BrokenBody::GetInstance() {
-	static BrokenBody instance;
-	return&instance;
-}
 
-void BrokenBody::Initialize() {
+
+BrokenBody::BrokenBody()
+{
 	InstancingGameObject::Initialize("AnimeCube");
 	world_.scale_ = { 0.2f,0.2f,0.2f };
 	effectDatas_.clear();
@@ -15,6 +13,11 @@ void BrokenBody::Initialize() {
 	int tex = TextureManager::LoadTex("resources/Models/Object/enemy.png");
 
 	IMM_->SetTexture(tag_, tex);
+}
+
+BrokenBody::~BrokenBody()
+{
+	effectDatas_.clear();
 }
 
 void BrokenBody::Update() {
@@ -63,10 +66,6 @@ void BrokenBody::Draw() {
 
 }
 
-void BrokenBody::Finalize()
-{
-	effectDatas_.clear();
-}
 
 void BrokenBody::EffectOccurred(const EulerWorldTransform& world, int spawnNum) {
 

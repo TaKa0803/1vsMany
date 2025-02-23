@@ -31,7 +31,7 @@ public:	///**パブリック関数**//
 	/// <summary>
 	/// 更新
 	/// </summary>
-	virtual void Update();
+	virtual void GameUpdate();
 
 	/// <summary>
 	/// 描画

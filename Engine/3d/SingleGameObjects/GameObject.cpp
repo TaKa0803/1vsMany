@@ -13,7 +13,7 @@ void GameObject::Initialize(const std::string& filepath) {
 	}
 }
 
-void GameObject::Update() {
+void GameObject::GameUpdate() {
 	//行列更新
 	world_.UpdateMatrix();
 }

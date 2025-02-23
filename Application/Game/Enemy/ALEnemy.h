@@ -6,7 +6,7 @@
 #include"Game/items.h"
 
 
-class ALEnemy : public InstancingGameObject {
+class Enemy : public InstancingGameObject {
 
 public:
 	/// <summary>
@@ -28,7 +28,7 @@ public:
 	void PushBack(const Vector3& backV);
 
 	/// <summary>
-	/// 
+	/// 描画
 	/// </summary>
 	void Draw();
 
@@ -51,9 +51,9 @@ private:
 	void HitUpdate();
 
 	//状態ごとの初期化テーブル
-	static void (ALEnemy::* BehaviorInitialize[])();
+	static void (Enemy::* BehaviorInitialize[])();
 	//状態ごとの更新テーブル
-	static void (ALEnemy::* BehaviorUpdate[])();
+	static void (Enemy::* BehaviorUpdate[])();
 
 	//落下処理
 	void FallUpdate();

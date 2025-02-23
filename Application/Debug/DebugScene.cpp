@@ -87,8 +87,8 @@ void DebugScnene::Update()
 	pointLight_.position += move;
 
 	//各オブジェクト更新
-	object->Update();
-	terrain->Update();
+	object->GameUpdate();
+	terrain->GameUpdate();
 	skybox_->Update();
 	camera_->Update();
 

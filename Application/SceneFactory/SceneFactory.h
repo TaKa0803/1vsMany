@@ -32,7 +32,7 @@ public://**パブリック関数**//
 			return std::make_unique<ALTitleScene>();
 
 		case SCENE::GAME://ゲームシーンを返す処理
-			return std::make_unique<ALGameScene>();
+			return std::make_unique<GameScene>();
 
 		case SCENE::GAMECLEAR://ゲームクリアシーンを返す処理
 			return std::make_unique<ClearScene>();

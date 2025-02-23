@@ -4,28 +4,21 @@
 
 class BrokenBody :public InstancingGameObject {
 
-public://シングルトンパターン
-	static BrokenBody* GetInstance();
-
-private://シングルトンパターン
-
-	BrokenBody() = default;
-	~BrokenBody() = default;
-	BrokenBody(const BrokenBody& o) = delete;
-	const BrokenBody& operator=(const BrokenBody& o) = delete;
-
-
-
 public:
 
-	void Initialize();
+	BrokenBody();
+	~BrokenBody();
+
 
 	void Update();
 
 	void Draw();
 
-	void Finalize();
-
+	/// <summary>
+	/// エフェクト生成
+	/// </summary>
+	/// <param name="world">出現中心座標</param>
+	/// <param name="spawnNum">出現数</param>
 	void EffectOccurred(const EulerWorldTransform& world, int spawnNum);
 
 

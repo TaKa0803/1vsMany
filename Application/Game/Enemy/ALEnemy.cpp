@@ -7,7 +7,7 @@
 
 #include<numbers>
 
-void ALEnemy::Initialize(const Vector3& position, const EulerWorldTransform* playerWorld) {
+void Enemy::Initialize(const Vector3& position, const EulerWorldTransform* playerWorld) {
 	InstancingGameObject::Initialize("PlayerM4");
 
 	IMM_->SetTexture(a3tag_, TextureManager::white_);
@@ -49,19 +49,19 @@ void ALEnemy::Initialize(const Vector3& position, const EulerWorldTransform* pla
 	breakSound_ = AudioManager::LoadSoundNum("break");
 }
 
-void (ALEnemy::* ALEnemy::BehaviorInitialize[])() = {
-	&ALEnemy::StayInitialize,
-	&ALEnemy::FollowInitialize,
-	&ALEnemy::HitInitialize
+void (Enemy::* Enemy::BehaviorInitialize[])() = {
+	&Enemy::StayInitialize,
+	&Enemy::FollowInitialize,
+	&Enemy::HitInitialize
 };
 
-void (ALEnemy::* ALEnemy::BehaviorUpdate[])() = {
-	&ALEnemy::StayUpdate,
-	&ALEnemy::FollowUpdate,
-	&ALEnemy::HitUpdate
+void (Enemy::* Enemy::BehaviorUpdate[])() = {
+	&Enemy::StayUpdate,
+	&Enemy::FollowUpdate,
+	&Enemy::HitUpdate
 };
 
-void ALEnemy::Update() {
+void Enemy::Update() {
 
 	isHit_ = false;
 
@@ -91,7 +91,7 @@ void ALEnemy::Update() {
 
 
 
-bool ALEnemy::Collision(SphereCollider* collider) {
+bool Enemy::Collision(SphereCollider* collider) {
 
 	Vector3 backVec;
 	if (collider_->IsCollision(collider, backVec)) {
@@ -123,7 +123,7 @@ bool ALEnemy::Collision(SphereCollider* collider) {
 	return false;
 }
 
-Vector3 ALEnemy::OshiDashi(SphereCollider* collider)
+Vector3 Enemy::OshiDashi(SphereCollider* collider)
 {
 	isHit_ = true;
 
@@ -141,7 +141,7 @@ Vector3 ALEnemy::OshiDashi(SphereCollider* collider)
 	return backVec;
 }
 
-void ALEnemy::PushBack(const Vector3& backV)
+void Enemy::PushBack(const Vector3& backV)
 {
 	world_.translate_ += backV;
 	world_.UpdateMatrix();
@@ -151,7 +151,7 @@ void ALEnemy::PushBack(const Vector3& backV)
 	}
 }
 
-void ALEnemy::Draw() {
+void Enemy::Draw() {
 
 	world_.UpdateMatrix();
 
@@ -169,23 +169,23 @@ void ALEnemy::Draw() {
 
 #pragma region 各状態の初期化と更新
 
-void ALEnemy::StayInitialize()
+void Enemy::StayInitialize()
 {
 	velocity_.SetZero();
 	animeNum_ = 3;
 }
 
-void ALEnemy::FollowInitialize()
+void Enemy::FollowInitialize()
 {
 	animeNum_ = 4;
 
 }
 
-void ALEnemy::HitInitialize()
+void Enemy::HitInitialize()
 {
 }
 
-void ALEnemy::StayUpdate()
+void Enemy::StayUpdate()
 {
 	//pk
 	Vector3 p_eVelo = playerWorld_->GetWorldTranslate() - world_.GetWorldTranslate();
@@ -201,7 +201,7 @@ void ALEnemy::StayUpdate()
 	}
 }
 
-void ALEnemy::FollowUpdate()
+void Enemy::FollowUpdate()
 {
 	//プレイヤー方向の向き
 	Vector3 p_eVelo = playerWorld_->GetWorldTranslate() - world_.GetWorldTranslate();
@@ -251,7 +251,7 @@ void ALEnemy::FollowUpdate()
 	}
 }
 
-void ALEnemy::HitUpdate()
+void Enemy::HitUpdate()
 {
 	velocity_ += acce;
 
@@ -273,8 +273,7 @@ void ALEnemy::HitUpdate()
 		else {
 			//死亡処理
 			isDead_ = true;
-			BrokenBody* BB = BrokenBody::GetInstance();
-			BB->EffectOccurred(world_, 10);
+			
 
 			//音発生
 			AudioManager::PlaySoundData(breakSound_, 0.2f);
@@ -285,7 +284,7 @@ void ALEnemy::HitUpdate()
 #pragma endregion
 
 
-void ALEnemy::FallUpdate()
+void Enemy::FallUpdate()
 {
 	addFallspd_ -= fallspd_;
 	world_.translate_.y += addFallspd_;

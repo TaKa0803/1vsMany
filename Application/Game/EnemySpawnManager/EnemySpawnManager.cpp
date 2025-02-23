@@ -1,26 +1,25 @@
 #include "EnemySpawnManager.h"
 #include"DeltaTimer/DeltaTimer.h"
 
-EnemySpawnManager::EnemySpawnManager()
+EnemyManager::EnemyManager()
 {
 
-
+	//エフェクト生成
+	brokenBody_ = std::make_unique<BrokenBody>();
 
 }
 
-EnemySpawnManager::~EnemySpawnManager()
+EnemyManager::~EnemyManager()
 {
+	//敵のデータを全削除
 	enemies_.clear();
 }
 
-void EnemySpawnManager::Initialize()
+void EnemyManager::Initialize()
 {
-
-
-
 }
 
-void EnemySpawnManager::Update()
+void EnemyManager::GameUpdate()
 {
 
 	//各出現施設の更新
@@ -44,7 +43,7 @@ void EnemySpawnManager::Update()
 				points.spawnCount = maxSpawnCount_;
 
 				//敵を出現
-				std::unique_ptr<ALEnemy>newEnemy=std::make_unique<ALEnemy>();
+				std::unique_ptr<Enemy>newEnemy=std::make_unique<Enemy>();
 				newEnemy->Initialize(points.obj->world_.GetWorldTranslate(),pWorld_);
 			}
 			else {
@@ -55,16 +54,53 @@ void EnemySpawnManager::Update()
 
 	}
 
-	for (auto& enemy : enemies_) {
+	//敵の更新と削除処理
+	enemies_.remove_if([&](std::unique_ptr<Enemy>&enemy) {
+
+		//死亡フラグ取得
 		if (!enemy->GetDead()) {
+			//更新
 			enemy->Update();
+			//削除しない
+			return false;
 		}
-	}
+		else {
+			//エフェクトを生成
+			brokenBody_->EffectOccurred(enemy->world_, 10);
+
+			//キルカウント増加
+			killCount_++;
+
+			//リストから削除
+			return true;
+		}
+
+		});
+
+
 
 }
 
-void EnemySpawnManager::Draw()
+void EnemyManager::ObjectUpdate()
 {
+	//建物の更新
+	for (auto& spawn : spawnPoints_) {
+
+		spawn.obj->Update();
+	}
+
+	//エフェクトの更新
+	brokenBody_->Update();
+}
+
+void EnemyManager::Draw()
+{
+	brokenBody_->Draw();
+
+	//建物
+	for (auto& spawn : spawnPoints_) {
+		spawn.obj->Draw();
+	}
 
 	//敵
 	for (auto& enemy : enemies_) {

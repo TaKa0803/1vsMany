@@ -340,6 +340,8 @@
     <ClCompile Include="Application\Game\EnemySpawnManager\EnemySpawnManager.cpp" />
     <ClCompile Include="Application\Game\CountTimer\CountTimer.cpp" />
     <ClCompile Include="Application\Game\Player\UI\PlayerUI.cpp" />
+    <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp" />
+    <ClCompile Include="Application\Game\ScoreSaveManager\ScoreSaveManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -611,6 +613,8 @@
     <ClInclude Include="Application\Game\EnemySpawnManager\EnemySpawnManager.h" />
     <ClInclude Include="Application\Game\CountTimer\CountTimer.h" />
     <ClInclude Include="Application\Game\Player\UI\PlayerUI.h" />
+    <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h" />
+    <ClInclude Include="Application\Game\ScoreSaveManager\ScoreSaveManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">

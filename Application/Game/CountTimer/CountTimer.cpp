@@ -19,16 +19,21 @@ CountTimer::CountTimer()
 	currentCount_ += param_.maxCount;
 }
 
-void CountTimer::Update()
+void CountTimer::GameUpdate()
 {
-
+	//時間を減少
 	currentCount_ -= (float)DeltaTimer::deltaTime_;
 
+	//カウントが0以下
 	if (currentCount_ <= 0) {
 		currentCount_ = 0;
+		//フラグをON
 		isCountEnd_ = true;
 	}
+}
 
+void CountTimer::SpriteUpdate()
+{
 	//分に変換
 	int minute = (int)currentCount_;
 
@@ -42,6 +47,7 @@ void CountTimer::Update()
 	int minute2 = minute / 10;
 
 	num10_->SetUVTranslate({ ((float)minute2 / 10.0f) - 0.1f,0 });
+
 }
 
 void CountTimer::Draw()

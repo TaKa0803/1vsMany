@@ -121,6 +121,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Game\Effect\Impact\Impact.cpp" />
     <ClCompile Include="Application\Game\EnemySpawnManager\EnemySpawnManager.cpp" />
     <ClCompile Include="Application\Game\Enemy\ALEnemy.cpp" />
+    <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Application\Game\Plane\Plane.cpp" />
     <ClCompile Include="Application\Game\Player\Behavior\Attack\PlayerAttack.cpp" />
     <ClCompile Include="Application\Game\Player\Behavior\Run\PlayerRun.cpp" />
@@ -130,6 +131,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Game\Scene\ALGameScene.cpp" />
     <ClCompile Include="Application\Game\Scene\ALTitleScene.cpp" />
     <ClCompile Include="Application\Game\Scene\ClearScene.cpp" />
+    <ClCompile Include="Application\Game\ScoreSaveManager\ScoreSaveManager.cpp" />
     <ClCompile Include="Application\SceneManager\SceneManager.cpp" />
     <ClCompile Include="Application\IScene\IScene.cpp" />
     <ClCompile Include="Engine\2d\SpriteManager\SpriteManager.cpp" />
@@ -387,6 +389,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Game\Effect\Impact\Impact.h" />
     <ClInclude Include="Application\Game\EnemySpawnManager\EnemySpawnManager.h" />
     <ClInclude Include="Application\Game\Enemy\ALEnemy.h" />
+    <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Application\Game\items.h" />
     <ClInclude Include="Application\Game\Plane\Plane.h" />
     <ClInclude Include="Application\Game\Player\Behavior\Attack\PlayerAttack.h" />
@@ -398,6 +401,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Game\Scene\ALGameScene.h" />
     <ClInclude Include="Application\Game\Scene\ALTitleScene.h" />
     <ClInclude Include="Application\Game\Scene\ClearScene.h" />
+    <ClInclude Include="Application\Game\ScoreSaveManager\ScoreSaveManager.h" />
     <ClInclude Include="Application\IScene\IScene.h" />
     <ClInclude Include="Application\SceneFactory\SceneFactory.h" />
     <ClInclude Include="Application\SceneManager\SceneManager.h" />

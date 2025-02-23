@@ -47,7 +47,15 @@ public:
 
 	void Initialize();
 
-	void Update();
+	/// <summary>
+	/// ゲーム関係の更新
+	/// </summary>
+	void GameUpdate();
+
+	/// <summary>
+	/// モデルの更新
+	/// </summary>
+	void ObjectUpdate();
 
 	void Draw();
 
@@ -129,7 +137,7 @@ private:
 
 	std::unique_ptr<SphereCollider> collider_;
 
-	std::unique_ptr<EffectMove>peM_;
+	std::unique_ptr<EffectMove>effectMove_;
 
 	//プレイヤー関連のUI
 	std::unique_ptr<PlayerUI>ui_;

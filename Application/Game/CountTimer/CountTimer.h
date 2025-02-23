@@ -12,7 +12,12 @@ public://**パブリック関数**//
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void GameUpdate();
+
+	/// <summary>
+	/// 画像の更新
+	/// </summary>
+	void SpriteUpdate();
 
 	/// <summary>
 	/// 描画

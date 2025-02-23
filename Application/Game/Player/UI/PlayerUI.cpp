@@ -27,6 +27,8 @@ PlayerUI::PlayerUI(const int& comboCount)
 
 	guruguruTex_ = TextureManager::LoadTex("resources/Texture/AL/ult.png");
 	//ultSp_.reset(Sprite::Create(texture, { 180,90 }, { 90,90 }, { 90,90 }, { 1070,650 }));
+
+
 }
 
 
@@ -41,66 +43,49 @@ void PlayerUI::Init()
 	preSkillSprite_->SetScale(waitATKscale);
 	preSkillSprite_->SetUVTranslate({ 0.5f,0 });
 	BButton_->SetPosition({ 1155,635 });
-
 }
 
 void PlayerUI::Update()
 {
+	//各コンボ状態での画像セット
+
+	//何もしていない場合
 	if (*comboCount_ == 0) {
-		BState_ = Wait;
+		//１コンボ目の画像をセット
+		//skillSp_->SetTexture(skillTex_);
+		preSkillSprite_->SetTexture(punchTex_);
 	}
 	else if (*comboCount_ == 1) {
-		BState_ = Punch;
-	}
-	else if (*comboCount_ == 2) {
-		BState_ = Kick;
-	}
-	else if (*comboCount_ == 3) {
-		BState_ = Ult;
-	}
-
-
-
-	switch (BState_) {
-	case Wait:
-
-		skillSp_->SetTexture(skillTex_);
-		preSkillSprite_->SetTexture(punchTex_);
-
-		break;
-	case Punch:
 		skillSp_->SetTexture(punchTex_);
 		preSkillSprite_->SetTexture(kickTex_);
-
-		break;
-	case Kick:
-
+	}
+	else if (*comboCount_ == 2) {
 		skillSp_->SetTexture(kickTex_);
 		preSkillSprite_->SetTexture(guruguruTex_);
-
-
-		break;
-	case Ult:
-		skillSp_->SetTexture(guruguruTex_);
-		preSkillSprite_->SetTexture(skillTex_);
-
-
-
-		break;
-	default:
-		break;
 	}
+	else if (*comboCount_ == 3) {
+		skillSp_->SetTexture(guruguruTex_);
+		//preSkillSprite_->SetTexture(skillTex_);
+	}
+
 }
 
 void PlayerUI::Draw()
 {
-	baseSkillSp_->Draw();
 
-	if (*comboCount_ != 0) {
+	//何もしていない場合
+	if (*comboCount_ == 0) {
+		//空スキルUI描画
+		baseSkillSp_->Draw();
+	}
+	else {
+		//現在の攻撃スキルUI描画
 		skillSp_->Draw();
 	}
 
+	//最後のコンボ以外の場合
 	if (*comboCount_ != 3) {
+		//次の攻撃スキルUI描画
 		preSkillSprite_->Draw();
 	}
 	BButton_->Draw();
