@@ -11,7 +11,7 @@ EnemyManager::EnemyManager()
 	brokenBody_ = std::make_unique<BrokenBody>();
 
 	//デバッグ用に値を追加
-	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("敵関係");
+	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("AboutEnemy");
 	//モニター値を追加
 	gvg->SetMonitorValue("キル数", &killCount_);
 	//各パラメータ追加

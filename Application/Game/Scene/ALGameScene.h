@@ -19,6 +19,7 @@
 #include"Game/CountTimer/CountTimer.h"
 #include"Game/EnemySpawnManager/EnemySpawnManager.h"
 #include"Game/FollowCamera/FollowCamera.h"
+#include"Game/ScoreSaveManager/ScoreSaveManager.h"
 
 class GameScene : public IScene {
 
@@ -96,8 +97,8 @@ private:
 	//カメラ処理
 	std::unique_ptr<FollowCamera>followCamera_;
 
-
-
+	//スコアの保存
+	std::unique_ptr<ScoreSaveManager>scoreSaveManager_;
 	//シーンチェンジ用
 	std::string white = "resources/Texture/SystemResources/white.png";
 	std::unique_ptr<Sprite>sceneC_;

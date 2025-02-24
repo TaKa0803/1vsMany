@@ -123,7 +123,7 @@ void ALPlayer::Initialize() {
 	world_.translate_.z = 2;
 	world_.UpdateMatrix();
 
-	//model_->ChangeAnimation(3,0);
+	model_->ChangeAnimation(animeName_[WALK], 0);
 
 	effectMove_->Initialize({ 1,1,1,1 });
 
@@ -290,11 +290,11 @@ void ALPlayer::Move() {
 void ALPlayer::ModelRoop(const Vector3& velo)
 {
 	if (velo.x == 0 && velo.y == 0 && velo.z == 0) {
-		//model_->ChangeAnimation(3, 15);
+		model_->ChangeAnimation(animeName_[WAIT], 15.0f / 60.0f);
 		model_->animationRoopSecond_ = 1.0f;
 	}
 	else {
-		//model_->ChangeAnimation(4, 30);
+		model_->ChangeAnimation(animeName_[WALK], 30.0f/60.0f);
 		model_->animationRoopSecond_ = 10.0f;
 	}
 
@@ -321,7 +321,7 @@ void ALPlayer::InitializeMove() {
 void ALPlayer::InitializeATK() {
 
 
-	//model_->ChangeAnimation(0, 5);
+	model_->ChangeAnimation(animeName_[ATK1], 5.0f/60.0f);
 	model_->SetAnimationRoop(false);
 	model_->animationRoopSecond_ = 10.0;
 
@@ -510,10 +510,10 @@ void ALPlayer::UpdateATK() {
 				
 				if (nowATKState_ == kATK1) {
 					nowATKState_ = kATK2;
-					//model_->ChangeAnimation(1, 5);
+					model_->ChangeAnimation(animeName_[ATK2], 5.0f/60.0f);
 				}else if (nowATKState_ == kATK2) {
 					nowATKState_ = kATK3;
-					//model_->ChangeAnimation(2, 5);
+					model_->ChangeAnimation(animeName_[ATK3], 5.0f/60.0f);
 				}
 			}
 			else {

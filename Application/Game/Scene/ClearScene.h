@@ -62,6 +62,7 @@ private:
 
 	std::unique_ptr<Sprite>sceneC_;
 
+
 private://**プライベート変数**//
 
 	//シーン転換処理をするか否か
@@ -80,7 +81,7 @@ private://**プライベート変数**//
 	const float screenmaxAlphaNum_ = 0.7f;
 
 	//暗転時間
-	float blackoutSec_ = 3.0f;
+	float blackoutSec_ = 1.0f;
 
 	//1フレームごとに計算する敵の数
 	const float frameCountEnemy_ = 1.0f;

@@ -80,7 +80,7 @@ void BrokenBody::EffectOccurred(const EulerWorldTransform& world, int spawnNum) 
 		EffectData* edata = new EffectData();
 
 		//ワールド
-		edata->world.translate_ = world.translate_;
+		edata->world = world;
 		edata->velocity_ = {
 			RandomNumber::Get(-upSPD_,upSPD_),
 			upSPD_,

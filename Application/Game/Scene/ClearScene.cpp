@@ -3,6 +3,7 @@
 #include"AudioManager/AudioManager.h"
 #include"TextureManager/TextureManager.h"
 #include"DeltaTimer/DeltaTimer.h"
+#include"GlobalVariable/Group/GlobalVariableGroup.h"
 
 ClearScene::ClearScene()
 {
@@ -10,10 +11,10 @@ ClearScene::ClearScene()
 	input_ = Input::GetInstance();
 
 	//スコアセーブマネージャ生成
-	std::unique_ptr<ScoreSaveManager>scoreSaveManager_ = std::make_unique<ScoreSaveManager>();
-
+	std::unique_ptr<ScoreSaveManager>scoreSaveManager = std::make_unique<ScoreSaveManager>();
+	scoreSaveManager->LoadScore();
 	//データを読み込み
-	scoreData_ = scoreSaveManager_->GetData();
+	scoreData_ = scoreSaveManager->GetData();
 
 	//画像を読み込んでスプライト生成
 	int texture;
@@ -39,6 +40,16 @@ ClearScene::ClearScene()
 
 	//BGMの番号取得
 	bgmClear_ = AudioManager::LoadSoundNum("clear");
+
+
+	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("ClearScene");
+	gvg->SetTreeData(num1_->GetTree("1の位"));
+	gvg->SetTreeData(num10_->GetTree("10の位"));
+	gvg->SetTreeData(num100_->GetTree("100の位"));
+	gvg->SetTreeData(resultText_->GetTree("文字スプライト"));
+	gvg->SetTreeData(backScreen_->GetTree("黒背景"));
+	gvg->SetTreeData(sceneC_->GetTree("遷移用スプライト"));
+
 }
 
 ClearScene::~ClearScene()
@@ -72,6 +83,7 @@ void ClearScene::Initialize()
 	//カウント終了フラグをリセット
 	serchComplete_ = false;
 
+
 	//クリアBGMの再生
 	AudioManager::PlaySoundData(bgmClear_, 0.08f);
 }
@@ -88,7 +100,7 @@ void ClearScene::Update()
 	BlackOut();
 
 	//シーン変更処理
-	if (serchComplete_) {
+	if (serchComplete_&&!isSceneChange_) {
 		if (input_->TriggerKey(DIK_SPACE) || input_->IsTriggerButton(kButtonB)) {
 			
 			alphaNum_ = 0;
@@ -187,7 +199,7 @@ void ClearScene::FadeIn()
 {
 	//背景の透明処理
 	//シーン変更処理を行っていない場合のみの処理
-	if (isSceneChange_) {
+	if (!isSceneChange_) {
 		//カウントが未達の場合
 		if (alphaNum_ < addAlphaSec_) {
 

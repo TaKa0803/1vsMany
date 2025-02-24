@@ -31,6 +31,15 @@ class ALPlayer :public GameObject {
 
 public:
 
+	enum Animation {
+		ATK1,
+		ATK2,
+		ATK3,
+		WAIT,
+		WALK,
+		CountAnimation
+	};
+
 	//アニメーション名
 	std::string animeName_[5] = {
 		"ATK1",

@@ -32,6 +32,9 @@ GameScene::GameScene() {
 	//カメラ関係クラス生成
 	followCamera_ = std::make_unique<FollowCamera>();
 
+	//スコアの保存マネジャ
+	scoreSaveManager_ = std::make_unique<ScoreSaveManager>();
+
 	int texture;
 
 
@@ -318,6 +321,10 @@ void GameScene::UpdateThis2Other()
 
 	//カウントが指定地を超えた場合
 	if (currentSceneXhangeSec_ >= maxSceneChangeSec_) {
+
+		//スコアを保存する
+		scoreSaveManager_->SaveScore(enemySpawnManager_->GetKillCount(), 0);
+
 		//透明度を1に設定
 		sceneC_->SetColorAlpha(1);
 		//シーンを変更
