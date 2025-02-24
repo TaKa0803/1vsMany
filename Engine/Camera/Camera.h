@@ -25,7 +25,30 @@ public: //**パブリック変数**//
 	//カメラ本体のワールド
 	EulerWorldTransform mainCamera_;
 
+	//カメラの注目品との初期距離
+	const float rangeCameraFeaturedPoint = -50;
+
+	//完全追従するか座標のみ取得するか
+	bool isOnlyGetPosition = true;
+
+	//描画距離
+	float FarZ = 1000.0f;
+
+	//あたった時の追加で寄せる量
+	float direction = 0;
+
+	//カメラのオブジェクト当たり判定
+	bool isCollision_ = false;
+
+	//最小、最大角度
+	float minRotateX = 0;
+	float maxRotateX = 2.0f;
+
+	//注目点都の値
+	float farFeaturedPos_ = -50;
+
 public: //**パブリック関数**//
+
 
 	/// <summary>
 	/// 初期化処理
@@ -137,6 +160,12 @@ public: //**セッター**//
 	void AddCameraR_X(float x) { CameraMotionSupport_.rotate_.x += x; }
 
 	/// <summary>
+	/// カメラの回転量設定
+	/// </summary>
+	/// <param name="rotate"></param>
+	void SetFocusPointRotate(const Vector3& rotate) { CameraMotionSupport_.rotate_ = rotate; }
+
+	/// <summary>
 	/// カメラからみたベクトル方向に変換
 	/// </summary>
 	/// <param name="velo">元のベクトル</param>
@@ -154,14 +183,6 @@ private: //**プライベート変数**//
 	//注目しているWorldT
 	const EulerWorldTransform* FeaturedWorldTransform_ = nullptr;
 
-	//カメラの注目品との初期距離
-	const float rangeCameraFeaturedPoint = -50;
-
-	//完全追従するか座標のみ取得するか
-	bool isOnlyGetPosition = true;
-
-	//描画距離
-	float FarZ = 1000.0f;
 
 	//ビュー
 	Matrix4x4 view_ = MakeIdentity4x4();
@@ -175,15 +196,9 @@ private: //**プライベート変数**//
 	//ビューポート
 	Matrix4x4 viewPort_ = MakeIdentity4x4();
 
-	//注目点都の値
-	float farFeaturedPos_ = -50;
-
 	//カメラの視線
 	Segment segment_;
 
-	//あたった時の追加で寄せる量
-	float direction = 0;
 
-	//カメラのオブジェクト当たり判定
-	bool isCollision_ = false;
+
 };

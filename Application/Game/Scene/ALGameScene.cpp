@@ -15,7 +15,9 @@ GameScene::GameScene() {
 	input_ = Input::GetInstance();
 
 	camera_ = Camera::GetInstance();
+
 	player_ = std::make_unique<ALPlayer>();
+	player_->SetCamera(camera_);
 
 	//地面
 	plane_ = std::make_unique<Plane>();
@@ -51,9 +53,7 @@ GameScene::~GameScene() {
 
 void GameScene::Initialize() {
 
-
-	limitMinute = maxmilitMinute;
-
+	//プレイヤー初期化
 	player_->Initialize();
 
 	//初期化
@@ -61,8 +61,9 @@ void GameScene::Initialize() {
 	//各種設定
 	camera_->SetTarget(&player_->world_);
 	camera_->SetCameraDirection(-40.0f);
-	player_->SetCamera(camera_);
 
+
+	enemySpawnManager_->Initialize();
 
 	currentSceneXhangeSec_ = maxSceneChangeSec_;
 	isSceneChange_ = false;

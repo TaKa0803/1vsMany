@@ -1,10 +1,31 @@
 #include "FollowCamera.h"
 #include"RandomNum/RandomNum.h"
+#include"GlobalVariable/Group/GlobalVariableGroup.h"
 
 FollowCamera::FollowCamera()
 {
 	camera_ = Camera::GetInstance();
 	input_ = Input::GetInstance();
+
+	//デバッグ用にパラメータ設定
+	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Camera");
+	gvg->SetTreeData(camera_->mainCamera_.GetDebugTree("メインカメラ座標"));
+
+	gvg->SetValue("描画距離", &camera_->FarZ);
+	gvg->SetValue("最小角度X", &camera_->minRotateX);
+	gvg->SetValue("最大角度X", &camera_->maxRotateX);
+
+	gvg->SetValue("カメラの初期角度", &stRotate_);
+	gvg->SetValue("追従点との距離", &camera_->farFeaturedPos_);
+	gvg->SetValue("座標のみの追従を行うか", &camera_->isOnlyGetPosition);
+
+	gvg->SetValue("当たり判定処理フラグ", &camera_->isCollision_);
+	gvg->SetValue("あった時に追加で寄せる量", &camera_->direction);
+}
+
+void FollowCamera::Init()
+{
+	camera_->SetFocusPointRotate(stRotate_);
 }
 
 void FollowCamera::Update()

@@ -157,11 +157,11 @@ void Enemy::Draw() {
 
 	if (behaviorRequest_ == Stay || behavior_ == Stay) {
 		//タグに対応したモデルにワールド追加
-		//IMM_->SetData(a3tag_, world_, 3, color_);
+		IMM_->SetData(a3tag_, world_, color_);
 	}
 	else{
 		//タグに対応したモデルにワールド追加
-		//IMM_->SetData(a4tag_, world_, 3, color_);
+		IMM_->SetData(a4tag_, world_, color_);
 	}
 	shadow->Draw();
 	//collider_->Draw();

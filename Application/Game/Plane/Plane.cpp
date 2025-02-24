@@ -1,6 +1,4 @@
 #include "Plane.h"
-#include<imgui.h>
-
 #include "GlobalVariable/Group/GlobalVariableGroup.h"
 
 Plane::Plane() {

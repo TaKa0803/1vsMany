@@ -47,4 +47,6 @@ private:
 
 	bool isCountEnd_ = false;
 	float currentCount_ = 0;
+	//カウント停止フラグ
+	bool isStopCount_ = false;
 };

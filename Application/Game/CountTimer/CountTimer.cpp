@@ -1,6 +1,7 @@
 #include "CountTimer.h"
 #include"TextureManager/TextureManager.h"
 #include"DeltaTimer/DeltaTimer.h"
+#include"GlobalVariable/Group/GlobalVariableGroup.h"
 
 CountTimer::CountTimer()
 {
@@ -17,18 +18,28 @@ CountTimer::CountTimer()
 	num10_->SetScale({ 90,90 });
 
 	currentCount_ += param_.maxCount;
+
+	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("時間カウント");
+	gvg->SetMonitorValue("残り時間", &currentCount_);
+	gvg->SetMonitorValue("カウント停止", &isStopCount_);
+	gvg->SetValue("制限時間", &param_.maxCount);
+
+	gvg->SetTreeData(num1_->GetTree("1の位"));
+	gvg->SetTreeData(num10_->GetTree("10の位"));
 }
 
 void CountTimer::GameUpdate()
 {
-	//時間を減少
-	currentCount_ -= (float)DeltaTimer::deltaTime_;
+	if (!isStopCount_) {
+		//時間を減少
+		currentCount_ -= (float)DeltaTimer::deltaTime_;
 
-	//カウントが0以下
-	if (currentCount_ <= 0) {
-		currentCount_ = 0;
-		//フラグをON
-		isCountEnd_ = true;
+		//カウントが0以下
+		if (currentCount_ <= 0) {
+			currentCount_ = 0;
+			//フラグをON
+			isCountEnd_ = true;
+		}
 	}
 }
 

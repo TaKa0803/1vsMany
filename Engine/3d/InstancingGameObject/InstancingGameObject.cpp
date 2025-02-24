@@ -4,10 +4,10 @@
 
 GlobalVariableTree& InstancingGameObject::GetDebugTree(const std::string& name)
 {
-	//名前設定
-	tree_.name_ = name;
 	//ワールドのツリー追加
-	tree_.SetTreeData(world_.GetDebugMonitorTree());
+	tree_.SetTreeData(world_.GetDebugTree());
+	//マテリアル関係追加
+	tree_.SetTreeData(IMM_->CreateAndGetTree("EBox", name));
 
 	return tree_;
 }

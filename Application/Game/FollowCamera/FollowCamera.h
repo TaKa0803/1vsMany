@@ -8,6 +8,8 @@ public:
 	FollowCamera();
 	~FollowCamera()=default;
 
+	void Init();
+
 	void Update();
 
 	void SetShake();
@@ -16,6 +18,8 @@ private:
 	Camera* camera_;
 
 	Input* input_;
+
+	Vector3 stRotate_{ 0,0,0 };
 
 	//各角度での加算量
 	float xrotateNum = 0.05f;

@@ -96,18 +96,7 @@ private:
 	//カメラ処理
 	std::unique_ptr<FollowCamera>followCamera_;
 
-	int limitMinute = 0;
-	const int maxmilitMinute = 60 * 60;
-	
 
-
-
-
-
-
-
-
-	
 
 	//シーンチェンジ用
 	std::string white = "resources/Texture/SystemResources/white.png";

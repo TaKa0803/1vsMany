@@ -6,13 +6,22 @@
 
 BrokenBody::BrokenBody()
 {
-	InstancingGameObject::Initialize("AnimeCube");
+	InstancingGameObject::Initialize("EBox");
 	world_.scale_ = { 0.2f,0.2f,0.2f };
 	effectDatas_.clear();
 
 	int tex = TextureManager::LoadTex("resources/Models/Object/enemy.png");
 
 	IMM_->SetTexture(tag_, tex);
+
+	tree_.name_ = "砕け散るからだ";
+	tree_.SetValue("吹き飛び速度", &upSPD_);
+	tree_.SetValue("死亡時間", &maxDeadCount_);
+	tree_.SetValue("跳ねたときの速度減少量", &bulletforce_);
+	tree_.SetValue("サイズ", &scale_);
+	
+	//マテリアルツリーを追加
+	tree_.SetTreeData(IMM_->CreateAndGetTree(tag_, "マテリアル"));
 }
 
 BrokenBody::~BrokenBody()
@@ -23,17 +32,14 @@ BrokenBody::~BrokenBody()
 void BrokenBody::Update() {
 
 
-
-
 	for (EffectData* eData : effectDatas_) {
 
-		if (eData->deadCount++ >= eData->maxDeadCount) {
+		if (eData->deadCount++ >= maxDeadCount_) {
 			eData->isdead_ = true;
 		}
 		else {
 
-
-			eData->world.scale_ = world_.scale_;
+			//eData->world.scale_ = world_.scale_;
 			eData->velocity_ += eData->accce_;
 			eData->world.translate_ += eData->velocity_;
 
@@ -74,13 +80,14 @@ void BrokenBody::EffectOccurred(const EulerWorldTransform& world, int spawnNum) 
 		EffectData* edata = new EffectData();
 
 		//ワールド
-		edata->world = world;
+		edata->world.translate_ = world.translate_;
 		edata->velocity_ = {
 			RandomNumber::Get(-upSPD_,upSPD_),
 			upSPD_,
 			RandomNumber::Get(-upSPD_,upSPD_)
 		};
-		edata->world.scale_ = world.scale_;
+		edata->BulletForce = bulletforce_;
+		edata->world.scale_ = { scale_,scale_,scale_ };
 		effectDatas_.push_back(edata);
 	}
 

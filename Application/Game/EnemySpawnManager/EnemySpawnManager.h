@@ -37,7 +37,7 @@ public:
 	void SetPWorld(const EulerWorldTransform& pWorld) { pWorld_ = &pWorld; };
 public:
 
-	std::list<std::unique_ptr<Enemy>>&GetEnemies() { return enemies_; }
+	std::list<std::unique_ptr<Enemy>>& GetEnemies() { return enemies_; }
 
 	/// <summary>
 	/// キルカウント取得
@@ -51,8 +51,8 @@ private:
 	struct SpawnObject {
 		std::unique_ptr<InstancingGameObject>obj;
 		int hp;
-		float fixCount;
-		float spawnCount;
+		float fixCount=0;
+		float spawnCount=0;
 		bool broken = false;
 	};
 
@@ -64,18 +64,29 @@ private:
 	//壊れた体のエフェクト
 	std::unique_ptr<BrokenBody> brokenBody_;
 
+	//スポーンのモデル
+	std::string modelTag_ = "Flag";
+
+private://**パラメータ**//
+
 	//最大HP
 	int maxHp_ = 10;
 
 	//修繕時間
-	float maxFixCount_=10.0f;
+	float maxFixCount_ = 10.0f;
 
 	//出現時間
-	float maxSpawnCount_= 10.0f;
+	float maxSpawnSec_ = 5.0f;
 
 	//同時出現数
 	int maxSpawnNum_ = 1;
 
+	//出現範囲
+	float spawmWide_ = 5.0f;
 
+	//キル数
 	int killCount_ = 0;
+
+	//出現最大数
+	int maxSpawnCount_ = 200;
 };

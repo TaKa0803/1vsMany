@@ -40,9 +40,7 @@
 
     "player": [ "player", "player.obj", 100 ],
 
-
-
-    "Flag": [ "pole", "pole.obj", 10 ],
+    "Flag": [ "Object/Flag", "Flag.obj", 10 ],
     "EBox": [ "Particle/EBox", "EBox.obj", 50000 ],
     "SkyDome": [ "Skydome", "Skydome.obj", 5 ],
     "Impact": [ "Impact", "Impact.obj", 100 ],

@@ -1,5 +1,6 @@
 #include"Camera.h"
 #include"WinApp/WinApp.h"
+#include"GlobalVariable/Group/GlobalVariableGroup.h"
 #include<imgui.h>
 #include<numbers>
 
@@ -11,7 +12,11 @@ Camera* Camera::GetInstance()
 	return &instance;
 }
 
+
+
 void Camera::Initialize() {
+
+
 
 	//メインカメラ行列初期化
 	mainCamera_.Initialize();
@@ -21,9 +26,6 @@ void Camera::Initialize() {
 
 	//追従ワールド初期化
 	FeaturedWorldTransform_ = nullptr;
-
-	//カメラの初期距離を設定
-	mainCamera_.translate_.z = rangeCameraFeaturedPoint;
 
 	//ポイントカメラの回転の設定
 	CameraMotionSupport_.rotate_ = { 0.6f,0.0f,0.0f };
@@ -41,6 +43,9 @@ void Camera::Initialize() {
 	projection_ = MakePerspectiveFovMatrix(0.45f, (float)WindowApp::kClientWidth / (float)WindowApp::kClientHeight, 0.1f, FarZ);
 	//ビュープロジェクション行列生成
 	viewProjection_ = view_ * projection_;
+
+
+
 }
 
 void Camera::Update() {
@@ -48,13 +53,16 @@ void Camera::Update() {
 	//カメラの当たり判定無効化
 	isCollision_ = false;
 
+	//カメラ距離を一旦再設定
+	mainCamera_.translate_.z = farFeaturedPos_;
+
 	////回転量Xの制限
-	//if (CameraMotionSupport_.rotate_.x < minRotateX) {
-	//	CameraMotionSupport_.rotate_.x = minRotateX;
-	//}
-	//else if (CameraMotionSupport_.rotate_.x > maxRotateX) {
-	//	CameraMotionSupport_.rotate_.x = maxRotateX;
-	//}
+	if (CameraMotionSupport_.rotate_.x < minRotateX) {
+		CameraMotionSupport_.rotate_.x = minRotateX;
+	}
+	else if (CameraMotionSupport_.rotate_.x > maxRotateX) {
+		CameraMotionSupport_.rotate_.x = maxRotateX;
+	}
 
 	//一週以上している場合制限
 	if (CameraMotionSupport_.rotate_.y > (float)std::numbers::pi * 2.0f) {
@@ -107,29 +115,6 @@ void Camera::Update() {
 
 
 }
-
-//#TODO：ここのデバック処理をツリーに実装する
-//void Camera::DrawDebugWindow(const char* name) {
-//#ifdef _DEBUG
-//
-//	if (ImGui::BeginMenu(name)) {
-//		ImGui::Text("メインカメラ");
-//		ImGui::DragFloat3("メイン、座標", &camerapos_.x, 0.01f);
-//		ImGui::DragFloat("ターゲットとの距離", &mainCamera_.translate_.z,0.1f);
-//		ImGui::DragFloat3("メイン、回転", &mainCamera_.rotate_.x, 0.01f);
-//		ImGui::DragFloat3("メイン、スケール", &mainCamera_.scale_.x, 0.01f);
-//
-//		ImGui::Text("ターゲットカメラ");
-//		ImGui::DragFloat3("ターゲット座標", &CameraMotionSupport_.translate_.x, 0.01f);
-//		ImGui::DragFloat3("ターゲットを中心に回転", &CameraMotionSupport_.rotate_.x, 0.01f);
-//		ImGui::DragFloat3("PCM scale", &CameraMotionSupport_.scale_.x, 0.01f);
-//		ImGui::Checkbox("isOnlyGetPosition", &isOnlyGetPosition);
-//		ImGui::EndMenu();
-//	}
-//
-//#endif // _DEBUG
-//
-//}
 
 void Camera::UpdateMatrixes() {
 	//行列更新
