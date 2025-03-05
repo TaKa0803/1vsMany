@@ -335,13 +335,17 @@
     <ClCompile Include="Application\Game\Enemy\ALEnemy.cpp" />
     <ClCompile Include="Application\Game\Scene\ClearScene.cpp" />
     <ClCompile Include="Application\Game\Player\Behavior\Attack\PlayerAttack.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\Run\PlayerRun.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\Stand\PlayerStand.cpp" />
+    <ClCompile Include="Application\Game\Player\Behavior\Move\PlayerMove.cpp" />
     <ClCompile Include="Application\Game\EnemySpawnManager\EnemySpawnManager.cpp" />
     <ClCompile Include="Application\Game\CountTimer\CountTimer.cpp" />
     <ClCompile Include="Application\Game\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Application\Game\ScoreSaveManager\ScoreSaveManager.cpp" />
+    <ClCompile Include="Application\Game\Transition\Transition.cpp" />
+    <ClCompile Include="Application\Game\Player\Behavior\PlayerBaseBehavior.cpp" />
+    <ClCompile Include="Application\Game\Player\Input\PlayerInputManager.cpp" />
+    <ClCompile Include="Application\Game\Player\Animation\PlayerAnimationManager.cpp" />
+    <ClCompile Include="Application\Game\Player\Sound\PlayerSoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -607,14 +611,17 @@
     <ClInclude Include="Application\Game\Scene\ALTitleScene.h" />
     <ClInclude Include="Application\Game\Scene\ClearScene.h" />
     <ClInclude Include="Application\Game\Player\Behavior\Attack\PlayerAttack.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\Run\PlayerRun.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\Stand\PlayerStand.h" />
+    <ClInclude Include="Application\Game\Player\Behavior\Move\PlayerMove.h" />
     <ClInclude Include="Application\Game\Player\Behavior\PlayerBaseBehavior.h" />
     <ClInclude Include="Application\Game\EnemySpawnManager\EnemySpawnManager.h" />
     <ClInclude Include="Application\Game\CountTimer\CountTimer.h" />
     <ClInclude Include="Application\Game\Player\UI\PlayerUI.h" />
     <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Application\Game\ScoreSaveManager\ScoreSaveManager.h" />
+    <ClInclude Include="Application\Game\Transition\Transition.h" />
+    <ClInclude Include="Application\Game\Player\Input\PlayerInputManager.h" />
+    <ClInclude Include="Application\Game\Player\Animation\PlayerAnimationManager.h" />
+    <ClInclude Include="Application\Game\Player\Sound\PlayerSoundManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">

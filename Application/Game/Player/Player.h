@@ -7,52 +7,27 @@
 #include"Game/items.h"
 #include"Game/Effect/EffectMove/EffectMove.h"
 #include"Game/Player/UI/PlayerUI.h"
+#include"Game/Player/Behavior/PlayerBaseBehavior.h"
 
+#include"Game/Player/Sound/PlayerSoundManager.h"
+#include"Game/Player/Animation/PlayerAnimationManager.h"
 #include<vector>
 
 
 
-//攻撃のデータ構造体
-struct ATKData {
-	float extraTime = 0;	//予備動作
-	float AttackTime = 0;	//攻撃動作
-	float RigorTime = 0;	//硬直時間
 
-	int isYATK = false;	//Yボタン攻撃か
 
-	float spd = 0;
+class Player :public GameObject {
 
-	ModelAnimeParts parts;
+public://**パブリック変数**//
 
-	std::vector<ATKData>ATKDerivation;	//攻撃の派生
-};
+	//基本パラメータ
+	PlayerParameter parameter_;
 
-class ALPlayer :public GameObject {
+public://**パブリック変数**//
 
-public:
-
-	enum Animation {
-		ATK1,
-		ATK2,
-		ATK3,
-		WAIT,
-		WALK,
-		CountAnimation
-	};
-
-	//アニメーション名
-	std::string animeName_[5] = {
-		"ATK1",
-		"ATK2",
-		"ATK3",
-		"wait",
-		"walk"
-	};
-
-public:
-
-	ALPlayer();
-	~ALPlayer();
+	Player();
+	~Player()=default;
 
 	void Initialize();
 
@@ -84,12 +59,35 @@ public:
 
 	SphereCollider* GetCollider() { return collider_.get(); }
 
-	int& GetConboCount() { return ATKConboCount; }
+	
 
 	bool IsPlayerATK() {
 		if (behavior_ == State::ATK) { return true; }
 		return false;
 	}
+
+	/// <summary>
+	/// 移動エフェクト出現
+	/// </summary>
+	void SpawnMoveEffect();
+
+	/// <summary>
+	/// 攻撃エフェクト出現
+	/// </summary>
+	void SpawnImpactEffect() { impactE_->Spawn(world_); };
+
+	/// <summary>
+	/// アニメーションのセット
+	/// </summary>
+	/// <param name="type">アニメーションタイプ</param>
+	void SetAnimation(PlayerAnimationManager::Animation type) { animationManager_->SetAnimation(type); }
+
+	/// <summary>
+	/// 音のセット
+	/// </summary>
+	/// <param name="type"></param>
+	void SetSound(PlayerSoundManager::AudioType type) { soundManager_->PlayAudio(type); }
+
 private://メンバ関数
 
 
@@ -100,24 +98,21 @@ private://メンバ関数
 
 #pragma region 状態管理とメンバ関数ポインタテーブル
 
-	enum class State {
-		Move,		//移動
-		ATK,		//攻撃
-		HITACTION,	//被攻撃時
-		SPECIALATK,	//特別攻撃
-		kNumStates	//状態の数
-	};
+
 
 	//プレイヤーの状態
 	State behavior_ = State::Move;
 	//状態リクエスト
 	std::optional<State>behaviorRequest_ = std::nullopt;
 
+	//状態群
+	std::vector<std::unique_ptr<PlayerBaseBehavior>>behaviors_;
+
 	//状態ごとの初期化テーブル
-	static void (ALPlayer::* BehaviorInitialize[])();
+	static void (Player::* BehaviorInitialize[])();
 
 	//状態ごとの更新テーブル
-	static void (ALPlayer::* BehaviorUpdate[])();
+	static void (Player::* BehaviorUpdate[])();
 
 
 	void InitializeMove();
@@ -137,34 +132,41 @@ private://メンバ関数
 	void UpdateSpecialATK();
 #pragma endregion
 
-	void LoadATKDatas();
+private://**プライベート変数**//
 
-private:
+	//入力
 	Input* input_ = nullptr;
 
+	//カメラ
 	const Camera* camera_ = nullptr;
 
+	//当たり判定
 	std::unique_ptr<SphereCollider> collider_;
 
+	//移動エフェクト
 	std::unique_ptr<EffectMove>effectMove_;
 
 	//プレイヤー関連のUI
 	std::unique_ptr<PlayerUI>ui_;
 
+	//音管理
+	std::unique_ptr<PlayerSoundManager>soundManager_;
+
+	//アニメーション管理
+	std::unique_ptr<PlayerAnimationManager>animationManager_;
+
 #pragma region モデルに関する
 
 	//タグ軍
 
-	int textureData = 0;
-#pragma endregion
+	#pragma endregion
 
 #pragma region 影
 	std::unique_ptr<InstancingGameObject>shadow;
 #pragma endregion
 
 
-	//移動速度
-	float spd_ = 0.5f;
+
 
 	//落下速度
 	float fallSpd_ = 0.1f;
@@ -201,57 +203,10 @@ private:
 	};
 
 
-	//ボタンを押したときからの攻撃一覧
-	ATKData startATKData_;
 
-
-
-
-
-	//最大コンボ数
-	const int maxATKConBo = 3;
-
-	int ATKConboCount = 1;
-
-	enum class ATKState {
-		Extra,//準備
-		ATK,	//攻撃実行
-		Rigor//硬直
-	};
-	//攻撃の状態enum
-	ATKState atkState_;
-
-	//攻撃時に使うデータまとめ
-	struct ATKUpdateData {
-		//次の攻撃をするか
-		bool nextATK = false;
-		bool isPushY = false;
-		int count = 0;
-	};
-
-	//攻撃の更新データ
-	ATKUpdateData updateATKData_;
-
-	//実行する攻撃動作
-	ATKData ATKData_;
-
-	bool ATKAnimationSetup_ = false;
-
-	enum NowATK {
-		kATK1,
-		kATK2,
-		kATK3,
-		_countATK
-	};
-
-	NowATK nowATKState_=kATK1;
 #pragma endregion
 
-	int punchSound_;
 
-	int kickSound_;
-
-	int drilSound_;
 
 
 

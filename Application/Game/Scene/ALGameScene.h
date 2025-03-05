@@ -20,6 +20,7 @@
 #include"Game/EnemySpawnManager/EnemySpawnManager.h"
 #include"Game/FollowCamera/FollowCamera.h"
 #include"Game/ScoreSaveManager/ScoreSaveManager.h"
+#include"Game/Transition/Transition.h"
 
 class GameScene : public IScene {
 
@@ -63,11 +64,17 @@ private://**遷移処理**//
 	//状態ごとの更新テーブル
 	static void (GameScene::* BehaviorUpdate[])();
 
+
+	//シーンエントリー時の処理
 	void InitOther2This();
 
+	//ゲーム本編の状態
 	void InitThis();
 
+	//シーン離脱状態の処理
 	void InitThis2Other();
+
+
 
 	void UpdateOther2This();
 
@@ -84,7 +91,7 @@ private:
 
 
 	///以下ゲーム実装
-	std::unique_ptr<ALPlayer>player_;
+	std::unique_ptr<Player>player_;
 
 	std::unique_ptr<Plane>plane_;
 
@@ -99,18 +106,14 @@ private:
 
 	//スコアの保存
 	std::unique_ptr<ScoreSaveManager>scoreSaveManager_;
-	//シーンチェンジ用
-	std::string white = "resources/Texture/SystemResources/white.png";
-	std::unique_ptr<Sprite>sceneC_;
+
+	//遷移クラス
+	std::unique_ptr<Transition>transition_;
 
 	//シーン転換処理をするか否か
 	bool isSceneChange_ = false;
 
-	//シーンが変わりきる時間
-	const float maxSceneChangeSec_ = 1.0f;
 
-	//経過時間カウント
-	float currentSceneXhangeSec_ = 0;
 
 	//BGMの配列番号
 	int bgmGame_;

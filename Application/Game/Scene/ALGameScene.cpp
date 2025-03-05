@@ -12,11 +12,15 @@
 #include"DeltaTimer/DeltaTimer.h"
 
 GameScene::GameScene() {
+
+	//入力インスタンス取得
 	input_ = Input::GetInstance();
 
+	//カメラのインスタンス取得
 	camera_ = Camera::GetInstance();
 
-	player_ = std::make_unique<ALPlayer>();
+	//プレイヤー生成
+	player_ = std::make_unique<Player>();
 	player_->SetCamera(camera_);
 
 	//地面
@@ -35,12 +39,10 @@ GameScene::GameScene() {
 	//スコアの保存マネジャ
 	scoreSaveManager_ = std::make_unique<ScoreSaveManager>();
 
-	int texture;
+	//遷移クラス生成
+	transition_ = std::make_unique<Transition>();
 
-
-	texture = TextureManager::LoadTex(white);
-	sceneC_.reset(Sprite::Create(texture, { 1,1 }, { 1,1 }, { 1280,720 }));
-	sceneC_->SetMaterialDataColor({ 0,0,0,1 });
+	//遷移画像読み込み
 
 	bgmGame_ = AudioManager::LoadSoundNum("game");
 
@@ -68,9 +70,7 @@ void GameScene::Initialize() {
 
 	enemySpawnManager_->Initialize();
 
-	currentSceneXhangeSec_ = maxSceneChangeSec_;
 	isSceneChange_ = false;
-	sceneC_->SetColorAlpha(1);
 
 	AudioManager::GetInstance()->StopAllSounds();
 
@@ -156,8 +156,12 @@ void GameScene::Draw() {
 		UIDraw();
 
 	}
-	//シーン遷移時の画像描画
-	sceneC_->Draw();
+
+	//遷移時の時のみ描画
+	if (scene_ != ThisScene) {
+		transition_->Draw();
+	}
+
 }
 
 void GameScene::DebugWindows() {
@@ -220,10 +224,10 @@ void GameScene::SceneChange() {
 
 	//カウントが終了時
 	if (countTimer_->isCountEnd()) {
-		//状態変更リクエスト設定
-		sceneRequest_ = This2Other;
 		//全ての音を止める
 		AudioManager::GetInstance()->StopAllSounds();
+		//状態変更リクエスト設定
+		sceneRequest_ = This2Other;
 	}
 
 	//デバッグ用シーンチェンジ
@@ -251,8 +255,7 @@ void GameScene::UIDraw() {
 
 void GameScene::InitOther2This()
 {
-	//時間をリセット
-	currentSceneXhangeSec_ = maxSceneChangeSec_;
+	transition_->SetAndStartTransition(Transition::TransitionType::Black2Clear);
 }
 
 void GameScene::InitThis()
@@ -263,27 +266,13 @@ void GameScene::InitThis()
 
 void GameScene::InitThis2Other()
 {
-	//カウントリセット
-	currentSceneXhangeSec_ = 0;
+	transition_->SetAndStartTransition(Transition::TransitionType::Clear2Black);
 }
 
 void GameScene::UpdateOther2This()
 {
-
-	//割合から透明度算出
-	float alpha = float(currentSceneXhangeSec_ / maxSceneChangeSec_);
-
-	//透明度を反映
-	sceneC_->SetColorAlpha(alpha);
-
-	//減算処理
-	currentSceneXhangeSec_ -= (float)DeltaTimer::deltaTime_;
-
-	//もし0以下になったら
-	if (currentSceneXhangeSec_ <= 0.0f) {
-		//透明度を0に設定
-		sceneC_->SetColorAlpha(0);
-		//状態リクエスト送信
+	//遷移が終了時
+	if (transition_->Update()) {
 		sceneRequest_ = ThisScene;
 	}
 }
@@ -311,22 +300,9 @@ void GameScene::UpdateThis()
 
 void GameScene::UpdateThis2Other()
 {
-	//透明度計算
-	float alpha = float(currentSceneXhangeSec_ / maxSceneChangeSec_);
-
-	//透明度を反映
-	sceneC_->SetColorAlpha(alpha);
-
-	currentSceneXhangeSec_ += (float)DeltaTimer::deltaTime_;
-
-	//カウントが指定地を超えた場合
-	if (currentSceneXhangeSec_ >= maxSceneChangeSec_) {
-
+	if (transition_->Update()) {
 		//スコアを保存する
 		scoreSaveManager_->SaveScore(enemySpawnManager_->GetKillCount(), 0);
-
-		//透明度を1に設定
-		sceneC_->SetColorAlpha(1);
 		//シーンを変更
 		sceneNo = (int)SCENE::GAMECLEAR;
 	}

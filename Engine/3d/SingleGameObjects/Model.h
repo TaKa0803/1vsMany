@@ -154,7 +154,7 @@ public://**パブリック変数**//
 
 	//アニメーションフラグ
 	bool isAnimationActive_ = false;
-	//animationの一周までの秒数
+	//animationの一周までの秒数倍率
 	float animationRoopSecond_ = 1.0f;
 
 private://**プライベート関数**//

@@ -505,7 +505,7 @@ GlobalVariableTree& Model::SetDebugParam(const std::string& treeName)
 	animation.SetValue("アニメーション進行度", &setAt_);
 	animation.SetValue("有効", &isAnimationActive_);
 	animation.SetValue("ループ", &isAnimeRoop_);
-	animation.SetValue("ループ時間", &animationRoopSecond_);
+	animation.SetValue("ループ時間倍率", &animationRoopSecond_);
 	
 
 	tree.SetTreeData(uvTree);
