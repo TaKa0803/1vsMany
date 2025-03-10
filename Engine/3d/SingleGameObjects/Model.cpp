@@ -63,23 +63,27 @@ Model* Model::CreateFromOBJ(const std::string& filePath)
 
 void Model::UpdateAnimation()
 {
-
+	//アニメーションが未設定なら処理しない
 	if (nowAnimeName_ == "") {
 		return;
 	}
 
-	//OBJではない
+	//OBJではない場合
 	if (modelType_ != kOBJModel) {
 		//アニメーションフラグON
 		if (isAnimationActive_) {
-			//
-			animationTime_ += animationRoopSecond_ * modelData_.animation[nowAnimeName_].duration * (float)DeltaTimer::deltaTime_;
+
+			//再生時間*デルタタイム*速度倍率
+			animationTime_ +=  modelData_.animation[nowAnimeName_].duration   * (float)DeltaTimer::deltaTime_* animationRoopSecond_;
+			
 			//アニメーションループフラグON
 			if (isAnimeRoop_) {
-				animationTime_ = std::fmod(animationTime_, modelData_.animation[nowAnimeName_].duration);//最後まで行ったら最初からリピート再生
+				//最後まで行ったら最初からリピート再生
+				animationTime_ = std::fmod(animationTime_, modelData_.animation[nowAnimeName_].duration);
 			}
 			else {
 				//ループしない処理
+				//指定値以上なら指定値に変更
 				if (animationTime_ > modelData_.animation[nowAnimeName_].duration) {
 					animationTime_ = modelData_.animation[nowAnimeName_].duration;
 				}
@@ -87,13 +91,15 @@ void Model::UpdateAnimation()
 
 			//マイナス領域の時の処理
 			if (animationRoopSecond_ < 0) {
-
+				//カウントが０以下の場合
 				if (animationTime_ < 0) {
-					//ループ処理
+					//アニメーションループフラグが有効の場合
 					if (isAnimeRoop_) {
+						//加算して対応
 						animationTime_ += modelData_.animation[nowAnimeName_].duration;
 					}
 					else {
+						//０に設定
 						animationTime_ = 0;
 					}
 				}
@@ -101,13 +107,14 @@ void Model::UpdateAnimation()
 
 			//指定してた場合
 			if (isSetATime_) {
+				//指定された値で時間を設定
 				animationTime_ = Lerp(0, modelData_.animation[nowAnimeName_].duration, setAt_);
 			}
 
 			//ボーンのあるモデルの場合
 			if (modelType_ == kSkinningGLTF) {
 				//animationの更新を行って骨ごとのローカル情報を更新
-				ApplyAnimation(modelData_.skeleton, modelData_.animation[nowAnimeName_], animationTime_,isSetATime_);
+				ApplyAnimation(modelData_.skeleton, modelData_.animation[nowAnimeName_], animationTime_);
 				//骨ごとのLocal情報をもとにSkeletonSpaceの情報更新
 				Update(modelData_.skeleton);
 				//SkeletonSpaceの情報をもとにSkinClusterのまｔりｘPaletteを更新
@@ -123,16 +130,17 @@ void Model::UpdateAnimation()
 			}
 		}
 		else {
+			//アニメーションが無効の場合
+			//カウントを0に設定
 			animationTime_ = 0;
 			//animationの更新を行って骨ごとのローカル情報を更新
-			ApplyAnimation(modelData_.skeleton, modelData_.animation[nowAnimeName_], animationTime_,isSetATime_);
+			ApplyAnimation(modelData_.skeleton, modelData_.animation[nowAnimeName_], animationTime_);
 			//骨ごとのLocal情報をもとにSkeletonSpaceの情報更新
 			Update(modelData_.skeleton);
 			//SkeletonSpaceの情報をもとにSkinClusterのまｔりｘPaletteを更新
 			Update(modelData_.skinCluster, modelData_.skeleton);
 		}
 	}
-
 }
 
 Matrix4x4 Model::GetJoint(const std::string& name)
@@ -284,17 +292,21 @@ void Model::Initialize(
 	
 }
 
-void Model::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime,bool designation)
+void Model::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime)
 {
 	//補完の処理
 	float t = 0;
+	//補完が有効の場合
 	if (isSupplementation_) {
-		supplementationCount_+=(float)DeltaTimer::deltaTime_;
-		t = supplementationCount_ / maxSupplementationCount_;
+		//補完時間の加算
+		supplementationSec_+=(float)DeltaTimer::deltaTime_;
+		//割合を計算（0～1）
+		t = supplementationSec_ / maxSupplementationSec_;
 		//カウント最大の時
-		if (supplementationCount_>=maxSupplementationCount_) {
+		if (supplementationSec_>=maxSupplementationSec_) {
 			//Tを1.0にする
 			t = 1.0f;
+			//補完フラグを無効
 			isSupplementation_ = false;
 		}
 	}
@@ -302,6 +314,7 @@ void Model::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float
 	//各ジョイントの更新
 	int i = 0;
 	for (Joint& joint : skeleton.joints) {
+		//
 		if (auto it = animation.nodeAnimations.find(joint.name); it != animation.nodeAnimations.end()) {
 			const NodeAnimation& rootNodeAnimation = (*it).second;
 			joint.transform.translate_ = CalculateValue(rootNodeAnimation.translate.keyframes, animationTime);
@@ -310,7 +323,7 @@ void Model::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float
 		}
 
 		//アニメーション変更によるフラグ処理ONの場合
-		if (isSupplementation_&&designation) {
+		if (isSupplementation_) {
 
 			joint.transform.translate_ = Lerp(savedT[i].translate_, joint.transform.translate_, t);
 			joint.transform.rotate_ = Slerp(savedT[i].rotate_, joint.transform.rotate_, t);
@@ -325,7 +338,7 @@ void Model::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float
 
 void Model::Draw(const Matrix4x4& worldMatrix, int texture)
 {
-
+	//アニメーションの更新
 	UpdateAnimation();
 	//animationのあるモデルなら
 	if (modelType_ == kSkinningGLTF) {
@@ -442,12 +455,16 @@ void Model::ChangeAnimation(const std::string& animeName, float sec)
 		return;
 	}
 
+	//アニメーションがあるかチェック
 	if (modelData_.animation.find(animeName) != modelData_.animation.end()) {
+		//アニメーション名をセットする
 		nowAnimeName_ = animeName;
+		//経過時間が0ではない場合
 		if (sec != 0) {
 			//補完フラグON
 			isSupplementation_ = true;
 
+			//簡易補完アニメーション処理
 			//各ジョイント位置保存
 			savedT.clear();
 			for (Joint& joint : modelData_.skeleton.joints) {
@@ -456,18 +473,23 @@ void Model::ChangeAnimation(const std::string& animeName, float sec)
 				savedT.emplace_back(newd);
 			}
 
-			//
-			supplementationCount_ = 0;
-			maxSupplementationCount_ = sec;
+			//カウントを初期化
+			supplementationSec_ = 0;
+			//設定された時間にセット
+			maxSupplementationSec_ = sec;
 		}
 		else {
-
+			//補完時間を初期化
+			maxSupplementationSec_ = 0;
+			//補完フラグをoff
+			isSupplementation_ = false;
 		}
 
+		//カウント初期化
 		animationTime_ = 0;
 	}
 	else {
-	//見つからなかったのでエラー処理
+	//アニメーション名が見つからなかったのでエラー処理
 	assert(false);
 	}
 

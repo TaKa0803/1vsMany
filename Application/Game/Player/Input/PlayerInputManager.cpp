@@ -3,10 +3,13 @@
 PlayerInputManager::PlayerInputManager()
 {
 	input_ = Input::GetInstance();
+	//デッドライン設定
+	input_->SetDeadLine(0.3f);
 }
 
 const Vector3 PlayerInputManager::GetMoveInput()
 {
+	//入力データ保存変数
 	Vector3 move;
 
 	//キー入力取得
@@ -22,6 +25,7 @@ const Vector3 PlayerInputManager::GetMoveInput()
 
 bool PlayerInputManager::GetAttackInput()
 {
+	//攻撃入力の
 	int isAttackInput = 0;
 
 	//キー入力取得

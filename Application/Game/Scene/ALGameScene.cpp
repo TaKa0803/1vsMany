@@ -21,7 +21,6 @@ GameScene::GameScene() {
 
 	//プレイヤー生成
 	player_ = std::make_unique<Player>();
-	player_->SetCamera(camera_);
 
 	//地面
 	plane_ = std::make_unique<Plane>();

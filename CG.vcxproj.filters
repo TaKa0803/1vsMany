@@ -346,6 +346,7 @@
     <ClCompile Include="Application\Game\Player\Input\PlayerInputManager.cpp" />
     <ClCompile Include="Application\Game\Player\Animation\PlayerAnimationManager.cpp" />
     <ClCompile Include="Application\Game\Player\Sound\PlayerSoundManager.cpp" />
+    <ClCompile Include="Application\Game\CircleShadow\CircleShadow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -622,6 +623,7 @@
     <ClInclude Include="Application\Game\Player\Input\PlayerInputManager.h" />
     <ClInclude Include="Application\Game\Player\Animation\PlayerAnimationManager.h" />
     <ClInclude Include="Application\Game\Player\Sound\PlayerSoundManager.h" />
+    <ClInclude Include="Application\Game\CircleShadow\CircleShadow.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">

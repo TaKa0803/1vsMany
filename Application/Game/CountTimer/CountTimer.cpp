@@ -19,7 +19,7 @@ CountTimer::CountTimer()
 
 	currentCount_ += param_.maxCount;
 
-	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("時間カウント");
+	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("countTimer");
 	gvg->SetMonitorValue("残り時間", &currentCount_);
 	gvg->SetMonitorValue("カウント停止", &isStopCount_);
 	gvg->SetValue("制限時間", &param_.maxCount);

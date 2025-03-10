@@ -1,5 +1,6 @@
 #pragma once
 #include"SingleGameObjects/Model.h"
+#include"GlobalVariable/Tree/GlobalVariableTree.h"
 #include<string>
 
 //プレイヤーのアニメーション管理
@@ -26,9 +27,19 @@ public://**パブリック関数
 	/// <param name="anime"></param>
 	void SetAnimation(Animation anime);
 
-private:
+	/// <summary>
+	/// ツリーの取得
+	/// </summary>
+	/// <returns>ツリーの参照データ</returns>
+	GvariTree& GetTree() { return tree_; };
 
+private://**プライベート変数**//
+
+	//プレイヤーモデルのポインタ
 	Model* model_;
+
+	//パラメータツリー
+	GvariTree tree_;
 	
 	//アニメーション名
 	std::string animeName_[5] = {
@@ -46,5 +57,5 @@ private:
 	bool isLoops_[CountAnimation] = { false };
 
 	//アニメーション再生倍率
-	float multiplyAnimationSpd_[CountAnimation] = { 1.0f };
+	float multiplyAnimationSpds_[CountAnimation] = { 1.0f };
 };

@@ -4,8 +4,7 @@
 
 PlayerAttack::PlayerAttack()
 {
-	//状態リクエストを消す
-	behaviorRequest_ = std::nullopt;
+
 }
 
 void PlayerAttack::Init()
@@ -13,6 +12,9 @@ void PlayerAttack::Init()
 	//model_->ChangeAnimation(animeName_[ATK1], 5.0f / 60.0f);
 	//model_->SetAnimationRoop(false);
 	//model_->animationRoopSecond_ = 10.0;
+
+		//状態リクエストを消す
+	behaviorRequest_ = std::nullopt;
 
 	player_->SetAnimation(PlayerAnimationManager::ATK1);
 
@@ -127,6 +129,10 @@ void PlayerAttack::Update()
 
 	if (atkState_ == ATKState::Rigor) {
 		updateATKData_.count++;
+
+		//移動速度を0に
+		player_->parameter_.velocity.SetZero();
+
 		//条件を満たしたら次の状態へ
 		if (updateATKData_.count >= ATKData_.RigorTime) {
 #pragma region 条件によるシーン転換
@@ -164,7 +170,7 @@ void PlayerAttack::Update()
 			}
 			else {
 				//移動状態に変更
-				behaviorRequest_ = State::Move;
+				//behaviorRequest_ = State::Move;
 				ATKConboCount = 0;
 			}
 #pragma endregion

@@ -11,12 +11,10 @@
 
 #include"Game/Player/Sound/PlayerSoundManager.h"
 #include"Game/Player/Animation/PlayerAnimationManager.h"
+#include"Game/CircleShadow/CircleShadow.h"
 #include<vector>
 
-
-
-
-
+//プレイヤークラス
 class Player :public GameObject {
 
 public://**パブリック変数**//
@@ -50,13 +48,10 @@ public://**パブリック変数**//
 	/// </summary>
 	void DrawUI();
 
-	void DebugWindow(const char* name);
-
-	void SetCamera(Camera* camera) { camera_ = camera; }
-
 	//押し戻し
 	void OnCollisionBack(const Vector3& backV);
 
+	//コライダーを取得
 	SphereCollider* GetCollider() { return collider_.get(); }
 
 	
@@ -88,54 +83,19 @@ public://**パブリック変数**//
 	/// <param name="type"></param>
 	void SetSound(PlayerSoundManager::AudioType type) { soundManager_->PlayAudio(type); }
 
-private://メンバ関数
 
-
-	//移動
-	void Move();
-
-	void ModelRoop(const Vector3& velo);
 
 #pragma region 状態管理とメンバ関数ポインタテーブル
 
-
-
 	//プレイヤーの状態
 	State behavior_ = State::Move;
-	//状態リクエスト
-	std::optional<State>behaviorRequest_ = std::nullopt;
 
 	//状態群
 	std::vector<std::unique_ptr<PlayerBaseBehavior>>behaviors_;
 
-	//状態ごとの初期化テーブル
-	static void (Player::* BehaviorInitialize[])();
-
-	//状態ごとの更新テーブル
-	static void (Player::* BehaviorUpdate[])();
-
-
-	void InitializeMove();
-
-	void InitializeATK();
-
-	void InitializeHitAction();
-
-	void InitializeSpecialATK();
-
-	void UpdateMove();
-
-	void UpdateATK();
-
-	void UpdateHitAction();
-
-	void UpdateSpecialATK();
 #pragma endregion
 
 private://**プライベート変数**//
-
-	//入力
-	Input* input_ = nullptr;
 
 	//カメラ
 	const Camera* camera_ = nullptr;
@@ -146,6 +106,9 @@ private://**プライベート変数**//
 	//移動エフェクト
 	std::unique_ptr<EffectMove>effectMove_;
 
+	//円の影
+	std::unique_ptr<CircleShadow>circleShadow_;
+
 	//プレイヤー関連のUI
 	std::unique_ptr<PlayerUI>ui_;
 
@@ -155,26 +118,11 @@ private://**プライベート変数**//
 	//アニメーション管理
 	std::unique_ptr<PlayerAnimationManager>animationManager_;
 
-#pragma region モデルに関する
-
-	//タグ軍
-
-	#pragma endregion
-
-#pragma region 影
-	std::unique_ptr<InstancingGameObject>shadow;
-#pragma endregion
-
-
-
-
 	//落下速度
 	float fallSpd_ = 0.1f;
 
 	//加算式落下加速度
 	float addFallSpd_ = 0;
-
-
 
 	enum MoveState {
 		StopS,

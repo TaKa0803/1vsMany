@@ -8,7 +8,7 @@ class GlobalVariableTree {
 public: //**パブリック関数**//
 
 	//ツリーデータ作成
-	GlobalVariableTree(const std::string& treeName);
+	GlobalVariableTree(const std::string& treeName="ツリー");
 	~GlobalVariableTree() = default;
 
 	//ツリーのすべてのパラの前に表示するテキストの追加

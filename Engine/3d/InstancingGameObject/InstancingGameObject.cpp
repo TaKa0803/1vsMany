@@ -31,7 +31,6 @@ void InstancingGameObject::Initialize(const std::string& tag) {
 void InstancingGameObject::Update() {
 	//行列更新
 	world_.UpdateMatrix();
-
 }
 
 void InstancingGameObject::Draw()

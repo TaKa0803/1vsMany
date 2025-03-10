@@ -113,6 +113,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Debug\DebugScene.cpp" />
     <ClCompile Include="Application\AppScene\AppScene.cpp" />
     <ClCompile Include="Application\Game\BrokenBody\BrokenBody.cpp" />
+    <ClCompile Include="Application\Game\CircleShadow\CircleShadow.cpp" />
     <ClCompile Include="Application\Game\CountTimer\CountTimer.cpp" />
     <ClCompile Include="Application\Game\Effect\dZoneE\DZone.cpp" />
     <ClCompile Include="Application\Game\Effect\EffectExplosion.cpp" />
@@ -385,6 +386,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Debug\DebugScene.h" />
     <ClInclude Include="Application\AppScene\AppScene.h" />
     <ClInclude Include="Application\Game\BrokenBody\BrokenBody.h" />
+    <ClInclude Include="Application\Game\CircleShadow\CircleShadow.h" />
     <ClInclude Include="Application\Game\CountTimer\CountTimer.h" />
     <ClInclude Include="Application\Game\Effect\dZoneE\DZone.h" />
     <ClInclude Include="Application\Game\Effect\EffectExplosion.h" />

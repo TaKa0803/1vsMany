@@ -8,7 +8,7 @@ public:
 	EffectMove();
 	~EffectMove();
 
-	void Initialize(const Vector4& color);
+	void Initialize(const Vector4& color = {1,1,1,1});
 
 	void Update();
 

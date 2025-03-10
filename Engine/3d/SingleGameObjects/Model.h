@@ -137,7 +137,7 @@ private://**プライベート関数**//
 	/// <param name="animation">animationデータ</param>
 	/// <param name="animationTime">アニメーション時間</param>
 	/// <param name="designation"フラグ></param>
-	void ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime, bool designation);
+	void ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime);
 
 public://**パブリック変数**//
 
@@ -245,9 +245,9 @@ private://**プライベート関数**//
 	bool isSupplementation_ =false;
 
 	//カウント変数
-	float supplementationCount_ = 0;
+	float supplementationSec_ = 0;
 	//補完カウント
-	float maxSupplementationCount_;
+	float maxSupplementationSec_;
 	//過去アニメーション
 	std::vector<QuaterinionWorldTransform> savedT;
 #pragma endregion

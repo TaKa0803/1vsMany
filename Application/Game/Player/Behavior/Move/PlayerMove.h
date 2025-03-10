@@ -31,6 +31,11 @@ private:
 	/// </summary>
 	void SceneChange();
 
+	/// <summary>
+	/// アニメーション変更処理
+	/// </summary>
+	void ChangeAnimation();
+
 private://**プライベート変数
 
 	//移動速度
