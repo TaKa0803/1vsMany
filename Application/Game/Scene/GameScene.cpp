@@ -1,4 +1,4 @@
-#include"ALGameScene.h"
+#include"GameScene.h"
 
 #include<imgui.h>
 
@@ -51,10 +51,12 @@ GameScene::GameScene() {
 	bgmGame_ = AudioManager::LoadSoundNum("game");
 
 
-
 	ATKHitPerticle_ = std::make_unique<ParticleManager>();
+	ATKHitPerticle_->Initialize(TextureManager::LoadTex("resources/Texture/CG/circle.png"));
+	ATKHitPerticle_->SetOnlyImpact(true);
 	EmiterSphere* emit = ATKHitPerticle_->GetEmiterData();
 	emit->speed = { 0.1f,1.5f };
+	emit->color = { 0,0,1,1 };
 }
 
 GameScene::~GameScene() {
@@ -65,22 +67,11 @@ void GameScene::Initialize() {
 	//プレイヤー初期化
 	player_->Initialize();
 
-
-
-
-
+	//出現マネージャの初期化
 	enemySpawnManager_->Initialize();
 
-	isSceneChange_ = false;
-
+	//全ての音を止める
 	AudioManager::GetInstance()->StopAllSounds();
-
-
-	ATKHitPerticle_->Initialize(TextureManager::LoadTex("resources/Texture/CG/circle.png"));
-	ATKHitPerticle_->SetOnlyImpact(true);
-	EmiterSphere* emit = ATKHitPerticle_->GetEmiterData();
-
-	emit->color = { 0,0,1,1 };
 
 	//初期シーンリクエスト
 	sceneRequest_ = Other2ThisScene;

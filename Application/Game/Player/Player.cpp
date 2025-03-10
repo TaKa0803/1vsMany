@@ -69,8 +69,6 @@ void Player::Initialize() {
 
 	ui_->Init();
 
-	moveState_ = NoneS;
-
 	//ATKConboCount = 0;
 	//ATKAnimationSetup_ = false;
 

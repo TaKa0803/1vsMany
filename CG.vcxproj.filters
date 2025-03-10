@@ -330,8 +330,8 @@
     <ClCompile Include="Application\Game\Effect\EffectMove\EffectMove.cpp" />
     <ClCompile Include="Application\Game\Effect\dZoneE\DZone.cpp" />
     <ClCompile Include="Application\Game\BrokenBody\BrokenBody.cpp" />
-    <ClCompile Include="Application\Game\Scene\ALGameScene.cpp" />
-    <ClCompile Include="Application\Game\Scene\ALTitleScene.cpp" />
+    <ClCompile Include="Application\Game\Scene\GameScene.cpp" />
+    <ClCompile Include="Application\Game\Scene\TitleScene.cpp" />
     <ClCompile Include="Application\Game\Enemy\ALEnemy.cpp" />
     <ClCompile Include="Application\Game\Scene\ClearScene.cpp" />
     <ClCompile Include="Application\Game\Player\Behavior\Attack\PlayerAttack.cpp" />
@@ -608,8 +608,8 @@
     <ClInclude Include="Application\Game\Effect\EffectMove\EffectMove.h" />
     <ClInclude Include="Application\Game\Effect\dZoneE\DZone.h" />
     <ClInclude Include="Application\Game\BrokenBody\BrokenBody.h" />
-    <ClInclude Include="Application\Game\Scene\ALGameScene.h" />
-    <ClInclude Include="Application\Game\Scene\ALTitleScene.h" />
+    <ClInclude Include="Application\Game\Scene\GameScene.h" />
+    <ClInclude Include="Application\Game\Scene\TitleScene.h" />
     <ClInclude Include="Application\Game\Scene\ClearScene.h" />
     <ClInclude Include="Application\Game\Player\Behavior\Attack\PlayerAttack.h" />
     <ClInclude Include="Application\Game\Player\Behavior\Move\PlayerMove.h" />

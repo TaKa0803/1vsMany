@@ -3,8 +3,8 @@
 
 #pragma region 各シーンクラス
 #include"Debug/DebugScene.h"
-#include"Game/Scene/ALTitleScene.h"
-#include"Game/Scene/ALGameScene.h"
+#include"Game/Scene/TitleScene.h"
+#include"Game/Scene/GameScene.h"
 #include"Game/Scene/ClearScene.h"
 #pragma endregion
 
@@ -29,7 +29,7 @@ public://**パブリック関数**//
 			return std::make_unique<DebugScnene>();
 
 		case SCENE::TITLE://タイトルシーンを返す処理
-			return std::make_unique<ALTitleScene>();
+			return std::make_unique<TitleScene>();
 
 		case SCENE::GAME://ゲームシーンを返す処理
 			return std::make_unique<GameScene>();

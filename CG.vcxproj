@@ -132,8 +132,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Game\Player\Player.cpp" />
     <ClCompile Include="Application\Game\Player\Sound\PlayerSoundManager.cpp" />
     <ClCompile Include="Application\Game\Player\UI\PlayerUI.cpp" />
-    <ClCompile Include="Application\Game\Scene\ALGameScene.cpp" />
-    <ClCompile Include="Application\Game\Scene\ALTitleScene.cpp" />
+    <ClCompile Include="Application\Game\Scene\GameScene.cpp" />
+    <ClCompile Include="Application\Game\Scene\TitleScene.cpp" />
     <ClCompile Include="Application\Game\Scene\ClearScene.cpp" />
     <ClCompile Include="Application\Game\ScoreSaveManager\ScoreSaveManager.cpp" />
     <ClCompile Include="Application\Game\Transition\Transition.cpp" />
@@ -406,8 +406,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Game\Player\Player.h" />
     <ClInclude Include="Application\Game\Player\Sound\PlayerSoundManager.h" />
     <ClInclude Include="Application\Game\Player\UI\PlayerUI.h" />
-    <ClInclude Include="Application\Game\Scene\ALGameScene.h" />
-    <ClInclude Include="Application\Game\Scene\ALTitleScene.h" />
+    <ClInclude Include="Application\Game\Scene\GameScene.h" />
+    <ClInclude Include="Application\Game\Scene\TitleScene.h" />
     <ClInclude Include="Application\Game\Scene\ClearScene.h" />
     <ClInclude Include="Application\Game\ScoreSaveManager\ScoreSaveManager.h" />
     <ClInclude Include="Application\Game\Transition\Transition.h" />

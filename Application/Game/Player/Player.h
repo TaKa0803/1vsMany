@@ -39,8 +39,14 @@ public://**パブリック変数**//
 	/// </summary>
 	void ObjectUpdate();
 
+	/// <summary>
+	/// 描画
+	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// パーティクル描画
+	/// </summary>
 	void DrawParticle();
 
 	/// <summary>
@@ -54,8 +60,7 @@ public://**パブリック変数**//
 	//コライダーを取得
 	SphereCollider* GetCollider() { return collider_.get(); }
 
-	
-
+	//攻撃状態か取得
 	bool IsPlayerATK() {
 		if (behavior_ == State::ATK) { return true; }
 		return false;
@@ -123,14 +128,6 @@ private://**プライベート変数**//
 
 	//加算式落下加速度
 	float addFallSpd_ = 0;
-
-	enum MoveState {
-		StopS,
-		MoveS,
-		NoneS
-	};
-
-	MoveState moveState_ = NoneS;
 
 #pragma region 攻撃に関する変数
 
