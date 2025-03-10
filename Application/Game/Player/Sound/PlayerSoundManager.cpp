@@ -18,3 +18,9 @@ void PlayerSoundManager::PlayAudio(AudioType type)
 	//音の再生
 	AudioManager::PlaySoundData(soundNumbers_[num], volumes_[num], isLoop[num]);
 }
+
+void PlayerSoundManager::StopAudio(AudioType type)
+{
+	//音の停止
+	AudioManager::StopSound(soundNumbers_[(size_t)type]);
+}

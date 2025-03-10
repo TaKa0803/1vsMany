@@ -1,19 +1,18 @@
 #include"Player.h"
 
-#include"AudioManager/AudioManager.h"
-#include"TextureManager/TextureManager.h"
-
 #include"Game/Player/Behavior/Move/PlayerMove.h"
 #include"Game/Player/Behavior/Attack/PlayerAttack.h"
-
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
 
-#include<cassert>
 #include<numbers>
 
 
 Player::Player() {
-	//一回しかしない初期化情報
+
+	//入力管理クラス生成
+	input_ = std::make_unique<PlayerInputManager>();
+
+	//カメラのインスタンス取得
 	camera_ = Camera::GetInstance();
 
 	//コライダー生成
@@ -55,6 +54,10 @@ Player::Player() {
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GlobalVariableGroup>("player");
 	gvg->SetTreeData(model_->SetDebugParam());
 	gvg->SetTreeData(animationManager_->GetTree());
+
+	gvg->SetTreeData(behaviors_[(size_t)State::Move]->tree_);
+	gvg->SetTreeData(behaviors_[(size_t)State::ATK]->tree_);
+
 }
 
 
@@ -62,20 +65,15 @@ void Player::Initialize() {
 	//中身データ初期化
 	world_.Initialize();
 	world_.translate_.z = 2;
-	world_.UpdateMatrix();
 
 	//移動エフェクトの初期化
 	effectMove_->Initialize({ 1,1,1,1 });
 
+	//UIの初期化
 	ui_->Init();
 
-	//ATKConboCount = 0;
-	//ATKAnimationSetup_ = false;
-
-
+	//衝撃エフェクト初期化
 	impactE_->Initialize();
-
-	collider_->Update();
 }
 
 void Player::GameUpdate() {
@@ -115,6 +113,7 @@ void Player::ObjectUpdate()
 {
 	//更新
 	world_.UpdateMatrix();
+	circleShadow_->Update();
 	collider_->Update();
 	
 	impactE_->Update();
@@ -126,7 +125,7 @@ void Player::ObjectUpdate()
 void Player::Draw() {
 
 	//円影描画
-	//circleShadow_->Draw();
+	circleShadow_->Draw();
 
 	//各モデル描画
 	GameObject::Draw();
@@ -168,4 +167,27 @@ void Player::SpawnMoveEffect()
 {
 	//移動エフェクト生成
 	effectMove_->SpawnE(world_.GetWorldTranslate());
+}
+
+Vector3 Player::SetBody4Input()
+{
+	//入力を取得
+	Vector3 velocity = input_->GetMoveInput();
+
+	//カメラ方向に向ける
+	velocity = TransformNormal(velocity, camera_->GetMainCamera().matWorld_);
+	//ｙの量を無視する
+	velocity.y = 0.0f;
+
+	//正規化
+	velocity.SetNormalize();
+
+	//入力がある場合
+	if (velocity != Vector3(0, 0, 0)) {
+		//向きを指定
+		parameter_.rotation.y = GetYRotate({ velocity.x,velocity.z }) + ((float)std::numbers::pi);
+	}
+
+	//向きベクトルを返却
+	return velocity;
 }

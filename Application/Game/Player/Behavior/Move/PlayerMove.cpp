@@ -22,21 +22,11 @@ void PlayerMove::Update()
 
 void PlayerMove::Move()
 {
-	//移動取得
-	Vector3 move = input_->GetMoveInput();
+	//入力方向に回転して向きベクトル取得
+	Vector3 move = player_->SetBody4Input();
 
 	//移動速度量加算
 	move *= spd_;
-
-	//カメラ方向に向ける
-	move = TransformNormal(move, camera_->GetMainCamera().matWorld_);
-	//ｙの量を無視する
-	move.y = 0.0f;
-
-	if (move != Vector3(0, 0, 0)) {
-		//向きを指定
-		player_->parameter_.rotation.y = GetYRotate({ move.x,move.z }) + ((float)std::numbers::pi);
-	}
 	//加算
 	player_->parameter_.velocity = move;
 }

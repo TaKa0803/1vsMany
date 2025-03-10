@@ -24,6 +24,11 @@ public://**パブリック関数**//
 	/// <param name="type">音の種類</param>
 	void PlayAudio(AudioType type);
 
+	/// <summary>
+	/// 音の停止
+	/// </summary>
+	/// <param name="type">音の種類</param>
+	void StopAudio(AudioType type);
 private:
 
 	//音の配列番号

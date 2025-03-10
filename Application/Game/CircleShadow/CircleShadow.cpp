@@ -14,10 +14,4 @@ CircleShadow::CircleShadow(const EulerWorldTransform& world)
 	SetScale(1.5f);
 }
 
-void CircleShadow::Draw()
-{
-	//更新
-	Update();
-	//影の描画
-	Draw();
-}
+

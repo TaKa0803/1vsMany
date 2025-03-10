@@ -47,7 +47,12 @@ protected://**共通変数**//
 
 	std::unique_ptr<PlayerInputManager>input_;
 
-public:
+public://**パブリック変数**//
+
+	//パラメータ保存ツリー
+	GvariTree tree_;
+
+public://**パブリック関数**//
 
 	PlayerBaseBehavior();
 	virtual ~PlayerBaseBehavior() = default;

@@ -9,6 +9,7 @@
 #include"Game/Player/UI/PlayerUI.h"
 #include"Game/Player/Behavior/PlayerBaseBehavior.h"
 
+#include"Game/Player/Input/PlayerInputManager.h"
 #include"Game/Player/Sound/PlayerSoundManager.h"
 #include"Game/Player/Animation/PlayerAnimationManager.h"
 #include"Game/CircleShadow/CircleShadow.h"
@@ -25,7 +26,7 @@ public://**パブリック変数**//
 public://**パブリック変数**//
 
 	Player();
-	~Player()=default;
+	~Player() = default;
 
 	void Initialize();
 
@@ -76,6 +77,8 @@ public://**パブリック変数**//
 	/// </summary>
 	void SpawnImpactEffect() { impactE_->Spawn(world_); };
 
+public://**セッター**//
+
 	/// <summary>
 	/// アニメーションのセット
 	/// </summary>
@@ -83,12 +86,22 @@ public://**パブリック変数**//
 	void SetAnimation(PlayerAnimationManager::Animation type) { animationManager_->SetAnimation(type); }
 
 	/// <summary>
-	/// 音のセット
+	/// 音の再生
 	/// </summary>
 	/// <param name="type"></param>
-	void SetSound(PlayerSoundManager::AudioType type) { soundManager_->PlayAudio(type); }
+	void SetPlaySound(PlayerSoundManager::AudioType type) { soundManager_->PlayAudio(type); }
 
+	/// <summary>
+	/// 音の停止
+	/// </summary>
+	/// <param name="type"></param>
+	void SetStopSound(PlayerSoundManager::AudioType type) { soundManager_->StopAudio(type); };
 
+	/// <summary>
+	/// 入力方向を向く
+	/// </summary>
+	/// <returns>向きベクトルを返却</returns>
+	Vector3 SetBody4Input();
 
 #pragma region 状態管理とメンバ関数ポインタテーブル
 
@@ -102,6 +115,9 @@ public://**パブリック変数**//
 
 private://**プライベート変数**//
 
+	//入力管理
+	std::unique_ptr<PlayerInputManager>input_;
+
 	//カメラ
 	const Camera* camera_ = nullptr;
 
@@ -110,6 +126,9 @@ private://**プライベート変数**//
 
 	//移動エフェクト
 	std::unique_ptr<EffectMove>effectMove_;
+
+	//攻撃エフェクト
+	std::unique_ptr<EffectImpact>impactE_;
 
 	//円の影
 	std::unique_ptr<CircleShadow>circleShadow_;
@@ -128,31 +147,4 @@ private://**プライベート変数**//
 
 	//加算式落下加速度
 	float addFallSpd_ = 0;
-
-#pragma region 攻撃に関する変数
-
-	std::unique_ptr<EffectImpact>impactE_;
-
-	//攻撃に関するデータ
-	std::string atkDataPass_ = "resources/jsonfile/PlayerATKData.json";
-
-	//グループ名
-	std::string groupName_ = "BButtonATK";
-
-	static const int itemNum = 2;
-
-	//アイテムの名前
-	std::string keyNames_[itemNum] = {
-		"data",
-		"ATKDerivation"
-	};
-
-
-
-#pragma endregion
-
-
-
-
-
 };
