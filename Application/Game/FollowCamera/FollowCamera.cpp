@@ -1,6 +1,7 @@
 #include "FollowCamera.h"
 #include"RandomNum/RandomNum.h"
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
+#include"DeltaTimer/DeltaTimer.h"
 
 FollowCamera::FollowCamera()
 {
@@ -10,6 +11,9 @@ FollowCamera::FollowCamera()
 	//デバッグ用にパラメータ設定
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Camera");
 	gvg->SetTreeData(camera_->mainCamera_.GetDebugTree("メインカメラ座標"));
+
+	gvg->SetValue("加算量X", &xRotateNum);
+	gvg->SetValue("加算量Y", &yRotateNum);
 
 	gvg->SetValue("描画距離", &camera_->FarZ);
 	gvg->SetValue("最小角度X", &camera_->minRotateX);
@@ -21,51 +25,40 @@ FollowCamera::FollowCamera()
 
 	gvg->SetValue("当たり判定処理フラグ", &camera_->isCollision_);
 	gvg->SetValue("あった時に追加で寄せる量", &camera_->direction);
+
+	//シェイクのパラメータをツリーに設定
+	GvariTree tree;
+	tree.name_ = "カメラシェイク";
+	tree.SetMonitorValue("元の座標", &tempP_);	
+	tree.SetValue("最大振動時間",&maxSecond_);
+	tree.SetValue("振動幅", &shakeWide_);
+
+	//ツリーをセット
+	gvg->SetTreeData(tree);
 }
 
 void FollowCamera::Init()
 {
+
 	camera_->SetFocusPointRotate(stRotate_);
 }
 
 void FollowCamera::Update()
 {
 	//カメラ更新
-	Vector2 stick;
-	if (input_->IsControllerActive()) {
-		stick = input_->GetjoyStickR();
-	}
-	else {
-		Vector3 sti = input_->GetAllArrowKey();
-		stick = { sti.x,sti.z };
-	}
-	stick.Normalize();
-	stick.x *= xrotateNum;
-	stick.y *= yrotatenum * -1.0f;
+
+	//入力を受け取る
+	Vector2 stick=GetInput();
+
+	//移動量分乗算
+	stick.x *= xRotateNum;
+	stick.y *= yRotateNum * -1.0f;
+	//結果をカメラ本体に渡す
 	camera_->AddCameraR_X(stick.y);
 	camera_->AddCameraR_Y(stick.x);
 
-
-	if (isShake_) {
-
-		Vector3 pos = {
-		RandomNumber::Get(-0.5f,0.5f),
-		RandomNumber::Get(-0.5f,0.5f),
-		0
-		};
-
-		Vector3 newp = tempP_ + pos;
-
-		camera_->SetMainCameraPos(newp);
-
-		if (cameraShakeCount_-- <= 0) {
-			isShake_ = false;
-			cameraShakeCount_ = 0;
-			camera_->SetMainCameraPos(tempP_);
-		}
-
-	}
-
+	//カメラシェイクの更新
+	UpdateShake();
 }
 
 void FollowCamera::SetShake()
@@ -79,5 +72,51 @@ void FollowCamera::SetShake()
 	}
 
 	//シェイク時間をセット
-	cameraShakeCount_ = count_;
+	currentShakeSec_ = maxSecond_;
+}
+
+Vector2 FollowCamera::GetInput()
+{
+	//入力を保存する変数
+	Vector2 stick;
+	
+	//コントローラ入力を取得
+	stick = input_->GetjoyStickR();
+
+	//キー入力を取得
+	Vector3 sti = input_->GetAllArrowKey();
+	stick += { sti.x, sti.z };
+
+	//正規化して返却
+	return stick.Normalize();
+}
+
+void FollowCamera::UpdateShake()
+{
+	//カメラシェイクのフラグが有効の場合
+	if (isShake_) {
+		Vector3 shakePos = {
+		RandomNumber::Get(-shakeWide_,shakeWide_),
+		RandomNumber::Get(-shakeWide_,shakeWide_),
+		0
+		};
+
+		//ずれた値と主の値を加算した値を求める
+		Vector3 newPosition = tempP_ + shakePos;
+
+		//求めた値をセットする
+		camera_->SetMainCameraPos(newPosition);
+
+		//シェイク時間を減産処理
+		currentShakeSec_ -= (float)DeltaTimer::deltaTime_;
+
+		//時間が0以下の場合
+		if (currentShakeSec_ <= 0) {
+			//フラグをOFF
+			isShake_ = false;
+			//カメラ座標を元に戻す
+			camera_->SetMainCameraPos(tempP_);
+		}
+
+	}
 }

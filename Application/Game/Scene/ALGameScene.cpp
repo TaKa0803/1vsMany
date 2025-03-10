@@ -18,9 +18,14 @@ GameScene::GameScene() {
 
 	//カメラのインスタンス取得
 	camera_ = Camera::GetInstance();
+	//初期化
+	camera_->Initialize();
 
 	//プレイヤー生成
 	player_ = std::make_unique<Player>();
+
+	//プレイヤーをターゲットに指定
+	camera_->SetTarget(&player_->world_);
 
 	//地面
 	plane_ = std::make_unique<Plane>();
@@ -60,11 +65,8 @@ void GameScene::Initialize() {
 	//プレイヤー初期化
 	player_->Initialize();
 
-	//初期化
-	camera_->Initialize();
-	//各種設定
-	camera_->SetTarget(&player_->world_);
-	camera_->SetCameraDirection(-40.0f);
+
+
 
 
 	enemySpawnManager_->Initialize();

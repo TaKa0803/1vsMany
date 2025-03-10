@@ -16,8 +16,6 @@ Camera* Camera::GetInstance()
 
 void Camera::Initialize() {
 
-
-
 	//メインカメラ行列初期化
 	mainCamera_.Initialize();
 
@@ -43,9 +41,6 @@ void Camera::Initialize() {
 	projection_ = MakePerspectiveFovMatrix(0.45f, (float)WindowApp::kClientWidth / (float)WindowApp::kClientHeight, 0.1f, FarZ);
 	//ビュープロジェクション行列生成
 	viewProjection_ = view_ * projection_;
-
-
-
 }
 
 void Camera::Update() {
