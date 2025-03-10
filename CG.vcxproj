@@ -396,7 +396,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Game\EnemySpawnManager\EnemySpawnManager.h" />
     <ClInclude Include="Application\Game\Enemy\ALEnemy.h" />
     <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h" />
-    <ClInclude Include="Application\Game\items.h" />
     <ClInclude Include="Application\Game\Plane\Plane.h" />
     <ClInclude Include="Application\Game\Player\Animation\PlayerAnimationManager.h" />
     <ClInclude Include="Application\Game\Player\Behavior\Attack\PlayerAttack.h" />

@@ -1,14 +1,12 @@
 #pragma once
 #include"SingleGameObjects/GameObject.h"
-#include"Input/Input.h"
 #include"Camera/Camera.h"
 #include"SphereCollider/SphereCollider.h"
-#include"Game/Effect/Impact/Impact.h"
-#include"Game/items.h"
-#include"Game/Effect/EffectMove/EffectMove.h"
-#include"Game/Player/UI/PlayerUI.h"
 #include"Game/Player/Behavior/PlayerBaseBehavior.h"
+#include"Game/Effect/Impact/Impact.h"
+#include"Game/Effect/EffectMove/EffectMove.h"
 
+#include"Game/Player/UI/PlayerUI.h"
 #include"Game/Player/Input/PlayerInputManager.h"
 #include"Game/Player/Sound/PlayerSoundManager.h"
 #include"Game/Player/Animation/PlayerAnimationManager.h"

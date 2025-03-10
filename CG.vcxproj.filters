@@ -601,7 +601,6 @@
     <ClInclude Include="Application\Game\Player\Player.h" />
     <ClInclude Include="Application\Game\Enemy\ALEnemy.h" />
     <ClInclude Include="Application\Game\Plane\Plane.h" />
-    <ClInclude Include="Application\Game\items.h" />
     <ClInclude Include="Application\Game\Effect\EffectExplosion.h" />
     <ClInclude Include="Application\Game\Effect\Impact\Impact.h" />
     <ClInclude Include="Application\Game\Effect\EffectSphereExplo\ESphereExplo.h" />
