@@ -2,29 +2,45 @@
 
 #include"SingleGameObjects/GameObject.h"
 #include"SphereCollider/SphereCollider.h"
+#include"Game/CircleShadow/CircleShadow.h"
 #include<iostream>
-#include"Game/items.h"
 
-
+//敵キャラクラス
 class Enemy : public InstancingGameObject {
 
-public:
+public://**パブリック関数**//
+
+	Enemy();
+	~Enemy() = default;
+
 	/// <summary>
-	/// 
+	/// 初期化
 	/// </summary>
 	void Initialize(const Vector3& position, const EulerWorldTransform* playerWorld);
 
 	/// <summary>
-	/// 
+	/// 更新
 	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// ヒット確認と押し戻し処理
+	/// </summary>
+	/// <param name="collider">判定するコライダー</param>
+	/// <returns></returns>
 	bool Collision(SphereCollider* collider);
 
-	//osimodosi
+	/// <summary>
+	/// 押し戻し処理
+	/// </summary>
+	/// <param name="collider">参照元コライダー</param>
+	/// <returns>おし戻しベクトル</returns>
 	Vector3 OshiDashi(SphereCollider* collider);
 
-	//押し戻し処理
+	/// <summary>
+	/// 押し戻し処理
+	/// </summary>
+	/// <param name="backV"></param>
 	void PushBack(const Vector3& backV);
 
 	/// <summary>
@@ -32,16 +48,32 @@ public:
 	/// </summary>
 	void Draw();
 
-	//死んだか否か
+	/// <summary>
+	/// 死亡チェック
+	/// </summary>
+	/// <returns></returns>
 	bool GetDead() { return isDead_; }
 
-	//すでに当たっているか否か
+	/// <summary>
+	/// 既にヒット済かチェック
+	/// </summary>
+	/// <returns></returns>
 	bool isHit() { return isHit_; }
 
+	/// <summary>
+	/// 座標を加算
+	/// </summary>
+	/// <param name="translate"></param>
 	void AddTranslate(const Vector3& translate) { world_.translate_ += translate; }
 
+	/// <summary>
+	/// コライダーの取得
+	/// </summary>
+	/// <returns>コライダーポインタ返却</returns>
 	SphereCollider* GetCollider() { return collider_.get(); }
-private:
+
+private://**状態に関するプライベート関数**//
+
 	void StayInitialize();
 	void FollowInitialize();
 	void HitInitialize();
@@ -64,10 +96,8 @@ private:
 
 	std::unique_ptr<SphereCollider>collider_;
 
-#pragma region 影
-	std::unique_ptr<InstancingGameObject>shadow;
-#pragma endregion
-
+	//丸影
+	std::unique_ptr<CircleShadow>shadow;
 
 	std::string a3tag_ = "PlayerM3";
 	std::string a4tag_ = "PlayerM4";

@@ -1,4 +1,4 @@
-#include"Game/Enemy/ALEnemy.h"
+#include"Game/EnemyManager/Enemy/Enemy.h"
 
 #include"RandomNum/RandomNum.h"
 #include"TextureManager/TextureManager.h"
@@ -6,6 +6,11 @@
 #include"Game/BrokenBody/BrokenBody.h"
 
 #include<numbers>
+
+Enemy::Enemy()
+{
+
+}
 
 void Enemy::Initialize(const Vector3& position, const EulerWorldTransform* playerWorld) {
 	InstancingGameObject::Initialize("PlayerM4");
@@ -20,20 +25,20 @@ void Enemy::Initialize(const Vector3& position, const EulerWorldTransform* playe
 
 	color_ = { 1.0f,0.0f,0.0f,1.0f };
 
-	//model_->IsEnableTexture(false);
-	//model_->SetBlendMode(BlendMode::kNone);
+
 	world_.translate_ = position;
 
 	tHeight = world_.translate_.y;
 
 	playerWorld_ = playerWorld;
-	//idou
+	
+	//ランダム移動速度を生成
 	moveSPD_ = RandomNumber::Get(minSPD_, maxSPD_);
 
 	world_.rotate_.y = RandomNumber::Get(0, 3.14f);
 
-	shadow = std::make_unique<InstancingGameObject>();
-	shadow->Initialize("DZone");
+	shadow = std::make_unique<CircleShadow>(world_);
+
 
 	shadow->SetColor({ 0,0,0,1 });
 	shadow->world_.translate_=world_.translate_;
@@ -84,8 +89,7 @@ void Enemy::Update() {
 
 	collider_->Update();
 
-	shadow->world_.translate_ = world_.translate_;
-	shadow->world_.translate_.y = 0.1f;
+
 	shadow->Update();
 }
 

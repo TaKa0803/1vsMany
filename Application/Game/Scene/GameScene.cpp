@@ -34,8 +34,7 @@ GameScene::GameScene() {
 	countTimer_ = std::make_unique<CountTimer>();
 
 	//敵出現マネージャ生成
-	enemySpawnManager_ = std::make_unique<EnemyManager>();
-	enemySpawnManager_->SetPWorld(player_->world_);
+	enemyManager_ = std::make_unique<EnemyManager>(player_->world_);
 
 	//カメラ関係クラス生成
 	followCamera_ = std::make_unique<FollowCamera>();
@@ -68,7 +67,7 @@ void GameScene::Initialize() {
 	player_->Initialize();
 
 	//出現マネージャの初期化
-	enemySpawnManager_->Initialize();
+	//enemyManager_->Initialize();
 
 	//全ての音を止める
 	AudioManager::GetInstance()->StopAllSounds();
@@ -102,9 +101,9 @@ void GameScene::Update() {
 	//モデル更新
 	countTimer_->SpriteUpdate();
 	player_->ObjectUpdate();
-	enemySpawnManager_->ObjectUpdate();
+	//enemyManager_->ObjectUpdate();
 	camera_->Update();
-	
+
 }
 
 void GameScene::Draw() {
@@ -113,7 +112,7 @@ void GameScene::Draw() {
 	plane_->Draw();
 
 	//敵の出現地点と敵描画
-	enemySpawnManager_->Draw();
+	enemyManager_->Draw();
 
 	//プレイヤー
 	player_->Draw();
@@ -131,7 +130,7 @@ void GameScene::Draw() {
 	PostEffectManager::GetInstance()->PostEffectDraw(PostEffectManager::kHSV, true);
 
 	//キル数取得
-	int Count = enemySpawnManager_->GetKillCount();
+	int Count = enemyManager_->GetKillCount();
 
 	//キル数が200以上でさらに追加
 	if (Count >= 200) {
@@ -167,47 +166,13 @@ void GameScene::DebugWindows() {
 
 void GameScene::Collision() {
 
-	//現在の敵番号
-	int e1Num = 0;
-	//敵関係の当たり判定
-	for (auto& enemy : enemySpawnManager_->GetEnemies()) {
-		//生存しているかチェック
-		if (!enemy->GetDead()) {
-
-			//プレイヤーの攻撃ヒット処理
-			//プレイヤーが攻撃しているか否か
-			if (player_->IsPlayerATK()) {
-
-				//当たり判定チェック
-				if (enemy->Collision(player_->GetCollider())) {
-					//カメラシェイク処理
-					followCamera_->SetShake();
-					//エフェクトを発生
-					ATKHitPerticle_->SpawnE(enemy->world_.GetWorldTranslate());
-				}
-			}
-			//無条件でプレイヤーに押し出される
-			enemy->OshiDashi(player_->GetCollider());
-
-			//敵同士の当たり判定
-			//2グループの敵番号
-			int e2Num = 0;
-			//配列でループ
-			for (auto& enemy2 : enemySpawnManager_->GetEnemies()) {
-				//死んでいない＆すでに当たっていない＆番号が同じではない場合
-				if (!enemy2->GetDead() && !enemy2->isHit() && e1Num != e2Num) {
-					//押し出しベクトルの計算
-					Vector3 backV = enemy->OshiDashi(enemy2->GetCollider());
-					//押し出し
-					enemy2->AddTranslate(-backV);
-				}
-				//番号を加算
-				e2Num++;
-			}
-		}
-
-		//番号を加算
-		e1Num++;
+	//敵との当たり判定
+	if (enemyManager_->Collision(player_->GetCollider(), player_->IsPlayerATK())) {
+		//ヒットフラグが有効なので処理
+		//カメラシェイク処理
+		followCamera_->SetShake();
+		//エフェクトを発生
+		ATKHitPerticle_->SpawnE(player_->world_.GetWorldTranslate());
 	}
 
 }
@@ -278,7 +243,7 @@ void GameScene::UpdateThis()
 	player_->GameUpdate();
 
 	//敵関係更新
-	enemySpawnManager_->GameUpdate();
+	enemyManager_->Update();
 
 	//追従カメラ更新
 	followCamera_->Update();
@@ -294,7 +259,7 @@ void GameScene::UpdateThis2Other()
 {
 	if (transition_->Update()) {
 		//スコアを保存する
-		scoreSaveManager_->SaveScore(enemySpawnManager_->GetKillCount(), 0);
+		scoreSaveManager_->SaveScore(enemyManager_->GetKillCount(), 0);
 		//シーンを変更
 		sceneNo = (int)SCENE::GAMECLEAR;
 	}
@@ -303,16 +268,16 @@ void GameScene::UpdateThis2Other()
 //各処理の関数セット
 //初期化
 void (GameScene::* GameScene::BehaviorInitialize[])() {
-	& GameScene::InitOther2This,
-	& GameScene::InitThis,
-	& GameScene::InitThis2Other
+	&GameScene::InitOther2This,
+		& GameScene::InitThis,
+		& GameScene::InitThis2Other
 };
 
 //更新
 void (GameScene::* GameScene::BehaviorUpdate[])() {
-	& GameScene::UpdateOther2This,
-	& GameScene::UpdateThis,
-	& GameScene::UpdateThis2Other
+	&GameScene::UpdateOther2This,
+		& GameScene::UpdateThis,
+		& GameScene::UpdateThis2Other
 };
 
 

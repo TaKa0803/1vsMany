@@ -120,8 +120,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Game\Effect\EffectMove\EffectMove.cpp" />
     <ClCompile Include="Application\Game\Effect\EffectSphereExplo\ESphereExplo.cpp" />
     <ClCompile Include="Application\Game\Effect\Impact\Impact.cpp" />
-    <ClCompile Include="Application\Game\EnemySpawnManager\EnemySpawnManager.cpp" />
-    <ClCompile Include="Application\Game\Enemy\ALEnemy.cpp" />
+    <ClCompile Include="Application\Game\EnemyManager\EnemyManager.cpp" />
+    <ClCompile Include="Application\Game\EnemyManager\SpawnManager\EnemySpawnManager.cpp" />
+    <ClCompile Include="Application\Game\EnemyManager\StatusManager\EnemyStatusManager.cpp" />
+    <ClCompile Include="Application\Game\EnemyManager\Enemy\Enemy.cpp" />
     <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Application\Game\Plane\Plane.cpp" />
     <ClCompile Include="Application\Game\Player\Animation\PlayerAnimationManager.cpp" />
@@ -393,8 +395,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Game\Effect\EffectMove\EffectMove.h" />
     <ClInclude Include="Application\Game\Effect\EffectSphereExplo\ESphereExplo.h" />
     <ClInclude Include="Application\Game\Effect\Impact\Impact.h" />
-    <ClInclude Include="Application\Game\EnemySpawnManager\EnemySpawnManager.h" />
-    <ClInclude Include="Application\Game\Enemy\ALEnemy.h" />
+    <ClInclude Include="Application\Game\EnemyManager\EnemyManager.h" />
+    <ClInclude Include="Application\Game\EnemyManager\SpawnManager\EnemySpawnManager.h" />
+    <ClInclude Include="Application\Game\EnemyManager\StatusManager\EnemyStatusManager.h" />
+    <ClInclude Include="Application\Game\EnemyManager\Enemy\Enemy.h" />
     <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Application\Game\Plane\Plane.h" />
     <ClInclude Include="Application\Game\Player\Animation\PlayerAnimationManager.h" />

@@ -10,14 +10,13 @@
 
 #include"Game/Player/Player.h"
 #include"Game/Plane/Plane.h"
-#include"Game/Enemy/ALEnemy.h"
 
 #include"Sprite/Sprite.h"
-#include"Game/BrokenBody/BrokenBody.h"
+
 #include"ParticleData/ParticleManager.h"
 
 #include"Game/CountTimer/CountTimer.h"
-#include"Game/EnemySpawnManager/EnemySpawnManager.h"
+#include"Game/EnemyManager/EnemyManager.h"
 #include"Game/FollowCamera/FollowCamera.h"
 #include"Game/ScoreSaveManager/ScoreSaveManager.h"
 #include"Game/Transition/Transition.h"
@@ -99,7 +98,7 @@ private:
 	std::unique_ptr<CountTimer>countTimer_;
 
 	//敵出現マネージャ
-	std::unique_ptr<EnemyManager>enemySpawnManager_;
+	std::unique_ptr<EnemyManager>enemyManager_;
 
 	//カメラ処理
 	std::unique_ptr<FollowCamera>followCamera_;

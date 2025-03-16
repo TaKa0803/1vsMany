@@ -1,4 +1,5 @@
 #pragma once
+#include"GlobalVariable/Tree/GlobalVariableTree.h"
 #include<string>
 
 
@@ -29,6 +30,13 @@ public://**パブリック関数**//
 	/// </summary>
 	/// <param name="type">音の種類</param>
 	void StopAudio(AudioType type);
+
+	/// <summary>
+	/// デバッグツリー取得
+	/// </summary>
+	/// <returns></returns>
+	GvariTree& GetTree() { return tree_; }
+
 private:
 
 	//音の配列番号
@@ -38,15 +46,11 @@ private:
 	float volumes_[(size_t)CountSound] = { 1.0f };
 
 	//音のループフラグ
-	bool isLoop[(size_t)CountSound] = { false };
+	bool isLoop_[(size_t)CountSound] = { false };
 
 private:
 
-	//タグ名群
-	std::string pathTags_[(size_t)CountSound] = {
-		"com1",
-		"com2",
-		"com3"
-	};
+	//デバッグ用パラメータツリー
+	GlobalVariableTree tree_;
 
 };

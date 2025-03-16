@@ -54,7 +54,7 @@ public://**セッター**//
 	/// <summary>
 	/// アニメーションループフラグ
 	/// </summary>
-	/// <param name="isLoop">フラグ</param>
+	/// <param name="isLoop_">フラグ</param>
 	void SetAnimationRoop(bool isLoop) { isAnimeRoop_ = isLoop; };
 
 	/// <summary>

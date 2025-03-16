@@ -181,7 +181,7 @@ void PlayerAttack::UpdateRigor()
 		if (updateData_.currentSec >= AttackDatas_[nowAttackType_].rigorSec) {
 
 			//音を停止
-			StopSound4Type(nowAttackType_);
+			//StopSound4Type(nowAttackType_);
 
 			//攻撃入力フラグON&次に攻撃が存在している場合
 			if (updateData_.nextATK && nowAttackType_ != kAttack3) {

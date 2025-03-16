@@ -332,11 +332,11 @@
     <ClCompile Include="Application\Game\BrokenBody\BrokenBody.cpp" />
     <ClCompile Include="Application\Game\Scene\GameScene.cpp" />
     <ClCompile Include="Application\Game\Scene\TitleScene.cpp" />
-    <ClCompile Include="Application\Game\Enemy\ALEnemy.cpp" />
+    <ClCompile Include="Application\Game\EnemyManager\Enemy\Enemy.cpp" />
     <ClCompile Include="Application\Game\Scene\ClearScene.cpp" />
     <ClCompile Include="Application\Game\Player\Behavior\Attack\PlayerAttack.cpp" />
     <ClCompile Include="Application\Game\Player\Behavior\Move\PlayerMove.cpp" />
-    <ClCompile Include="Application\Game\EnemySpawnManager\EnemySpawnManager.cpp" />
+    <ClCompile Include="Application\Game\EnemyManager\SpawnManager\EnemySpawnManager.cpp" />
     <ClCompile Include="Application\Game\CountTimer\CountTimer.cpp" />
     <ClCompile Include="Application\Game\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp" />
@@ -347,6 +347,8 @@
     <ClCompile Include="Application\Game\Player\Animation\PlayerAnimationManager.cpp" />
     <ClCompile Include="Application\Game\Player\Sound\PlayerSoundManager.cpp" />
     <ClCompile Include="Application\Game\CircleShadow\CircleShadow.cpp" />
+    <ClCompile Include="Application\Game\EnemyManager\StatusManager\EnemyStatusManager.cpp" />
+    <ClCompile Include="Application\Game\EnemyManager\EnemyManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -599,7 +601,7 @@
       <Filter>Application\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="Application\Game\Player\Player.h" />
-    <ClInclude Include="Application\Game\Enemy\ALEnemy.h" />
+    <ClInclude Include="Application\Game\EnemyManager\Enemy\Enemy.h" />
     <ClInclude Include="Application\Game\Plane\Plane.h" />
     <ClInclude Include="Application\Game\Effect\EffectExplosion.h" />
     <ClInclude Include="Application\Game\Effect\Impact\Impact.h" />
@@ -613,7 +615,7 @@
     <ClInclude Include="Application\Game\Player\Behavior\Attack\PlayerAttack.h" />
     <ClInclude Include="Application\Game\Player\Behavior\Move\PlayerMove.h" />
     <ClInclude Include="Application\Game\Player\Behavior\PlayerBaseBehavior.h" />
-    <ClInclude Include="Application\Game\EnemySpawnManager\EnemySpawnManager.h" />
+    <ClInclude Include="Application\Game\EnemyManager\SpawnManager\EnemySpawnManager.h" />
     <ClInclude Include="Application\Game\CountTimer\CountTimer.h" />
     <ClInclude Include="Application\Game\Player\UI\PlayerUI.h" />
     <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h" />
@@ -623,6 +625,8 @@
     <ClInclude Include="Application\Game\Player\Animation\PlayerAnimationManager.h" />
     <ClInclude Include="Application\Game\Player\Sound\PlayerSoundManager.h" />
     <ClInclude Include="Application\Game\CircleShadow\CircleShadow.h" />
+    <ClInclude Include="Application\Game\EnemyManager\StatusManager\EnemyStatusManager.h" />
+    <ClInclude Include="Application\Game\EnemyManager\EnemyManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">
