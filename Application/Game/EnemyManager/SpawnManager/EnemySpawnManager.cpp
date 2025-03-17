@@ -19,7 +19,7 @@ EnemySpawnManager::EnemySpawnManager(const EulerWorldTransform& playerWorld)
 
 }
 
-std::list<std::unique_ptr<Enemy>> EnemySpawnManager::SpawnEnemy(int enemyCount)
+std::list<std::unique_ptr<Enemy>> EnemySpawnManager::SpawnEnemy(int enemyCount,EnemyParameters parameters)
 {
 	//新しい敵データ作成
 	std::list<std::unique_ptr<Enemy>>newEnemies;
@@ -34,30 +34,33 @@ std::list<std::unique_ptr<Enemy>> EnemySpawnManager::SpawnEnemy(int enemyCount)
 
 	//数分生成
 	for (int i = 0; i < maxSpawnNum_; i++) {
-		//敵のデータ作成
-		std::unique_ptr<Enemy>newEnemy = std::make_unique<Enemy>();
-		
+
 		//プレイヤー地点から一定距離離れて出現
+		//0-1の値取得
+		float t = RandomNumber::Get(0, 1);
+
+		//XZ座標系の向きベクトル作成
+		Vector3 velo = {
+			RandomNumber::Get(-1,1),
+			0,
+			RandomNumber::Get(-1,1)
+		};
 
 		//誤差の値作成
-		Vector3 differencePos = {
-			RandomNumber::Get(-maxSpawmWide_, maxSpawmWide_),
-			0,
-			RandomNumber::Get(-maxSpawmWide_, maxSpawmWide_),
-		};
+		Vector3 differencePos = velo.GetNormalizeNum() * Lerp(minSpawnWide_, maxSpawmWide_, t);
 
 		//誤差を含めた座標生成
 		Vector3 pos = playerWorld_->GetWorldTranslate()+differencePos;
 
-		//座標をセットして初期化
-		newEnemy->Initialize(pos,playerWorld_);
+		//座標をセットして生成
+		std::unique_ptr<Enemy>newEnemy = std::make_unique<Enemy>(pos,playerWorld_,parameters);
 
 		//データに追加
 		newEnemies.emplace_back(std::move(newEnemy));
 	}
 
 	//データを渡す
-	return std::move(newEnemies);
+	return newEnemies;
 }
 
 
@@ -76,7 +79,6 @@ void EnemySpawnManager::Update()
 	if (currrentSpawnSec_ >= maxSpawnSec_) {		
 		//時間をリセット
 		currrentSpawnSec_ = 0;
-
 		//生成フラグを有効
 		isSpawn_ = true;
 	}

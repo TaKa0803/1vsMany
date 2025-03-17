@@ -1,15 +1,25 @@
 #include "EnemyManager.h"
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
+#include"AudioManager/AudioManager.h"
 
 EnemyManager::EnemyManager(const EulerWorldTransform& playerWorld)
 {
+	//敵出現管理クラス生成
 	spawnManager_ = std::make_unique<EnemySpawnManager>(playerWorld);
+	//敵のパラメータ管理クラス生成
+	parameterManager_ = std::make_unique<EnemyParameterManager>();
+	
 	//エフェクトクラス生成
 	brokenBody_ = std::make_unique<BrokenBody>();
+
+	//死亡音の配列番号取得
+	breakSound_ = AudioManager::LoadSoundNum("break");
 
 	//デバッグ用に値を追加
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("AboutEnemy");
 	gvg->SetTreeData(spawnManager_->GetTree());
+	gvg->SetTreeData(parameterManager_->GetTree());
+
 	//体が壊れる演出のツリー追加
 	gvg->SetTreeData(brokenBody_->tree_);
 
@@ -18,10 +28,22 @@ EnemyManager::EnemyManager(const EulerWorldTransform& playerWorld)
 	gvg->SetMonitorValue("敵の数", &enemyCount_);
 }
 
+void EnemyManager::Init()
+{
+	//アニメーション関係のパラメータをセット
+	parameterManager_->SetAnimationParameter();
+}
+
 void EnemyManager::Update()
 {
+
+#ifdef _DEBUG
 	//デバッグ用値にデータを渡す
 	enemyCount_ = (int)enemies_.size();
+	//アニメーション関係のパラメータをセット
+	parameterManager_->SetAnimationParameter();
+#endif // _DEBUG
+
 
 	//敵の生成処理
 	SpawnEnemy();
@@ -102,7 +124,7 @@ void EnemyManager::SpawnEnemy()
 	spawnManager_->Update();
 
 	//生成したリストを取得
-	std::list<std::unique_ptr<Enemy>>newEnemies = spawnManager_->SpawnEnemy(enemyCount_);
+	std::list<std::unique_ptr<Enemy>>newEnemies = spawnManager_->SpawnEnemy(enemyCount_,parameterManager_->GetParameters());
 	//生成データがある場合に処理
 	if (newEnemies.size() != 0) {
 		//後ろにデータ追加
@@ -127,10 +149,13 @@ void EnemyManager::UpdateEnemies()
 		}
 		else {
 			//エフェクトを生成
-			brokenBody_->EffectOccurred(enemy->world_, 10);
+			brokenBody_->EffectOccurred(enemy->world_);
 
 			//キルカウント増加
 			killCount_++;
+
+			//音発生
+			AudioManager::PlaySoundData(breakSound_, 0.2f);
 
 			//リストから削除
 			return true;

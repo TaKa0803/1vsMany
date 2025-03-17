@@ -7,52 +7,44 @@
 
 #include<numbers>
 
-Enemy::Enemy()
+
+
+Enemy::Enemy(const Vector3 position, const EulerWorldTransform* playerWorld, const EnemyParameters& param)
 {
+	//インスタンスモデルマネージャ取得
+	IMM_ = InstancingModelManager::GetInstance();
 
-}
-
-void Enemy::Initialize(const Vector3& position, const EulerWorldTransform* playerWorld) {
-	InstancingGameObject::Initialize("PlayerM4");
-
-	IMM_->SetTexture(a3tag_, TextureManager::white_);
-	//IMM_->SetAnimeNum(a3tag_, 3);
-	IMM_->SetTexture(a4tag_, TextureManager::white_);
-	//IMM_->SetAnimeNum(a4tag_, 4);
-
-	IMM_->SetAnimationRoopFrame(a3tag_,  1,true);
-	IMM_->SetAnimationRoopFrame(a4tag_,  5,true);
-
-	color_ = { 1.0f,0.0f,0.0f,1.0f };
-
-
+	//座標の設定
 	world_.translate_ = position;
-
+	//最低高度を設定
 	tHeight = world_.translate_.y;
-
+	//プレイヤーのワールドを取得
 	playerWorld_ = playerWorld;
-	
-	//ランダム移動速度を生成
-	moveSPD_ = RandomNumber::Get(minSPD_, maxSPD_);
 
+	//出現時ランダムな方向を向く
 	world_.rotate_.y = RandomNumber::Get(0, 3.14f);
 
+	//丸影生成
 	shadow = std::make_unique<CircleShadow>(world_);
 
-
-	shadow->SetColor({ 0,0,0,1 });
-	shadow->world_.translate_=world_.translate_;
-	shadow->world_.translate_.y = 0.01f;
-	shadow->SetScale(1.5f);	
+	//各パラメータを設定
+	//ランダム移動速度を生成
+	moveSpped_ = RandomNumber::Get(param.minSpeed, param.maxSpeed);
+	//最大速度になるまでの時間
+	maxSpeedSec_ = param.maxSpeedSec;
+	//落下速度
+	fallspd_ = param.fallSpeed;
+	//追跡停止する最小距離
+	stopFollowRange_ = param.stopFollowRange;
+	//追跡開始する最大距離
+	startFollowRange_ = param.startFollowRange;
 
 	collider_ = std::make_unique<SphereCollider>();
 	collider_->Initialize("ene", world_);
 	collider_->SetRadius(1.5f);
 	collider_->SetTranslate({ 0,1.5f,0 });
-
-
-	breakSound_ = AudioManager::LoadSoundNum("break");
 }
+
 
 void (Enemy::* Enemy::BehaviorInitialize[])() = {
 	&Enemy::StayInitialize,
@@ -84,12 +76,9 @@ void Enemy::Update() {
 	//状態の更新
 	(this->*BehaviorUpdate[(int)behavior_])();
 
-	//InstancingGameObject::Update();
+	//各更新
 	world_.UpdateMatrix();
-
 	collider_->Update();
-
-
 	shadow->Update();
 }
 
@@ -161,11 +150,11 @@ void Enemy::Draw() {
 
 	if (behaviorRequest_ == Stay || behavior_ == Stay) {
 		//タグに対応したモデルにワールド追加
-		IMM_->SetData(a3tag_, world_, color_);
+		IMM_->SetData(a3tag_, world_);
 	}
 	else{
 		//タグに対応したモデルにワールド追加
-		IMM_->SetData(a4tag_, world_, color_);
+		IMM_->SetData(a4tag_, world_);
 	}
 	shadow->Draw();
 	//collider_->Draw();
@@ -199,7 +188,7 @@ void Enemy::StayUpdate()
 	float p_eLength = p_eVelo.GetLength();
 
 	//プレイヤーが追従範囲内の時
-	if (p_eLength > stopRange_ && p_eLength < serchRange_) {
+	if (p_eLength > stopFollowRange_ && p_eLength < startFollowRange_) {
 		behaviorRequest_ = Follow;
 
 	}
@@ -215,7 +204,7 @@ void Enemy::FollowUpdate()
 	float p_eLength = p_eVelo.GetLength();
 
 	//プレイヤーが追従範囲内の時
-	if (p_eLength > stopRange_ && p_eLength < serchRange_) {
+	if (p_eLength > stopFollowRange_ && p_eLength < startFollowRange_) {
 
 		//プレイヤーの方向に移動
 		Vector3 moveVelo{};
@@ -223,22 +212,22 @@ void Enemy::FollowUpdate()
 		//ノーマライズ
 		moveVelo.SetNormalize();
 		//移動領分書ける
-		moveVelo *= moveSPD_ / maxSPDFrame;
+		moveVelo *= moveSpped_ / maxSpeedSec_;
 
 
 		//速度に追加
 		velocity_ += moveVelo;
 		//速度ベクトルの量を取得
 		float veloSPD = velocity_.GetLength();
-		//プレイヤーへの向きベクトルに書ける
+		//プレイヤーへの向きベクトルに乗算
 		velocity_ = p_eVelo.SetNormalize() * veloSPD;
 
 		
 		//最大速度に達していたら移動量もどす
 		float spd = Length(velocity_);
-		if (spd > moveSPD_) {
+		if (spd > moveSpped_) {
 			velocity_.SetNormalize();
-			velocity_ *= moveSPD_;
+			velocity_ *= moveSpped_;
 		}
 
 		//加算処理
@@ -277,10 +266,6 @@ void Enemy::HitUpdate()
 		else {
 			//死亡処理
 			isDead_ = true;
-			
-
-			//音発生
-			AudioManager::PlaySoundData(breakSound_, 0.2f);
 		}
 
 	}

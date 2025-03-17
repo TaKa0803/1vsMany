@@ -74,11 +74,6 @@ public:	//**パブリック関数**//
 	/// <param name="texture"></param>
 	void Draw(int texture = -1);
 
-	/// <summary>
-	/// Debug用ImGui表示
-	/// </summary>
-	/// <param name="name"></param>
-	//void DebugParameter(const char* name);
 
 
 

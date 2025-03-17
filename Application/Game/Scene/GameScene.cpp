@@ -50,10 +50,10 @@ GameScene::GameScene() {
 	bgmGame_ = AudioManager::LoadSoundNum("game");
 
 
-	ATKHitPerticle_ = std::make_unique<ParticleManager>();
-	ATKHitPerticle_->Initialize(TextureManager::LoadTex("resources/Texture/CG/circle.png"));
-	ATKHitPerticle_->SetOnlyImpact(true);
-	EmiterSphere* emit = ATKHitPerticle_->GetEmiterData();
+	AttackHitPerticle_ = std::make_unique<ParticleManager>();
+	AttackHitPerticle_->Initialize(TextureManager::LoadTex("resources/Texture/CG/circle.png"));
+	AttackHitPerticle_->SetOnlyImpact(true);
+	EmiterSphere* emit = AttackHitPerticle_->GetEmiterData();
 	emit->speed = { 0.1f,1.5f };
 	emit->color = { 0,0,1,1 };
 }
@@ -84,7 +84,7 @@ void GameScene::Update() {
 	DebugWindows();
 
 	//エフェクトマネージャ追加
-	ATKHitPerticle_->Update();
+	AttackHitPerticle_->Update();
 
 	//リクエストが存在しているなら処理
 	if (sceneRequest_) {
@@ -121,13 +121,13 @@ void GameScene::Draw() {
 	InstancingModelManager::GetInstance()->DrawAllModel();
 
 	//パーティクル描画
-	ATKHitPerticle_->Draw();
+	AttackHitPerticle_->Draw();
 	player_->DrawParticle();
 
 	//ポストプロセス処理
 	PostEffectManager::GetInstance()->PostEffectDraw(PostEffectManager::kLightOutline, true);
 	PostEffectManager::GetInstance()->PostEffectDraw(PostEffectManager::kVinetting, true);
-	PostEffectManager::GetInstance()->PostEffectDraw(PostEffectManager::kHSV, true);
+	PostEffectManager::GetInstance()->PostEffectDraw(PostEffectManager::kBloom, true);
 
 	//キル数取得
 	int Count = enemyManager_->GetKillCount();
@@ -172,7 +172,7 @@ void GameScene::Collision() {
 		//カメラシェイク処理
 		followCamera_->SetShake();
 		//エフェクトを発生
-		ATKHitPerticle_->SpawnE(player_->world_.GetWorldTranslate());
+		AttackHitPerticle_->SpawnE(player_->world_.GetWorldTranslate());
 	}
 
 }

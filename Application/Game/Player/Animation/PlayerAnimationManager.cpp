@@ -19,7 +19,7 @@ PlayerAnimationManager::PlayerAnimationManager(Model* model)
 		tree.name_ = animeName_[index];
 		tree.SetValue("変化しきる時間", &transitionSeconds_[index]);
 		tree.SetValue("ループフラグ", &isLoops_[index]);
-		tree.SetValue("再生倍率", &multiplyAnimationSpds_[index]);
+		tree.SetValue("再生倍率", &multiplyAnimationSpeeds_[index]);
 
 		//データ追加
 		tree_.SetTreeData(tree);
@@ -40,5 +40,5 @@ void PlayerAnimationManager::SetAnimation(Animation anime)
 	//ループフラグの設定
 	model_->SetAnimationRoop(isLoops_[num]);
 	//アニメーション再生倍率の変更
-	model_->animationRoopSecond_ = multiplyAnimationSpds_[num];
+	model_->animationRoopSecond_ = multiplyAnimationSpeeds_[num];
 }

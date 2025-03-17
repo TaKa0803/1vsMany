@@ -1,6 +1,5 @@
 #pragma once
-
-#include"SingleGameObjects/GameObject.h"
+#include"Game/EnemyManager/ParameterManager/EnemyParameterManager.h"
 #include"SphereCollider/SphereCollider.h"
 #include"Game/CircleShadow/CircleShadow.h"
 #include<iostream>
@@ -10,13 +9,8 @@ class Enemy : public InstancingGameObject {
 
 public://**パブリック関数**//
 
-	Enemy();
+	Enemy(const Vector3 position, const EulerWorldTransform* playerWorld, const EnemyParameters& param);
 	~Enemy() = default;
-
-	/// <summary>
-	/// 初期化
-	/// </summary>
-	void Initialize(const Vector3& position, const EulerWorldTransform* playerWorld);
 
 	/// <summary>
 	/// 更新
@@ -94,12 +88,15 @@ private:
 	//プレイヤーのワールド
 	const EulerWorldTransform* playerWorld_;
 
+	//当たり判定コライダー
 	std::unique_ptr<SphereCollider>collider_;
 
 	//丸影
 	std::unique_ptr<CircleShadow>shadow;
 
+	//待機状態animationモデルタグ
 	std::string a3tag_ = "PlayerM3";
+	//移動状態アニメーションモデルタグ
 	std::string a4tag_ = "PlayerM4";
 
 	int animeNum_ = 3;
@@ -107,25 +104,22 @@ private:
 	//移動速度
 	Vector3 velocity_{};
 
-	//最大速度になるまでのF数
-	float maxSPDFrame = 60.0f;
-
-	//個体差用
-	const float maxSPD_ = 0.5f;
-	const float minSPD_ = 0.3f;
+	//最大速度になるまでの時間
+	float maxSpeedSec_ = 60.0f;
 
 	//移動速度
-	float moveSPD_ = 0.5f;
+	float moveSpped_ = 0.5f;
 
 	//落下速度
 	float fallspd_ = 0.1f;
 	float addFallspd_ = 0;
 
 	//ugokanakunarukyori
-	float stopRange_ = 10.0f;
+	float stopFollowRange_ = 10.0f;
 
 	//探知距離
-	float serchRange_ = 30.0f;
+	float startFollowRange_ = 30.0f;
+
 
 	//行動状態
 	enum State {
@@ -152,8 +146,7 @@ private:
 
 	float tHeight = 0;
 
-	//破壊音
-	int breakSound_;
+
 
 	bool isHit_ =false;
 };

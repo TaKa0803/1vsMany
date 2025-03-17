@@ -122,7 +122,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Game\Effect\Impact\Impact.cpp" />
     <ClCompile Include="Application\Game\EnemyManager\EnemyManager.cpp" />
     <ClCompile Include="Application\Game\EnemyManager\SpawnManager\EnemySpawnManager.cpp" />
-    <ClCompile Include="Application\Game\EnemyManager\StatusManager\EnemyStatusManager.cpp" />
+    <ClCompile Include="Application\Game\EnemyManager\ParameterManager\EnemyParameterManager.cpp" />
     <ClCompile Include="Application\Game\EnemyManager\Enemy\Enemy.cpp" />
     <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Application\Game\Plane\Plane.cpp" />
@@ -387,6 +387,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClInclude Include="Application\Debug\DebugScene.h" />
     <ClInclude Include="Application\AppScene\AppScene.h" />
+    <ClInclude Include="Application\Game\BaseManager\BaseManager.h" />
     <ClInclude Include="Application\Game\BrokenBody\BrokenBody.h" />
     <ClInclude Include="Application\Game\CircleShadow\CircleShadow.h" />
     <ClInclude Include="Application\Game\CountTimer\CountTimer.h" />
@@ -397,7 +398,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Game\Effect\Impact\Impact.h" />
     <ClInclude Include="Application\Game\EnemyManager\EnemyManager.h" />
     <ClInclude Include="Application\Game\EnemyManager\SpawnManager\EnemySpawnManager.h" />
-    <ClInclude Include="Application\Game\EnemyManager\StatusManager\EnemyStatusManager.h" />
+    <ClInclude Include="Application\Game\EnemyManager\ParameterManager\EnemyParameterManager.h" />
     <ClInclude Include="Application\Game\EnemyManager\Enemy\Enemy.h" />
     <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Application\Game\Plane\Plane.h" />

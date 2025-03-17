@@ -1,4 +1,5 @@
 #include"BrokenBody.h"
+#include"DeltaTimer/DeltaTimer.h"
 #include"RandomNum/RandomNum.h"
 #include"TextureManager/TextureManager.h"
 
@@ -6,17 +7,19 @@
 
 BrokenBody::BrokenBody()
 {
+	//タグミスがないかチェック
 	InstancingGameObject::Initialize("EBox");
-	world_.scale_ = { 0.2f,0.2f,0.2f };
-	effectDatas_.clear();
 
+	//画像取得
 	int tex = TextureManager::LoadTex("resources/Models/Object/enemy.png");
-
+	//タグモデルに画像をセット
 	IMM_->SetTexture(tag_, tex);
 
 	tree_.name_ = "砕け散るからだ";
+	tree_.SetValue("生成数", &spawnNum_);
+	tree_.SetValue("加速度", &acceleration_);
 	tree_.SetValue("吹き飛び速度", &upSPD_);
-	tree_.SetValue("死亡時間", &maxDeadCount_);
+	tree_.SetValue("死亡時間", &maxDeadSec_);
 	tree_.SetValue("跳ねたときの速度減少量", &bulletforce_);
 	tree_.SetValue("サイズ", &scale_);
 	
@@ -24,38 +27,41 @@ BrokenBody::BrokenBody()
 	tree_.SetTreeData(IMM_->CreateAndGetTree(tag_, "マテリアル"));
 }
 
-BrokenBody::~BrokenBody()
-{
-	effectDatas_.clear();
-}
-
 void BrokenBody::Update() {
 
+	//エフェクトの更新
+	for (auto& eData : effectDatas_) {
+		//時間の経過
+		eData->currentSec += (float)DeltaTimer::deltaTime_;
 
-	for (EffectData* eData : effectDatas_) {
-
-		if (eData->deadCount++ >= maxDeadCount_) {
-			eData->isdead_ = true;
+		//時間が規定以上になったとき
+		if (eData->currentSec >= maxDeadSec_) {
+			//死亡フラグを有効にする
+			eData->isdead = true;
 		}
-		else {
+		else {//規定時間内の場合
 
-			//eData->world.scale_ = world_.scale_;
-			eData->velocity_ += eData->accce_;
-			eData->world.translate_ += eData->velocity_;
-
+			//加速度を速度に加算
+			eData->velocity += acceleration_;
+			//速度を座標に加算
+			eData->world.translate_ += eData->velocity;
+			
+			//もし0以下の場合
 			if (eData->world.translate_.y <= 0) {
+				//0に設定
 				eData->world.translate_.y = 0;
-				eData->velocity_.y *= -1;
-				eData->velocity_ *= eData->BulletForce;
+				//速度を反転する
+				eData->velocity.y *= -1;
+				//弾性倍率をかける
+				eData->velocity *= eData->BulletForce;
 			}
-
-
 		}
 	}
 
-
-	effectDatas_.remove_if([](const EffectData* edata) {
-		if (edata->isdead_) {
+	//エフェクトの削除処理
+	effectDatas_.remove_if([](auto& edata) {
+		//死亡している場合削除
+		if (edata->isdead) {
 			return true;
 		}
 		return false;
@@ -63,33 +69,37 @@ void BrokenBody::Update() {
 }
 
 void BrokenBody::Draw() {
-
+	//エフェクトデータ更新して描画設定
 	for (auto& eData : effectDatas_) {
+		//行列更新
 		eData->world.UpdateMatrix();
-
-		IMM_->SetData(tag_, eData->world,color_);
+		//座標データを送る
+		IMM_->SetData(tag_, eData->world);
 	}
-
 }
 
 
-void BrokenBody::EffectOccurred(const EulerWorldTransform& world, int spawnNum) {
+void BrokenBody::EffectOccurred(const EulerWorldTransform& world) {
 
-	for (int count = 0; count < spawnNum; ++count) {
+	//数分生成
+	for (int count = 0; count < spawnNum_; ++count) {
 
-		EffectData* edata = new EffectData();
+		//データ生成
+		std::unique_ptr<EffectData> edata =std::make_unique<EffectData>();
 
-		//ワールド
+		//ワールド座標を合わせる
 		edata->world = world;
-		edata->velocity_ = {
+		//吹き飛ぶ方向をランダムに設定
+		edata->velocity = {
 			RandomNumber::Get(-upSPD_,upSPD_),
 			upSPD_,
 			RandomNumber::Get(-upSPD_,upSPD_)
 		};
+		//弾性力を設定
 		edata->BulletForce = bulletforce_;
+		//サイズ設定
 		edata->world.scale_ = { scale_,scale_,scale_ };
-		effectDatas_.push_back(edata);
+		//データを追加
+		effectDatas_.push_back(std::move(edata));
 	}
-
-
 }

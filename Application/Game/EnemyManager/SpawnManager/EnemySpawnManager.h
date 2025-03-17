@@ -1,10 +1,11 @@
 #pragma once
+#include"Game/BaseManager/BaseManager.h"
 #include"Game/EnemyManager/Enemy/Enemy.h"
-#include"GlobalVariable/Tree/GlobalVariableTree.h"
+#include"Game/EnemyManager/ParameterManager/EnemyParameterManager.h"
 #include<list>
 
 //敵の管理マネージャ
-class EnemySpawnManager {
+class EnemySpawnManager :public BaseManager{
 
 public:
 
@@ -21,13 +22,7 @@ public:
 	/// </summary>
 	/// <param name="enemyCount">敵の数</param>
 	/// <returns>追加の敵データ</returns>
-	std::list<std::unique_ptr<Enemy>> SpawnEnemy(int enemyCount);
-
-	/// <summary>
-	/// ツリーの取得
-	/// </summary>
-	/// <returns></returns>
-	GvariTree& GetTree() { return tree_; };
+	std::list<std::unique_ptr<Enemy>> SpawnEnemy(int enemyCount,EnemyParameters parameters);
 
 private://**プライベート変数**//
 
@@ -36,9 +31,6 @@ private://**プライベート変数**//
 
 	//出現間隔時間
 	float currrentSpawnSec_=0;
-	
-	//デバッグ用のパラメータ保存ツリー
-	GvariTree tree_;
 
 private://**パラメータ**//
 

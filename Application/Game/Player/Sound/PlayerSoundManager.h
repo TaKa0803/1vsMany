@@ -1,10 +1,10 @@
 #pragma once
-#include"GlobalVariable/Tree/GlobalVariableTree.h"
+#include"Game/BaseManager/BaseManager.h"
 #include<string>
 
 
 //プレイヤーの音関係のまとめ
-class PlayerSoundManager {
+class PlayerSoundManager :public BaseManager {
 
 public://**パブリック変数**//
 	enum AudioType {
@@ -31,12 +31,6 @@ public://**パブリック関数**//
 	/// <param name="type">音の種類</param>
 	void StopAudio(AudioType type);
 
-	/// <summary>
-	/// デバッグツリー取得
-	/// </summary>
-	/// <returns></returns>
-	GvariTree& GetTree() { return tree_; }
-
 private:
 
 	//音の配列番号
@@ -47,10 +41,4 @@ private:
 
 	//音のループフラグ
 	bool isLoop_[(size_t)CountSound] = { false };
-
-private:
-
-	//デバッグ用パラメータツリー
-	GlobalVariableTree tree_;
-
 };

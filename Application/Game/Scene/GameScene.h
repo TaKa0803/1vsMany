@@ -117,5 +117,5 @@ private:
 	//BGMの配列番号
 	int bgmGame_;
 
-	std::unique_ptr<ParticleManager>ATKHitPerticle_;
+	std::unique_ptr<ParticleManager>AttackHitPerticle_;
 };

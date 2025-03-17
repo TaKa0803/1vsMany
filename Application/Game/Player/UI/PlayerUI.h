@@ -1,10 +1,11 @@
 #pragma once
+#include"Game/BaseManager/BaseManager.h"
 #include"Sprite/Sprite.h"
 #include"Math/Vector3.h"
 #include<algorithm>
 
 //プレイヤー関連のUI管理
-class PlayerUI {
+class PlayerUI :public BaseManager {
 public:
 
 	PlayerUI(const int&comboCount);

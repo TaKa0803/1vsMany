@@ -347,7 +347,7 @@
     <ClCompile Include="Application\Game\Player\Animation\PlayerAnimationManager.cpp" />
     <ClCompile Include="Application\Game\Player\Sound\PlayerSoundManager.cpp" />
     <ClCompile Include="Application\Game\CircleShadow\CircleShadow.cpp" />
-    <ClCompile Include="Application\Game\EnemyManager\StatusManager\EnemyStatusManager.cpp" />
+    <ClCompile Include="Application\Game\EnemyManager\ParameterManager\EnemyParameterManager.cpp" />
     <ClCompile Include="Application\Game\EnemyManager\EnemyManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -625,8 +625,9 @@
     <ClInclude Include="Application\Game\Player\Animation\PlayerAnimationManager.h" />
     <ClInclude Include="Application\Game\Player\Sound\PlayerSoundManager.h" />
     <ClInclude Include="Application\Game\CircleShadow\CircleShadow.h" />
-    <ClInclude Include="Application\Game\EnemyManager\StatusManager\EnemyStatusManager.h" />
+    <ClInclude Include="Application\Game\EnemyManager\ParameterManager\EnemyParameterManager.h" />
     <ClInclude Include="Application\Game\EnemyManager\EnemyManager.h" />
+    <ClInclude Include="Application\Game\BaseManager\BaseManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">

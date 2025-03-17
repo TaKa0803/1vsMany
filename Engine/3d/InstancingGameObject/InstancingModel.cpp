@@ -67,7 +67,7 @@ void InstancingModel::UpdateAnimationCount()
 	if (modelType_ != kOBJModel) {
 		if (isAnimationActive_) {
 			//カウント進行
-			animationTime_ += animationRoopSecond_ *(float)DeltaTimer::deltaTime_;
+			animationTime_ += animationRoopSecond_ *modelData_.animation[nowAnimeName_].duration*(float)DeltaTimer::deltaTime_;
 
 			Animation& anime = modelData_.animation[nowAnimeName_];
 

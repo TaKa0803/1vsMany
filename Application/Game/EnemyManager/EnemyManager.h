@@ -1,7 +1,7 @@
 #pragma once
 #include"Game/EnemyManager/Enemy/Enemy.h"
 #include"Game/EnemyManager/SpawnManager/EnemySpawnManager.h"
-#include"Game/EnemyManager/StatusManager/EnemyStatusManager.h"
+#include"Game/EnemyManager/ParameterManager/EnemyParameterManager.h"
 
 #include"Game/BrokenBody/BrokenBody.h"
 
@@ -13,6 +13,11 @@ public:
 	/// </summary>
 	EnemyManager(const  EulerWorldTransform&playerWorld);
 	~EnemyManager() = default;
+
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	void Init();
 
 	/// <summary>
 	/// 更新
@@ -56,7 +61,7 @@ private:
 	std::unique_ptr<BrokenBody> brokenBody_;
 
 	//敵のステータス管理マネージャ(現在は未使用)
-	//std::unique_ptr<EnemyStatusManager>statusManager_;
+	std::unique_ptr<EnemyParameterManager>parameterManager_;
 	//出現マネージャ
 	std::unique_ptr<EnemySpawnManager>spawnManager_;
 
@@ -68,7 +73,11 @@ private://**プライベート変数**//
 	//キル数
 	int killCount_ = 0;
 
+	//死亡音
+	int breakSound_;
+
 	//敵の数
 	int enemyCount_ = 0;
+
 
 };
