@@ -25,8 +25,11 @@ struct EnemyParameters {
 	//加速度
 	Vector3 acceraletion = {0,-0.1f,0};
 
-	//吹っ飛び量
-	float hitSpeed = 0.5f;
+	//ヒット時の速度
+	float hitSpeed = 1.0f;
+
+	//上向きの吹っ飛び量
+	float hitHighVelo = 1.5f;
 
 	//体力
 	int hp = 1;
@@ -37,6 +40,9 @@ class EnemyParameterManager :public BaseManager{
 
 public://**パブリック関数**//
 
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
 	EnemyParameterManager();
 	~EnemyParameterManager()=default;
 

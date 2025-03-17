@@ -7,7 +7,9 @@
 
 //敵データの総合管理クラス
 class EnemyManager {
-public:
+
+public://**パブリック関数**//
+
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
@@ -41,7 +43,7 @@ public:
 	/// キル数の取得
 	/// </summary>
 	/// <returns></returns>
-	int GetKillCount() { return killCount_; };
+	int GetKillCount() const { return killCount_; };
 
 private://**プライベート関数**//
 
@@ -55,20 +57,21 @@ private://**プライベート関数**//
 	/// </summary>
 	void UpdateEnemies();
 
-private:
+private://**プライベート変数**//
+
+	//敵のステータス管理マネージャ(現在は未使用)
+	std::unique_ptr<EnemyParameterManager>parameterManager_;
+	
+	//出現マネージャ
+	std::unique_ptr<EnemySpawnManager>spawnManager_;
 
 	//壊れた体のエフェクト
 	std::unique_ptr<BrokenBody> brokenBody_;
 
-	//敵のステータス管理マネージャ(現在は未使用)
-	std::unique_ptr<EnemyParameterManager>parameterManager_;
-	//出現マネージャ
-	std::unique_ptr<EnemySpawnManager>spawnManager_;
-
 	//敵のデータ群
 	std::list<std::unique_ptr<Enemy>>enemies_;
 
-private://**プライベート変数**//
+private://**パラメータ変数**//
 
 	//キル数
 	int killCount_ = 0;
@@ -79,5 +82,6 @@ private://**プライベート変数**//
 	//敵の数
 	int enemyCount_ = 0;
 
-
+	//デバッグ用敵の全削除フラグ
+	bool clearEnemy_ = false;
 };

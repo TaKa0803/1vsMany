@@ -45,20 +45,16 @@ GameScene::GameScene() {
 	//遷移クラス生成
 	transition_ = std::make_unique<Transition>();
 
-	//遷移画像読み込み
-
+	//BGM読み込み
 	bgmGame_ = AudioManager::LoadSoundNum("game");
 
-
+	//攻撃ヒットエフェクトの生成と初期化
 	AttackHitPerticle_ = std::make_unique<ParticleManager>();
 	AttackHitPerticle_->Initialize(TextureManager::LoadTex("resources/Texture/CG/circle.png"));
 	AttackHitPerticle_->SetOnlyImpact(true);
 	EmiterSphere* emit = AttackHitPerticle_->GetEmiterData();
 	emit->speed = { 0.1f,1.5f };
 	emit->color = { 0,0,1,1 };
-}
-
-GameScene::~GameScene() {
 }
 
 void GameScene::Initialize() {
@@ -101,7 +97,6 @@ void GameScene::Update() {
 	//モデル更新
 	countTimer_->SpriteUpdate();
 	player_->ObjectUpdate();
-	//enemyManager_->ObjectUpdate();
 	camera_->Update();
 
 }
@@ -145,7 +140,6 @@ void GameScene::Draw() {
 	else {//シーン変更前ではない場合
 		//UIの描画
 		UIDraw();
-
 	}
 
 	//遷移時の時のみ描画
@@ -189,8 +183,12 @@ void GameScene::SceneChange() {
 
 	//デバッグ用シーンチェンジ
 #ifdef _DEBUG
+	//Pキー入力でシーン遷移
 	if (input_->TriggerKey(DIK_P)) {
-		sceneNo = (int)SCENE::GAMECLEAR;
+		//全ての音を止める
+		AudioManager::GetInstance()->StopAllSounds();
+		//状態変更リクエスト設定
+		sceneRequest_ = This2Other;
 	}
 #endif // _DEBUG
 
@@ -212,6 +210,7 @@ void GameScene::UIDraw() {
 
 void GameScene::InitOther2This()
 {
+	//遷移の初期化
 	transition_->SetAndStartTransition(Transition::TransitionType::Black2Clear);
 }
 
@@ -223,6 +222,7 @@ void GameScene::InitThis()
 
 void GameScene::InitThis2Other()
 {
+	//遷移の初期化
 	transition_->SetAndStartTransition(Transition::TransitionType::Clear2Black);
 }
 
@@ -268,16 +268,16 @@ void GameScene::UpdateThis2Other()
 //各処理の関数セット
 //初期化
 void (GameScene::* GameScene::BehaviorInitialize[])() {
-	&GameScene::InitOther2This,
-		& GameScene::InitThis,
-		& GameScene::InitThis2Other
+	& GameScene::InitOther2This,
+	& GameScene::InitThis,
+	& GameScene::InitThis2Other
 };
 
 //更新
 void (GameScene::* GameScene::BehaviorUpdate[])() {
-	&GameScene::UpdateOther2This,
-		& GameScene::UpdateThis,
-		& GameScene::UpdateThis2Other
+	& GameScene::UpdateOther2This,
+	& GameScene::UpdateThis,
+	& GameScene::UpdateThis2Other
 };
 
 

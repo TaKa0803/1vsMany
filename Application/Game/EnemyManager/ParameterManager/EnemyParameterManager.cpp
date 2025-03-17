@@ -20,6 +20,7 @@ EnemyParameterManager::EnemyParameterManager()
 	tree_.SetValue("追跡開始距離", &parameters_.startFollowRange);
 	tree_.SetValue("加速度", &parameters_.acceraletion);
 	tree_.SetValue("吹っ飛び量", &parameters_.hitSpeed);
+	tree_.SetValue("吹っ飛ぶ上向きの値の量", &parameters_.hitHighVelo);
 	tree_.SetValue("最大体力", &parameters_.hp);
 
 	//使用するモデルのデバッグ処理

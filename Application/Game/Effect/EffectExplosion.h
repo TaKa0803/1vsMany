@@ -12,7 +12,7 @@ struct moveData {
 	//速度
 	Vector3 velo;
 	//加速度
-	Vector3 acce;
+	Vector3 acceraletion;
 	//各死亡カウント（フレーム数）
 	int maxDeadCount;
 	//実際のカウント（初期で0

@@ -7,8 +7,12 @@
 //敵の管理マネージャ
 class EnemySpawnManager :public BaseManager{
 
-public:
+public://**パブリック関数**//
 
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="playerWorld">プレイヤーワールドポインタ</param>
 	EnemySpawnManager(const EulerWorldTransform&playerWorld);
 	~EnemySpawnManager()=default;
 

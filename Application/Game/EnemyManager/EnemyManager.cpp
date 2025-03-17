@@ -26,6 +26,7 @@ EnemyManager::EnemyManager(const EulerWorldTransform& playerWorld)
 	//モニター値を追加
 	gvg->SetMonitorValue("キル数", &killCount_);
 	gvg->SetMonitorValue("敵の数", &enemyCount_);
+	gvg->SetMonitorValue("敵を全て削除", &clearEnemy_);
 }
 
 void EnemyManager::Init()
@@ -42,6 +43,9 @@ void EnemyManager::Update()
 	enemyCount_ = (int)enemies_.size();
 	//アニメーション関係のパラメータをセット
 	parameterManager_->SetAnimationParameter();
+	if (clearEnemy_) {
+		enemies_.clear();
+	}
 #endif // _DEBUG
 
 

@@ -30,7 +30,7 @@ void EffectExplosion::Update()
 			//移動量更新
 			pdata.world.translate_ += pdata.velo;
 			//加速度処理
-			pdata.velo += pdata.acce;
+			pdata.velo += pdata.acceraletion;
 
 			//0以下で停止
 			if (pdata.world.translate_.y < 0) {

@@ -1,9 +1,8 @@
 #include"Game/EnemyManager/Enemy/Enemy.h"
-
+#include"DeltaTimer/DeltaTimer.h"
 #include"RandomNum/RandomNum.h"
 #include"TextureManager/TextureManager.h"
 #include"AudioManager/AudioManager.h"
-#include"Game/BrokenBody/BrokenBody.h"
 
 #include<numbers>
 
@@ -25,19 +24,28 @@ Enemy::Enemy(const Vector3 position, const EulerWorldTransform* playerWorld, con
 	world_.rotate_.y = RandomNumber::Get(0, 3.14f);
 
 	//丸影生成
-	shadow = std::make_unique<CircleShadow>(world_);
+	circleShadow = std::make_unique<CircleShadow>(world_);
 
 	//各パラメータを設定
 	//ランダム移動速度を生成
-	moveSpped_ = RandomNumber::Get(param.minSpeed, param.maxSpeed);
+	maxSpped_ = RandomNumber::Get(param.minSpeed, param.maxSpeed);
 	//最大速度になるまでの時間
 	maxSpeedSec_ = param.maxSpeedSec;
-	//落下速度
-	fallspd_ = param.fallSpeed;
+	//加速度
+	acceraletion_ = param.acceraletion;
 	//追跡停止する最小距離
 	stopFollowRange_ = param.stopFollowRange;
 	//追跡開始する最大距離
 	startFollowRange_ = param.startFollowRange;
+
+	//ヒット時の速度
+	hitSPD_ = param.hitSpeed;
+
+	//高さの向き
+	hitHighVelo_ = param.hitHighVelo;
+
+	//体力
+	HP_ = param.hp;
 
 	collider_ = std::make_unique<SphereCollider>();
 	collider_->Initialize("ene", world_);
@@ -45,13 +53,15 @@ Enemy::Enemy(const Vector3 position, const EulerWorldTransform* playerWorld, con
 	collider_->SetTranslate({ 0,1.5f,0 });
 }
 
-
+//関数ポインタ設定
+//初期化関数まとめ
 void (Enemy::* Enemy::BehaviorInitialize[])() = {
 	&Enemy::StayInitialize,
 	&Enemy::FollowInitialize,
 	&Enemy::HitInitialize
 };
 
+//更新巻数まとめ
 void (Enemy::* Enemy::BehaviorUpdate[])() = {
 	&Enemy::StayUpdate,
 	&Enemy::FollowUpdate,
@@ -59,14 +69,14 @@ void (Enemy::* Enemy::BehaviorUpdate[])() = {
 };
 
 void Enemy::Update() {
-
+	//ヒットフラグを無効化
 	isHit_ = false;
-
-	FallUpdate();
 
 	//状態の初期化処理
 	if (behaviorRequest_) {
+		//リクエストの値を設定
 		behavior_ = behaviorRequest_.value();
+		//リクエスト初期化
 		behaviorRequest_ = std::nullopt;
 
 		//実際の初期化処理
@@ -76,43 +86,50 @@ void Enemy::Update() {
 	//状態の更新
 	(this->*BehaviorUpdate[(int)behavior_])();
 
+	//加算処理
+	world_.translate_ += velocity_ * (float)DeltaTimer::deltaTime_;
+
 	//各更新
 	world_.UpdateMatrix();
 	collider_->Update();
-	shadow->Update();
+	circleShadow->Update();
 }
 
+void Enemy::Draw() {
+
+	//行列更新
+	world_.UpdateMatrix();
+
+	//状態で描画
+	if (behavior_ == Stay) {
+		//タグに対応したモデルにワールド追加
+		IMM_->SetData(waitAnimationTag_, world_);
+	}
+	else {
+		//タグに対応したモデルにワールド追加
+		IMM_->SetData(moveAnimationTag_, world_);
+	}
+
+	//丸影描画
+	circleShadow->Draw();
+
+	//コライダーは当たり判定に違和感があった時だけ描画
+	//collider_->Draw();
+}
 
 
 bool Enemy::Collision(SphereCollider* collider) {
 
+	//押し戻しベクトルを作成
 	Vector3 backVec;
+	//もし当たっていれば処理
 	if (collider_->IsCollision(collider, backVec)) {
-
-		behavior_ = Hit;
-
-		velocity_ = hitVelo;
-
-		Vector3 myPos = world_.GetWorldTranslate();
-		Vector3 pPos = playerWorld_->GetWorldTranslate();
-
-		myPos.y = 0;
-		pPos.y = 0;
-
-		Vector3 direc = myPos - pPos;
-		direc.SetNormalize();
-		direc *= hitSPD_;
-
-		velocity_.x = direc.x;
-		velocity_.z = direc.z;
-
-		HP_--;
-
+		//状態リクエストを設定
 		behaviorRequest_ = Hit;
-
+		//ＴＲＵＥで返却
 		return true;
 	}
-
+	//当たらなかかった
 	return false;
 }
 
@@ -127,111 +144,109 @@ Vector3 Enemy::OshiDashi(SphereCollider* collider)
 		world_.translate_ += backVec;
 
 		if (backVec.y != 0) {
-			addFallspd_ = 0;
+			acceraletion_.y = 0;
 		}
 	}
 
 	return backVec;
 }
 
-void Enemy::PushBack(const Vector3& backV)
-{
-	world_.translate_ += backV;
-	world_.UpdateMatrix();
 
-	if (backV.y != 0) {
-		addFallspd_ = 0;
-	}
-}
-
-void Enemy::Draw() {
-
-	world_.UpdateMatrix();
-
-	if (behaviorRequest_ == Stay || behavior_ == Stay) {
-		//タグに対応したモデルにワールド追加
-		IMM_->SetData(a3tag_, world_);
-	}
-	else{
-		//タグに対応したモデルにワールド追加
-		IMM_->SetData(a4tag_, world_);
-	}
-	shadow->Draw();
-	//collider_->Draw();
-}
 
 #pragma region 各状態の初期化と更新
 
 void Enemy::StayInitialize()
 {
+	//移動量を0に変更
 	velocity_.SetZero();
-	animeNum_ = 3;
 }
 
 void Enemy::FollowInitialize()
 {
-	animeNum_ = 4;
-
 }
 
 void Enemy::HitInitialize()
 {
+	//自身の座標取得
+	Vector3 myPos = world_.GetWorldTranslate();
+	//プレイヤー座標取得
+	Vector3 playerPos = playerWorld_->GetWorldTranslate();
+
+	//どちらも高さを考慮しない
+	myPos.y = 0;
+	playerPos.y = 0;
+
+	//向きベクトルを求める
+	Vector3 direc = myPos - playerPos;
+	//高さを設定
+	direc.y = hitHighVelo_;
+
+	//正規化
+	direc.SetNormalize();
+	direc *= hitSPD_;
+
+	//初速度を設定
+	velocity_ = direc;
+
+	//体力を減らす
+	HP_--;
 }
 
 void Enemy::StayUpdate()
 {
-	//pk
+	//プレイヤーまでのベクトル
 	Vector3 p_eVelo = playerWorld_->GetWorldTranslate() - world_.GetWorldTranslate();
 	//高さを考慮しない
 	p_eVelo.y = 0;
-
+	//長さを出す
 	float p_eLength = p_eVelo.GetLength();
 
-	//プレイヤーが追従範囲内の時
+	//追跡範囲内にプレイヤーがいる時に追従状態に変更
 	if (p_eLength > stopFollowRange_ && p_eLength < startFollowRange_) {
+		//状態リクエストを設定
 		behaviorRequest_ = Follow;
-
 	}
 }
 
 void Enemy::FollowUpdate()
 {
-	//プレイヤー方向の向き
+	//プレイヤー方向のベクトル
 	Vector3 p_eVelo = playerWorld_->GetWorldTranslate() - world_.GetWorldTranslate();
 	//高さを考慮しない
 	p_eVelo.y = 0;
 
+	//長さを出す
 	float p_eLength = p_eVelo.GetLength();
 
-	//プレイヤーが追従範囲内の時
+	//プレイヤーが追跡範囲内の時
 	if (p_eLength > stopFollowRange_ && p_eLength < startFollowRange_) {
 
 		//プレイヤーの方向に移動
 		Vector3 moveVelo{};
+		//向きベクトルを設定
 		moveVelo = p_eVelo;
-		//ノーマライズ
+		//正規化
 		moveVelo.SetNormalize();
-		//移動領分書ける
-		moveVelo *= moveSpped_ / maxSpeedSec_;
+		//移動速度を加算
+		currentSpeedSec_ += (float)DeltaTimer::deltaTime_;
 
-
+		//割合Tを算出
+		float t = currentSpeedSec_ / maxSpeedSec_;
+		//割合から現在の速度算出
+		float nowSpeed = Lerp(0, maxSpped_, t);
+		//速度量を求める
+		moveVelo *= nowSpeed;
 		//速度に追加
 		velocity_ += moveVelo;
-		//速度ベクトルの量を取得
-		float veloSPD = velocity_.GetLength();
-		//プレイヤーへの向きベクトルに乗算
-		velocity_ = p_eVelo.SetNormalize() * veloSPD;
 
-		
-		//最大速度に達していたら移動量もどす
+		//速度を取得
 		float spd = Length(velocity_);
-		if (spd > moveSpped_) {
+		//最大速度に達していたら移動量もどす
+		if (spd > maxSpped_) {
 			velocity_.SetNormalize();
-			velocity_ *= moveSpped_;
+			//最大速度に変換
+			velocity_ *= maxSpped_;
 		}
-
-		//加算処理
-		world_.translate_ += velocity_;
 
 		//向きの処理
 		if (moveVelo != Vector3(0, 0, 0)) {
@@ -239,6 +254,7 @@ void Enemy::FollowUpdate()
 		}
 	}
 	else {
+		//範囲外なので待機状態にリクエスト
 		behaviorRequest_ = Stay;
 
 	}
@@ -246,40 +262,30 @@ void Enemy::FollowUpdate()
 
 void Enemy::HitUpdate()
 {
-	velocity_ += acce;
+	//加速度を加算
+	velocity_ += acceraletion_ * (float)DeltaTimer::deltaTime_;
 
-	world_.translate_ += velocity_;
-
+	//回転する
 	world_.rotate_.x -= 0.5f;
 
-	//高さがゼロ以下
+	//高さが規定値以下なら処理
 	if (world_.translate_.y <= tHeight) {
 
 		//HPがあるなら復帰
 		if (HP_ > 0) {
+			//高さを合わせる
 			world_.translate_.y = tHeight;
+			//角度を戻す
 			world_.rotate_.x = 0;
-			behavior_ = Stay;
+			//状態リクエストを設定
+			behaviorRequest_ = Stay;
+			//移動量を初期化
 			velocity_.SetZero();
-
 		}
 		else {
-			//死亡処理
+			//死亡フラグを有効
 			isDead_ = true;
 		}
-
 	}
 }
 #pragma endregion
-
-
-void Enemy::FallUpdate()
-{
-	addFallspd_ -= fallspd_;
-	world_.translate_.y += addFallspd_;
-
-	if (world_.translate_.y < 0) {
-		world_.translate_.y = 0;
-		addFallspd_ = 0;
-	}
-}

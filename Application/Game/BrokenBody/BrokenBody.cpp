@@ -18,7 +18,7 @@ BrokenBody::BrokenBody()
 	tree_.name_ = "砕け散るからだ";
 	tree_.SetValue("生成数", &spawnNum_);
 	tree_.SetValue("加速度", &acceleration_);
-	tree_.SetValue("吹き飛び速度", &upSPD_);
+	tree_.SetValue("吹き飛び速度", &upSpeed_);
 	tree_.SetValue("死亡時間", &maxDeadSec_);
 	tree_.SetValue("跳ねたときの速度減少量", &bulletforce_);
 	tree_.SetValue("サイズ", &scale_);
@@ -91,9 +91,9 @@ void BrokenBody::EffectOccurred(const EulerWorldTransform& world) {
 		edata->world = world;
 		//吹き飛ぶ方向をランダムに設定
 		edata->velocity = {
-			RandomNumber::Get(-upSPD_,upSPD_),
-			upSPD_,
-			RandomNumber::Get(-upSPD_,upSPD_)
+			RandomNumber::Get(-upSpeed_,upSpeed_),
+			upSpeed_,
+			RandomNumber::Get(-upSpeed_,upSpeed_)
 		};
 		//弾性力を設定
 		edata->BulletForce = bulletforce_;
