@@ -65,7 +65,7 @@ void PlayerAttack::Update()
 	}
 
 	//攻撃入力があれば保存しておく
-	if (input_->GetAttackInput()) {
+	if (input_->GetAttackInputB()) {
 		updateData_.nextATK = true;
 	}
 
@@ -273,17 +273,17 @@ void PlayerAttack::SetAnimation(AttackType type)
 	{
 	case PlayerAttack::kAttack1:
 		//攻撃1の音再生
-		player_->SetAnimation(PlayerAnimationManager::ATK1);
+		player_->SetAnimation(PlayerAnimationManager::ATK_Punch);
 		break;
 
 	case PlayerAttack::kAttack2:
 		//攻撃2の音再生
-		player_->SetAnimation(PlayerAnimationManager::ATK2);
+		player_->SetAnimation(PlayerAnimationManager::ATK_Kick);
 		break;
 
 	case PlayerAttack::kAttack3:
 		//攻撃3の音再生
-		player_->SetAnimation(PlayerAnimationManager::ATK3);
+		player_->SetAnimation(PlayerAnimationManager::ATK_Drill);
 		break;
 
 	case PlayerAttack::CountATK:

@@ -8,9 +8,9 @@ class PlayerAnimationManager :public BaseManager {
 
 public://**パブリック変数
 	enum Animation {
-		ATK1,
-		ATK2,
-		ATK3,
+		ATK_Punch,
+		ATK_Kick,
+		ATK_Drill,
 		WAIT,
 		WALK,
 		CountAnimation

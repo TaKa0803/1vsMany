@@ -322,33 +322,96 @@
     <ClCompile Include="Engine\GlobalVariable\Manager\GlobalVaribleManager.cpp">
       <Filter>Engine\GlobalVariable\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\Player\Player.cpp" />
-    <ClCompile Include="Application\Game\Plane\Plane.cpp" />
-    <ClCompile Include="Application\Game\Effect\EffectExplosion.cpp" />
-    <ClCompile Include="Application\Game\Effect\Impact\Impact.cpp" />
-    <ClCompile Include="Application\Game\Effect\EffectSphereExplo\ESphereExplo.cpp" />
-    <ClCompile Include="Application\Game\Effect\EffectMove\EffectMove.cpp" />
-    <ClCompile Include="Application\Game\Effect\dZoneE\DZone.cpp" />
-    <ClCompile Include="Application\Game\BrokenBody\BrokenBody.cpp" />
-    <ClCompile Include="Application\Game\Scene\GameScene.cpp" />
-    <ClCompile Include="Application\Game\Scene\TitleScene.cpp" />
-    <ClCompile Include="Application\Game\EnemyManager\Enemy\Enemy.cpp" />
-    <ClCompile Include="Application\Game\Scene\ClearScene.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\Attack\PlayerAttack.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\Move\PlayerMove.cpp" />
-    <ClCompile Include="Application\Game\EnemyManager\SpawnManager\EnemySpawnManager.cpp" />
-    <ClCompile Include="Application\Game\CountTimer\CountTimer.cpp" />
-    <ClCompile Include="Application\Game\Player\UI\PlayerUI.cpp" />
-    <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp" />
-    <ClCompile Include="Application\Game\ScoreSaveManager\ScoreSaveManager.cpp" />
-    <ClCompile Include="Application\Game\Transition\Transition.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\PlayerBaseBehavior.cpp" />
-    <ClCompile Include="Application\Game\Player\Input\PlayerInputManager.cpp" />
-    <ClCompile Include="Application\Game\Player\Animation\PlayerAnimationManager.cpp" />
-    <ClCompile Include="Application\Game\Player\Sound\PlayerSoundManager.cpp" />
-    <ClCompile Include="Application\Game\CircleShadow\CircleShadow.cpp" />
-    <ClCompile Include="Application\Game\EnemyManager\ParameterManager\EnemyParameterManager.cpp" />
-    <ClCompile Include="Application\Game\EnemyManager\EnemyManager.cpp" />
+    <ClCompile Include="Application\Game\BrokenBody\BrokenBody.cpp">
+      <Filter>Application\Game\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\CircleShadow\CircleShadow.cpp">
+      <Filter>Application\Game\CircleShadow</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\CountTimer\CountTimer.cpp">
+      <Filter>Application\Game\CountTimer</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Effect\EffectMove\EffectMove.cpp">
+      <Filter>Application\Game\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\EnemyManager\Enemy\Enemy.cpp">
+      <Filter>Application\Game\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\EnemyManager\EnemyManager.cpp">
+      <Filter>Application\Game\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\EnemyManager\ParameterManager\EnemyParameterManager.cpp">
+      <Filter>Application\Game\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\EnemyManager\SpawnManager\EnemySpawnManager.cpp">
+      <Filter>Application\Game\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp">
+      <Filter>Application\Game\FollowCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Scene\ClearScene.cpp">
+      <Filter>Application\Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Scene\GameScene.cpp">
+      <Filter>Application\Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Effect\Impact\Impact.cpp">
+      <Filter>Application\Game\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Plane\Plane.cpp">
+      <Filter>Application\Game\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Player.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Animation\PlayerAnimationManager.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Behavior\Attack\PlayerAttack.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\Drill\PlayerAttackDrill.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\Kick\PlayerAttackKick.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\PlayerAttackManager.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\Punch\PlayerAttackPunch.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\PlayerBaseAttack.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Behavior\PlayerBaseBehavior.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Behavior\AttackManager\BButtonComboManager\PlayerBButtonComboManager.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Input\PlayerInputManager.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Behavior\Move\PlayerMove.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\Sound\PlayerSoundManager.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Player\UI\PlayerUI.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\ScoreSaveManager\ScoreSaveManager.cpp">
+      <Filter>Application\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Scene\TitleScene.cpp">
+      <Filter>Application\Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Game\Transition\Transition.cpp">
+      <Filter>Application\Game\Transition</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -600,34 +663,102 @@
     <ClInclude Include="Application\SceneFactory\SceneFactory.h">
       <Filter>Application\SceneManager</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Game\Player\Player.h" />
-    <ClInclude Include="Application\Game\EnemyManager\Enemy\Enemy.h" />
-    <ClInclude Include="Application\Game\Plane\Plane.h" />
-    <ClInclude Include="Application\Game\Effect\EffectExplosion.h" />
-    <ClInclude Include="Application\Game\Effect\Impact\Impact.h" />
-    <ClInclude Include="Application\Game\Effect\EffectSphereExplo\ESphereExplo.h" />
-    <ClInclude Include="Application\Game\Effect\EffectMove\EffectMove.h" />
-    <ClInclude Include="Application\Game\Effect\dZoneE\DZone.h" />
-    <ClInclude Include="Application\Game\BrokenBody\BrokenBody.h" />
-    <ClInclude Include="Application\Game\Scene\GameScene.h" />
-    <ClInclude Include="Application\Game\Scene\TitleScene.h" />
-    <ClInclude Include="Application\Game\Scene\ClearScene.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\Attack\PlayerAttack.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\Move\PlayerMove.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\PlayerBaseBehavior.h" />
-    <ClInclude Include="Application\Game\EnemyManager\SpawnManager\EnemySpawnManager.h" />
-    <ClInclude Include="Application\Game\CountTimer\CountTimer.h" />
-    <ClInclude Include="Application\Game\Player\UI\PlayerUI.h" />
-    <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h" />
-    <ClInclude Include="Application\Game\ScoreSaveManager\ScoreSaveManager.h" />
-    <ClInclude Include="Application\Game\Transition\Transition.h" />
-    <ClInclude Include="Application\Game\Player\Input\PlayerInputManager.h" />
-    <ClInclude Include="Application\Game\Player\Animation\PlayerAnimationManager.h" />
-    <ClInclude Include="Application\Game\Player\Sound\PlayerSoundManager.h" />
-    <ClInclude Include="Application\Game\CircleShadow\CircleShadow.h" />
-    <ClInclude Include="Application\Game\EnemyManager\ParameterManager\EnemyParameterManager.h" />
-    <ClInclude Include="Application\Game\EnemyManager\EnemyManager.h" />
-    <ClInclude Include="Application\Game\BaseManager\BaseManager.h" />
+    <ClInclude Include="Application\Game\BaseManager\BaseManager.h">
+      <Filter>Application\Game\BaseManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\BrokenBody\BrokenBody.h">
+      <Filter>Application\Game\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\CircleShadow\CircleShadow.h">
+      <Filter>Application\Game\CircleShadow</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\CountTimer\CountTimer.h">
+      <Filter>Application\Game\CountTimer</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Effect\EffectMove\EffectMove.h">
+      <Filter>Application\Game\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\EnemyManager\Enemy\Enemy.h">
+      <Filter>Application\Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\EnemyManager\EnemyManager.h">
+      <Filter>Application\Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\EnemyManager\ParameterManager\EnemyParameterManager.h">
+      <Filter>Application\Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\EnemyManager\SpawnManager\EnemySpawnManager.h">
+      <Filter>Application\Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h">
+      <Filter>Application\Game\FollowCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Scene\ClearScene.h">
+      <Filter>Application\Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Scene\GameScene.h">
+      <Filter>Application\Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Effect\Impact\Impact.h">
+      <Filter>Application\Game\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Plane\Plane.h">
+      <Filter>Application\Game\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Player.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Animation\PlayerAnimationManager.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Behavior\Attack\PlayerAttack.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\Drill\PlayerAttackDrill.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\Kick\PlayerAttackKick.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\PlayerAttackManager.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\Punch\PlayerAttackPunch.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\PlayerBaseAttack.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Behavior\PlayerBaseBehavior.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\PlayerBaseButtonManager.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Behavior\AttackManager\BButtonComboManager\PlayerBButtonComboManager.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Input\PlayerInputManager.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Behavior\Move\PlayerMove.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\Sound\PlayerSoundManager.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Player\UI\PlayerUI.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\ScoreSaveManager\ScoreSaveManager.h">
+      <Filter>Application\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Scene\TitleScene.h">
+      <Filter>Application\Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Game\Transition\Transition.h">
+      <Filter>Application\Game\Transition</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">
@@ -657,8 +788,12 @@
     <None Include="resources\GlobalVariables\StageWall.json">
       <Filter>resources\json</Filter>
     </None>
-    <None Include="resources\jsonfile\enemyPopData.json" />
-    <None Include="resources\jsonfile\PlayerATKData.json" />
+    <None Include="resources\jsonfile\enemyPopData.json">
+      <Filter>resources\json</Filter>
+    </None>
+    <None Include="resources\jsonfile\PlayerATKData.json">
+      <Filter>resources\json</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -715,89 +850,17 @@
     <Filter Include="Application\Game\Scenes">
       <UniqueIdentifier>{f4d20a5e-eaac-4333-bca9-d0d02bec855e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Application\Game\Scenes\ClearScene">
-      <UniqueIdentifier>{b2c9b843-bf8f-4d63-b59a-00d29c458001}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\3D">
       <UniqueIdentifier>{62a69fc9-80cf-4568-b7b5-a6bb795a09b1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\3D\SingleObject">
       <UniqueIdentifier>{698d40bf-8f10-4c8e-aa6f-732ec115f6b7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Application\Game\Scenes\OverScene">
-      <UniqueIdentifier>{5a95fbf6-9abb-4b90-80a2-efc8bd31bbf2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Scenes\InGameScene">
-      <UniqueIdentifier>{31360ac8-3813-4739-a34c-ee8d9a0efa82}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss">
-      <UniqueIdentifier>{4add078d-1061-46b1-99c1-65b87acecde3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\BossBulletManager">
-      <UniqueIdentifier>{71b9fba2-b66e-4063-af00-5647fe4c7260}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior">
-      <UniqueIdentifier>{0771b1de-83c2-434b-9640-c8d661804d2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\ATKTypeManager">
-      <UniqueIdentifier>{ed548207-f23d-47f5-828a-4e7bab1baba5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\ATKTypeManager\ATKType">
-      <UniqueIdentifier>{11ba5404-596d-4314-b69e-f1b2424b6ea4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal">
-      <UniqueIdentifier>{7c546478-bf2b-4f82-8f91-2a7117596c1a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs">
-      <UniqueIdentifier>{393b53ba-7147-475c-b761-2915124eca16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\BackStep">
-      <UniqueIdentifier>{d8dabd14-2c70-4ac9-b4ee-1c219700994d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\Charge">
-      <UniqueIdentifier>{5f3ad942-3fdd-4684-b30e-dddc4790443a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\Punch">
-      <UniqueIdentifier>{e3c7f700-24e6-46d5-81a8-e551cc51364a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\ShotBullet">
-      <UniqueIdentifier>{217c9691-95a4-4940-9644-4a16d03f294a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\Stump">
-      <UniqueIdentifier>{16707fb6-ec6d-41c3-a54e-da8c413322fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\ATKTypeManager\ATKType\Normal\ATKs\SumerSolt">
-      <UniqueIdentifier>{4d0affeb-f0bc-4c14-8e34-a1e9e1db3e3a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\Idle">
-      <UniqueIdentifier>{8e7f1d09-8944-49ca-aa18-e31eb90f6967}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\Down">
-      <UniqueIdentifier>{221f5b1d-42e6-4d59-85c3-1c4ec3a515c8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\UI">
-      <UniqueIdentifier>{3d2f97df-b0a2-4cb1-b0b8-e7304a1a99b8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Application\Game\Effect">
       <UniqueIdentifier>{8cd7708a-f9cb-4044-b3ae-259331a3c439}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Application\Game\Effect\CircleShadow">
-      <UniqueIdentifier>{8b4ee3eb-083e-440b-b399-6597779e0d6d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Effect\LargeDebris">
-      <UniqueIdentifier>{387a6385-db6a-4eef-adfb-b795b91dd0a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Effect\Move">
-      <UniqueIdentifier>{4096db57-18a9-4097-95bc-832e01ae6a10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Effect\Normal">
-      <UniqueIdentifier>{033b681d-1b84-4ea8-84bd-fcd6c035aeea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Application\Game\FollowCamera">
       <UniqueIdentifier>{eb2a8577-570b-4d30-bfbf-8b0c8e9d1e48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\UI">
-      <UniqueIdentifier>{4595add0-bb32-4693-b415-bea395573953}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\GlobalVariable">
       <UniqueIdentifier>{ba1e5a53-6d0d-4555-a774-0209bd349080}</UniqueIdentifier>
@@ -807,9 +870,6 @@
     </Filter>
     <Filter Include="Engine\GlobalVariable\Group">
       <UniqueIdentifier>{71426397-c4a0-4057-b527-08bf3285900f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Boss\Behavior\BaseATK">
-      <UniqueIdentifier>{97612dcd-61a6-4640-be52-c423fcb20e05}</UniqueIdentifier>
     </Filter>
     <Filter Include="external">
       <UniqueIdentifier>{e530f38d-9179-4b5e-b534-4137d64b5705}</UniqueIdentifier>
@@ -831,9 +891,6 @@
     </Filter>
     <Filter Include="Application\Game\Player">
       <UniqueIdentifier>{0591ff5b-605f-43ba-a514-e2062c01d2fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Player\Behavior">
-      <UniqueIdentifier>{daa655be-767b-47fd-b86e-6b2fbb6a11a0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Application\Game\IScene">
       <UniqueIdentifier>{480c074b-f3dd-4d89-b301-50170e220d10}</UniqueIdentifier>
@@ -876,30 +933,6 @@
     </Filter>
     <Filter Include="Application\Game\Plane">
       <UniqueIdentifier>{4272bbb4-88fd-4cc6-9ec8-1fb1d084c6aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Player\Behavior\ATKManager">
-      <UniqueIdentifier>{99a25d04-9a7f-4d37-a419-acbbd98e88d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Player\Behavior\Down">
-      <UniqueIdentifier>{e63681d2-dfdb-48a7-9fb0-1535bb848cad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Player\Behavior\Hit">
-      <UniqueIdentifier>{67d5cb3e-bc8a-4ce2-81cb-8ce8271c946e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Player\Behavior\Idle">
-      <UniqueIdentifier>{d4be481f-99e1-43c6-a1a4-8a5d052dba6a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Player\Behavior\ATKManager\ATKs">
-      <UniqueIdentifier>{025e2e4d-ba9c-464a-a2d3-ddd319ffcca4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Player\Behavior\ATKManager\ATKs\Punch">
-      <UniqueIdentifier>{60a5ed0d-094c-4044-a468-6f98b2b7e488}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Player\Behavior\Roll">
-      <UniqueIdentifier>{d321cbb4-1bc3-4dbf-8bc4-c15a0ee1da08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\Game\Player\Stamina">
-      <UniqueIdentifier>{74a40c70-0bc0-4bdc-ae9c-fa88aec7f26c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\PostEffect\Manager">
       <UniqueIdentifier>{6af60d5e-b43f-4529-b046-3b6c33e7bdd6}</UniqueIdentifier>
@@ -946,9 +979,6 @@
     <Filter Include="Engine\base\TextureManager">
       <UniqueIdentifier>{ce58f707-4d33-47c6-be6b-f82813788b9e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Application\Game\Scenes\TitleScene">
-      <UniqueIdentifier>{d7038d31-9726-456d-8335-5750ad89334e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\base\UAVManager">
       <UniqueIdentifier>{88802832-125c-4560-9abe-eb5ee6f77115}</UniqueIdentifier>
     </Filter>
@@ -961,14 +991,20 @@
     <Filter Include="Engine\GlobalVariable\Tree">
       <UniqueIdentifier>{3a8f8554-6483-4776-9d00-e9a0d152083f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Application\Game\Player\AnimationManager">
-      <UniqueIdentifier>{17c11089-d77b-4980-a424-2f1349843242}</UniqueIdentifier>
+    <Filter Include="Application\Game\BaseManager">
+      <UniqueIdentifier>{5eb6c658-b195-4c02-9193-9a63d3891e77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Application\Game\Player\InputManager">
-      <UniqueIdentifier>{c710d10e-bab8-4f05-ac63-a26e99271db9}</UniqueIdentifier>
+    <Filter Include="Application\Game\CircleShadow">
+      <UniqueIdentifier>{ca74803d-8abc-483b-95e9-1fc915d9e47d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Application\Game\Player\UI">
-      <UniqueIdentifier>{c9a3f18e-5ce8-41de-91a9-05f3af4b7c6b}</UniqueIdentifier>
+    <Filter Include="Application\Game\CountTimer">
+      <UniqueIdentifier>{8ebe82a8-eaa1-47b2-82d9-779a5e8bdb37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\Game\Enemy">
+      <UniqueIdentifier>{61c63694-4440-42b3-99a9-1518eba46ba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\Game\Transition">
+      <UniqueIdentifier>{f4ea11ce-e8ad-44ff-80d3-c71b419668cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

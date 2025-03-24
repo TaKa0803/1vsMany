@@ -23,7 +23,7 @@ const Vector3 PlayerInputManager::GetMoveInput()
 	return move;
 }
 
-bool PlayerInputManager::GetAttackInput()
+bool PlayerInputManager::GetAttackInputB()
 {
 	//攻撃入力の
 	int isAttackInput = 0;
@@ -32,6 +32,19 @@ bool PlayerInputManager::GetAttackInput()
 	isAttackInput = input_->TriggerKey(DIK_Z);
 	//パッド入力取得
 	isAttackInput += input_->IsTriggerButton(kButtonB);
+
+	return (bool)isAttackInput;
+}
+
+bool PlayerInputManager::GetAttackInputA()
+{
+	//攻撃入力の
+	int isAttackInput = 0;
+
+	//キー入力取得
+	isAttackInput = input_->TriggerKey(DIK_X);
+	//パッド入力取得
+	isAttackInput += input_->IsTriggerButton(kButtonX);
 
 	return (bool)isAttackInput;
 }

@@ -16,14 +16,20 @@ public://**パブリック関数
 	const Vector3 GetMoveInput();
 
 	/// <summary>
-	/// 攻撃入力取得
+	/// 攻撃入力Bボタン（直線タイプ）取得
 	/// </summary>
 	/// <returns></returns>
-	bool GetAttackInput();
+	bool GetAttackInputB();
+
+	/// <summary>
+	/// 攻撃入力Aボタン（範囲タイプ）取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetAttackInputA();
 
 private://**パブリック変数**//
 
 	//入力
-	Input* input_=nullptr;
+	Input* input_ = nullptr;
 
 };

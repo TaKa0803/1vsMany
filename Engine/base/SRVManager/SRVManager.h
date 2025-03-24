@@ -121,7 +121,7 @@ private://**プラべーと変数**//
 	std::list<ID3D12Resource*>intermediaResources_;
 
 	//データ群
-	//std::vector<D3D12_GPU_DESCRIPTOR_HANDLE> datas_;
+	//std::vector<D3D12_GPU_DESCRIPTOR_HANDLE> parameters_;
 
 	//GPUHandleデータ群
 	std::map<int, D3D12_GPU_DESCRIPTOR_HANDLE>hDatas_;

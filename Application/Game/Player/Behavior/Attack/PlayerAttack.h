@@ -12,7 +12,7 @@ public://**パブリック関数**//
 	/// コンストラクタ
 	/// </summary>
 	PlayerAttack();
-	~PlayerAttack() = default;
+	virtual ~PlayerAttack() = default;
 
 	/// <summary>
 	/// 初期化

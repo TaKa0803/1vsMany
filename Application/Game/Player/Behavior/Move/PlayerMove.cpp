@@ -34,7 +34,7 @@ void PlayerMove::Move()
 void PlayerMove::SceneChange()
 {
 	//攻撃入力で状態を変更
-	if (input_->GetAttackInput()) {
+	if (input_->GetAttackInputB()) {
 		behaviorRequest_ = State::ATK;
 	}
 }

@@ -96,7 +96,7 @@ void SRVManager::Initialize(ID3D12Device* DXF) {
 	srvDescriptorHeap = CreateDescriptorHeap(DXF_, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, maxSRVSize_, true);
 	descriptorSizeSRV = DXF_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
-	//datas_.resize(maxSRVSize_);
+	//parameters_.resize(maxSRVSize_);
 }
 
 void SRVManager::PostInitialize() {
