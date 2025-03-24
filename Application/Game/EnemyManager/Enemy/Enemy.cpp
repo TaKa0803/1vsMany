@@ -190,6 +190,9 @@ void Enemy::HitInitialize()
 
 	//体力を減らす
 	HP_--;
+
+	//浮かせる
+	world_.translate_.y = 0.01f;
 }
 
 void Enemy::StayUpdate()
