@@ -7,14 +7,6 @@
 //プレイヤー前方宣言
 class Player;
 
-struct FlagData {
-	bool isInputB = false;	//Bボタン入力
-	bool isInputA = false;	//Aボタン入力
-	bool isEnd = false;		//終了フラグ
-};
-
-
-
 //プレイヤーの攻撃基底クラス
 class PlayerBaseAttack {
 
@@ -24,7 +16,7 @@ protected://**共通変数**//
 	static Player* player_;
 
 	//終了フラグ
-	static FlagData attackData_;
+	static bool isEnd_;
 
 public://**パブリック変数**//
 
@@ -71,9 +63,11 @@ public://**セッター・ゲッター**//
 	/// 終了フラグを取得
 	/// </summary>
 	/// <returns>フラグ</returns>
-	static FlagData& GetAttackData() {
-		return attackData_;
+	static bool& GetAttackData() {
+		return isEnd_;
 	}
+
+
 
 private://**プライベート関数**//
 
@@ -82,10 +76,6 @@ private://**プライベート関数**//
 	/// </summary>
 	void SetMaxSec();
 
-	/// <summary>
-	/// 入力チェック
-	/// </summary>
-	void CheckInput();
 
 public://**状態関数**//
 
@@ -126,7 +116,7 @@ private://**プライベート変数**//
 		float executionSec = 1.0f;	//攻撃動作
 		float rigorSec = 1.0f;		//硬直時間
 
-		float speed = 0.0f;			//移動速度
+		float speed = 1.0f;			//移動速度
 	}parameters_;
 
 

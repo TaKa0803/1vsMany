@@ -130,7 +130,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\Punch\PlayerAttackPunch.cpp" />
     <ClCompile Include="Application\Game\Player\Behavior\AttackManager\BButtonComboManager\PlayerBButtonComboManager.cpp" />
     <ClCompile Include="Application\Game\Player\Behavior\AttackManager\PlayerAttackManager.cpp" />
-    <ClCompile Include="Application\Game\Player\Behavior\Attack\PlayerAttack.cpp" />
     <ClCompile Include="Application\Game\Player\Behavior\Move\PlayerMove.cpp" />
     <ClCompile Include="Application\Game\Player\Behavior\PlayerBaseBehavior.cpp" />
     <ClCompile Include="Application\Game\Player\Input\PlayerInputManager.cpp" />
@@ -410,7 +409,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Game\Player\Behavior\AttackManager\BButtonComboManager\PlayerBButtonComboManager.h" />
     <ClInclude Include="Application\Game\Player\Behavior\AttackManager\PlayerAttackManager.h" />
     <ClInclude Include="Application\Game\Player\Behavior\AttackManager\PlayerBaseButtonManager.h" />
-    <ClInclude Include="Application\Game\Player\Behavior\Attack\PlayerAttack.h" />
     <ClInclude Include="Application\Game\Player\Behavior\PlayerBaseBehavior.h" />
     <ClInclude Include="Application\Game\Player\Behavior\Move\PlayerMove.h" />
     <ClInclude Include="Application\Game\Player\Input\PlayerInputManager.h" />

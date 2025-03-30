@@ -21,7 +21,7 @@ void PlayerAttackDrill::InitExecution()
 void PlayerAttackDrill::InitRigor()
 {
 	//音の停止
-	player_->SetStopSound(PlayerSoundManager::Drill);
+	//player_->SetStopSound(PlayerSoundManager::Drill);
 }
 
 void PlayerAttackDrill::UpdateReserve()
@@ -51,6 +51,6 @@ void PlayerAttackDrill::UpdateRigor()
 	//条件を満たしたらおわる
 	if (currentSec_ >= nowMaxSec_) {
 		//おわる
-		attackData_.isEnd = true;
+		isEnd_ = true;
 	}
 }

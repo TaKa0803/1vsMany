@@ -6,7 +6,7 @@
 Player* PlayerBaseAttack::player_ = nullptr;
 
 //終了フラグ初期化
-FlagData PlayerBaseAttack::attackData_ = FlagData{};
+bool PlayerBaseAttack::isEnd_ = false;
 
 PlayerBaseAttack::PlayerBaseAttack(){
 
@@ -26,7 +26,7 @@ void PlayerBaseAttack::Init()
 	behaviorRequest_ = Behavior::Reserve;
 	
 	//フラグを初期化
-	attackData_ = FlagData{};
+	isEnd_ = false;
 }
 
 void PlayerBaseAttack::Update()
@@ -43,6 +43,9 @@ void PlayerBaseAttack::Update()
 		//カウント初期化
 		currentSec_ = 0;
 
+		//移動量を初期化
+		player_->baseParameter_.velocity.SetZero();
+
 		//最大時間を再セット
 		SetMaxSec();
 	}
@@ -53,9 +56,6 @@ void PlayerBaseAttack::Update()
 
 	//状態を更新
 	(this->*behaviorUpdate[(int)behavior_])();
-
-	//入力取得
-	CheckInput();
 
 }
 
@@ -72,18 +72,22 @@ void PlayerBaseAttack::SetInput2Move()
 		Vector3 offset = { 0,0,-1 };
 		//プレイヤー行列から向きを参照
 		offset = TransformNormal(offset, player_->world_.matWorld_);
-
-		//速度を加算
-		offset *= parameters_.speed;
+	
 		//上下の向きを無視
 		offset.y = 0;
+
+		//正規化
+		offset.SetNormalize();
+
+		//速度を加算
+		offset *= parameters_.speed * (float)DeltaTimer::deltaTime_;
 
 		//移動量を変更
 		move = offset;
 	}
 
 	//速度分をセット
-	player_->parameter_.velocity = move;
+	player_->baseParameter_.velocity = move;
 }
 
 void PlayerBaseAttack::SetMaxSec()
@@ -108,24 +112,6 @@ void PlayerBaseAttack::SetMaxSec()
 
 	default:
 		break;
-	}
-}
-
-void PlayerBaseAttack::CheckInput()
-{
-	//入力取得
-	bool inputB = inputManager_->GetAttackInputB();
-	bool inputA = inputManager_->GetAttackInputA();
-
-	//どちらも入力があるかどちらもない場合
-	if ((inputB && inputA) || (!inputB && !inputA)) {
-		//何もしない
-	}
-	else {
-		//どちらかの入力がある場合
-		//値をセット
-		attackData_.isInputA = inputA;
-		attackData_.isInputB = inputB;
 	}
 }
 

@@ -19,7 +19,10 @@ class Player :public GameObject {
 public://**パブリック変数**//
 
 	//基本パラメータ
-	PlayerParameter parameter_;
+	PlayerParameter baseParameter_;
+
+	//入力パラメータ
+	PlayerInputParameter inputParameter_;
 
 public://**パブリック変数**//
 
@@ -100,6 +103,14 @@ public://**セッター**//
 	/// </summary>
 	/// <returns>向きベクトルを返却</returns>
 	Vector3 SetBody4Input();
+
+public://**ゲッター**//
+
+	/// <summary>
+	/// プレイヤー入力管理取得
+	/// </summary>
+	/// <returns></returns>
+	PlayerInputManager* GetInput() { return input_.get(); }
 
 #pragma region 状態管理とメンバ関数ポインタテーブル
 

@@ -28,13 +28,18 @@ void PlayerMove::Move()
 	//移動速度量加算
 	move *= spd_;
 	//加算
-	player_->parameter_.velocity = move;
+	player_->baseParameter_.velocity = move;
 }
 
 void PlayerMove::SceneChange()
 {
-	//攻撃入力で状態を変更
-	if (input_->GetAttackInputB()) {
+	//ボタン入力取得
+	player_->inputParameter_ = player_->GetInput()->GetAttackInput();
+	//変数を参照
+	auto& data = player_->inputParameter_;
+
+	//どちらかが有効で状態を変更
+	if (data.inputA|| data.inputB) {
 		behaviorRequest_ = State::ATK;
 	}
 }
@@ -42,7 +47,7 @@ void PlayerMove::SceneChange()
 void PlayerMove::ChangeAnimation()
 {
 	//移動していない場合
-	if (player_->parameter_.velocity == Vector3{ 0,0,0 }) {
+	if (player_->baseParameter_.velocity == Vector3{ 0,0,0 }) {
 		//停止時のアニメーションに変更
 		player_->SetAnimation(PlayerAnimationManager::WAIT);
 	}

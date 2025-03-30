@@ -8,10 +8,7 @@ Player* PlayerBaseBehavior::player_ = nullptr;
 
 PlayerBaseBehavior::PlayerBaseBehavior()
 {
-	if (!input_) {
-		input_ = std::make_unique<PlayerInputManager>();
-	}
-
+	//カメラのインスタンス未取得の場合取得
 	if (!camera_) {
 		camera_ = Camera::GetInstance();
 	}

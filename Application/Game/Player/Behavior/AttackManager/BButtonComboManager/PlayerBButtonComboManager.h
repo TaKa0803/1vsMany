@@ -1,6 +1,5 @@
 #pragma once
 #include"Game/Player/Behavior/AttackManager/PlayerBaseButtonManager.h"
-#include"Game/Player/Behavior/PlayerBaseBehavior.h"
 #include"Game/Player/Behavior/AttackManager/Attacks/PlayerBaseAttack.h"
 #include<vector>
 #include<memory>
@@ -27,10 +26,10 @@ public://**パブリック関数**//
 
 	//攻撃タイプ
 	enum class AttackType{
-		Punch,
-		Kick,
-		Drill,
-		CountAttackType
+		Punch,			//パンチ
+		Kick,			//キック
+		Drill,			//ドリル	
+		CountAttackType	//攻撃の数
 	};
 
 	//攻撃データ群

@@ -1,7 +1,7 @@
 #include"Player.h"
 
 #include"Game/Player/Behavior/Move/PlayerMove.h"
-#include"Game/Player/Behavior/Attack/PlayerAttack.h"
+#include"Game/Player/Behavior/AttackManager/PlayerAttackManager.h"
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
 
 #include<numbers>
@@ -29,11 +29,12 @@ Player::Player() {
 	
 	//パラメータを設定
 	PlayerBaseBehavior::SetPlayer(this);
+	PlayerBaseAttack::SetPlayer(this);
 
 	//各状態の生成
 	behaviors_.resize((size_t)State::NumStates);
 	behaviors_[(size_t)State::Move] = std::make_unique<PlayerMove>();
-	behaviors_[(size_t)State::ATK] = std::make_unique<PlayerAttack>();
+	behaviors_[(size_t)State::ATK] = std::make_unique<PlayerAttackManager>();
 
 	//インパクトエフェクト生成
 	impactE_ = std::make_unique<EffectImpact>();
@@ -42,7 +43,7 @@ Player::Player() {
 	effectMove_ = std::make_unique<EffectMove>();
 
 	//UIクラス生成
-	ui_ = std::make_unique<PlayerUI>(parameter_.comboCount);
+	ui_ = std::make_unique<PlayerUI>(baseParameter_.comboCount);
 
 	//アニメーションマネージャの生成
 	animationManager_ = std::make_unique<PlayerAnimationManager>(model_.get());
@@ -83,6 +84,8 @@ void Player::GameUpdate() {
 	if (PlayerBaseBehavior::GetBehaviorRequest()) {
 		//値を現在の状態に渡す
 		behavior_ = PlayerBaseBehavior::GetBehaviorRequest().value();
+		//状態リクエストを初期化
+		PlayerBaseBehavior::SetBehaviorRequestNull();
 
 		//状態の初期化
 		behaviors_[(int)behavior_]->Init();
@@ -95,9 +98,9 @@ void Player::GameUpdate() {
 	effectMove_->Update();
 
 	//移動量加算
-	world_.translate_+=parameter_.velocity;
+	world_.translate_+=baseParameter_.velocity;
 	//変更した回転量を渡す
-	world_.rotate_ = parameter_.rotation;
+	world_.rotate_ = baseParameter_.rotation;
 
 	//落下の処理
 	addFallSpd_ -= fallSpd_;
@@ -186,7 +189,7 @@ Vector3 Player::SetBody4Input()
 	//入力がある場合
 	if (velocity != Vector3(0, 0, 0)) {
 		//向きを指定
-		parameter_.rotation.y = GetYRotate({ velocity.x,velocity.z }) + ((float)std::numbers::pi);
+		baseParameter_.rotation.y = GetYRotate({ velocity.x,velocity.z }) + ((float)std::numbers::pi);
 	}
 
 	//向きベクトルを返却

@@ -43,9 +43,7 @@ protected://**共通変数**//
 	static Player* player_;
 
 	//カメラのインスタンス
-	const Camera* camera_=nullptr;
-
-	std::unique_ptr<PlayerInputManager>input_;
+	const Camera* camera_ = nullptr;
 
 public://**パブリック変数**//
 
@@ -77,5 +75,10 @@ public://**パブリック関数**//
 	/// 状態リクエストを取得
 	/// </summary>
 	/// <returns>リクエスト変数</returns>
-	static const std::optional<State>&GetBehaviorRequest() { return behaviorRequest_; }
+	static const std::optional<State>& GetBehaviorRequest() { return behaviorRequest_; }
+
+	/// <summary>
+	/// 状態リクエストを初期化
+	/// </summary>
+	static void SetBehaviorRequestNull() { behaviorRequest_ = std::nullopt; }
 };

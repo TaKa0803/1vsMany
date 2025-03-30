@@ -367,9 +367,6 @@
     <ClCompile Include="Application\Game\Player\Animation\PlayerAnimationManager.cpp">
       <Filter>Application\Game\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\Player\Behavior\Attack\PlayerAttack.cpp">
-      <Filter>Application\Game\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Application\Game\Player\Behavior\AttackManager\Attacks\Drill\PlayerAttackDrill.cpp">
       <Filter>Application\Game\Player</Filter>
     </ClCompile>
@@ -709,9 +706,6 @@
       <Filter>Application\Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="Application\Game\Player\Animation\PlayerAnimationManager.h">
-      <Filter>Application\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Game\Player\Behavior\Attack\PlayerAttack.h">
       <Filter>Application\Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="Application\Game\Player\Behavior\AttackManager\Attacks\Drill\PlayerAttackDrill.h">

@@ -15,8 +15,9 @@ PlayerBButtonManager::PlayerBButtonManager(Player* player)
 	attacks_[(size_t)AttackType::Punch] =std::make_unique<PlayerAttackPunch>();
 	attacks_[(size_t)AttackType::Kick] = std::make_unique<PlayerAttackKick>();
 	attacks_[(size_t)AttackType::Drill] = std::make_unique<PlayerAttackDrill>();
-
-
+	
+	//デバッグ用にパラメータをツリーにセット
+	tree_.name_ = "Bボタン攻撃";
 	//デバッグツリーをセット
 	for (int i = 0; i < (int)AttackType::CountAttackType; i++) {
 		//ツリーをセット
@@ -27,7 +28,7 @@ PlayerBButtonManager::PlayerBButtonManager(Player* player)
 void PlayerBButtonManager::Init()
 {
 	//攻撃タイプをセット
-	type_ = (AttackType)(player_->parameter_.comboCount);
+	type_ = (AttackType)(player_->baseParameter_.comboCount);
 
 	//攻撃データを初期化
 	attacks_[(size_t)type_]->Init();

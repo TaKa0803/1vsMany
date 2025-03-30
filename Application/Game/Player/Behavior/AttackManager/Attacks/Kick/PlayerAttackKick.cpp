@@ -21,7 +21,7 @@ void PlayerAttackKick::InitExecution()
 void PlayerAttackKick::InitRigor()
 {
 	//音の停止
-	player_->SetStopSound(PlayerSoundManager::Punch);
+	//player_->SetStopSound(PlayerSoundManager::Punch);
 }
 
 void PlayerAttackKick::UpdateReserve()
@@ -53,6 +53,6 @@ void PlayerAttackKick::UpdateRigor()
 	//条件を満たしたらおわる
 	if (currentSec_ >= nowMaxSec_) {
 		//おわる
-		attackData_.isEnd = true;
+		isEnd_ = true;
 	}
 }

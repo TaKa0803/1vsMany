@@ -1,6 +1,13 @@
 #pragma once
 #include"Input/Input.h"
 
+//入力パラメータ
+struct PlayerInputParameter {
+	//ボタンフラグB
+	float inputB = false;
+	//ボタンフラグA
+	float inputA = false;
+};
 
 class PlayerInputManager {
 
@@ -14,6 +21,13 @@ public://**パブリック関数
 	/// </summary>
 	/// <returns></returns>
 	const Vector3 GetMoveInput();
+
+	/// <summary>
+	/// 攻撃入力取得
+	/// </summary>
+	const PlayerInputParameter GetAttackInput();
+
+private://**プライベート関数**//
 
 	/// <summary>
 	/// 攻撃入力Bボタン（直線タイプ）取得

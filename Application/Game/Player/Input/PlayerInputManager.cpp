@@ -23,6 +23,29 @@ const Vector3 PlayerInputManager::GetMoveInput()
 	return move;
 }
 
+const PlayerInputParameter PlayerInputManager::GetAttackInput()
+{
+	//返す変数生成
+	PlayerInputParameter parameter{};
+
+	//入力取得
+	bool inputB = GetAttackInputB();
+	bool inputA = GetAttackInputA();
+
+	//どちらも入力があるかどちらもない場合
+	if ((inputB && inputA)|| (!inputB && !inputA)) {
+		//何もしない
+	}
+	else {
+		//どちらかの入力がある場合
+		//値をセット
+		parameter.inputA = inputA;
+		parameter.inputB = inputB;
+	}
+
+	return parameter;
+}
+
 bool PlayerInputManager::GetAttackInputB()
 {
 	//攻撃入力の
