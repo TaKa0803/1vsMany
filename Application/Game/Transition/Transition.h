@@ -55,4 +55,7 @@ private:
 
 	//経過時間カウント
 	float currentSceneXhangeSec_ = 0;
+
+	//デバッグ用ツリー
+	GvariTree tree_;
 };

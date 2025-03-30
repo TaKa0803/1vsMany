@@ -409,6 +409,8 @@
     <ClCompile Include="Application\Game\Transition\Transition.cpp">
       <Filter>Application\Game\Transition</Filter>
     </ClCompile>
+    <ClCompile Include="Application\Game\Effect\FallDeadEnemies\EffectFallEnemies.cpp" />
+    <ClCompile Include="Application\Game\CountKilledEnemies\CountKilledEnemies.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -753,6 +755,8 @@
     <ClInclude Include="Application\Game\Transition\Transition.h">
       <Filter>Application\Game\Transition</Filter>
     </ClInclude>
+    <ClInclude Include="Application\Game\Effect\FallDeadEnemies\EffectFallEnemies.h" />
+    <ClInclude Include="Application\Game\CountKilledEnemies\CountKilledEnemies.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">

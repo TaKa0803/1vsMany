@@ -230,6 +230,7 @@ void GameScene::UpdateOther2This()
 {
 	//遷移が終了時
 	if (transition_->Update()) {
+		//
 		sceneRequest_ = ThisScene;
 	}
 }

@@ -3,6 +3,8 @@
 #include"Input/Input.h"
 #include"Sprite/Sprite.h"
 #include"Game/ScoreSaveManager/ScoreSaveManager.h"
+#include"Game/CountKilledEnemies/CountKilledEnemies.h"
+#include"Game/Transition/Transition.h"
 
 //クリアシーン
 class ClearScene : public IScene {
@@ -33,60 +35,66 @@ public://**パブリック関数**//
 private://**プライベート関数**//
 
 	/// <summary>
-	/// キル数分カウントを増やす処理
-	/// </summary>
-	void CountKill();
-
-	/// <summary>
 	/// 文字が段々浮かんでくる処理
 	/// </summary>
-	void FadeIn();
+	//void FadeIn();
 
 	/// <summary>
 	/// 画面が暗くなって行く処理
 	/// </summary>
-	void BlackOut();
+	//void BlackOut();
 
-private:
+private://**シーン関係**//
+
+	//ゲームシーン内の状態
+	enum ClearSceneBehavior {
+		Other2ThisScene,	//他シーンからここ
+		ThisScene,			//現在のシーン更新
+		This2Other,			//現在のシーンから他へ
+		CountScene
+	}scene_;
+
+	//状態リクエスト
+	std::optional<ClearSceneBehavior>sceneRequest_ = std::nullopt;
+
+	//現在の状態
+	ClearSceneBehavior sceneBehavior_ = Other2ThisScene;
+
+	//状態ごとの初期化テーブル
+	static void (ClearScene::* BehaviorInitialize[])();
+
+	//状態ごとの更新テーブル
+	static void (ClearScene::* BehaviorUpdate[])();
+
+	//シーンエントリー時の処理
+	void InitOther2This();
+	//ゲーム本編の状態
+	void InitThis();
+	//シーン離脱状態の処理
+	void InitThis2Other();
+
+	//各状態更新
+	//シーンエントリー更新
+	void UpdateOther2This();
+	//シーン更新
+	void UpdateThis();
+	//シーン離脱更新
+	void UpdateThis2Other();
+
+private://**プライベート変数**//
 	//入力関係
 	Input* input_=nullptr;
 
-	
-	//各数字
-	std::unique_ptr<Sprite>num1_;
-	std::unique_ptr<Sprite>num10_;
-	std::unique_ptr<Sprite>num100_;
-
-	std::unique_ptr<Sprite>resultText_;
+	//背景
 	std::unique_ptr<Sprite>backScreen_;
 
-	std::unique_ptr<Sprite>sceneC_;
+	//敵の討伐数をカウントするクラス
+	std::unique_ptr<CountKilledEnemies>countKilledEnemies_;
 
+	//遷移クラス
+	std::unique_ptr<Transition>transition_;
 
 private://**プライベート変数**//
-
-	//シーン転換処理をするか否か
-	bool isSceneChange_ = false;
-
-	//討伐数計算の処理が終わったか
-	bool serchComplete_ = false;
-
-	//透明度の値
-	float alphaNum_ = 0;
-
-	//目標時間
-	const float addAlphaSec_ = 2.0f;
-
-	//最大透明度
-	const float screenmaxAlphaNum_ = 0.7f;
-
-	//暗転時間
-	float blackoutSec_ = 1.0f;
-
-	//1フレームごとに計算する敵の数
-	const float frameCountEnemy_ = 1.0f;
-	//現在のカウント数
-	float currentCountEnemy_ = 0;
 
 	//スコアのデータ
 	ScoreData scoreData_;
