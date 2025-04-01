@@ -20,8 +20,8 @@ void PlayerAttackDrill::InitExecution()
 
 void PlayerAttackDrill::InitRigor()
 {
-	//音の停止
-	//player_->SetStopSound(PlayerSoundManager::Drill);
+	//アニメーションをセット
+	player_->SetAnimation(PlayerAnimationManager::WALK);
 }
 
 void PlayerAttackDrill::UpdateReserve()
@@ -48,6 +48,8 @@ void PlayerAttackDrill::UpdateExecution()
 
 void PlayerAttackDrill::UpdateRigor()
 {
+	//入力方向に向いて移動
+	SetInput2Move();
 	//条件を満たしたらおわる
 	if (currentSec_ >= nowMaxSec_) {
 		//おわる

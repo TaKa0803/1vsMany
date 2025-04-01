@@ -144,6 +144,7 @@ void GameScene::Draw() {
 
 	//遷移時の時のみ描画
 	if (scene_ != ThisScene) {
+		//遷移描画
 		transition_->Draw();
 	}
 
