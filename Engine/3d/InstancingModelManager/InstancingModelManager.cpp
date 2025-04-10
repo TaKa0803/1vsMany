@@ -124,6 +124,7 @@ bool InstancingModelManager::SerchTag(const std::string& tag) {
 	}
 	else {
 		//タグ不明
+		assert(false);
 		return false;
 	}
 }

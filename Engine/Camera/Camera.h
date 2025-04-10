@@ -119,7 +119,13 @@ public: //**ゲッター**//
 	/// カメラの視線取得
 	/// </summary>
 	/// <returns></returns>
-	const Segment GetSegment() { return segment_; }
+	const Segment& GetSegment() const{ return segment_; }
+
+	/// <summary>
+	/// モニターツリー取得
+	/// </summary>
+	/// <returns></returns>
+	GvariTree& GetDebugTree() { return tree_; }
 
 public: //**セッター**//
 
@@ -199,6 +205,6 @@ private: //**プライベート変数**//
 	//カメラの視線
 	Segment segment_;
 
-
-
+	//デバッグ用ツリー
+	GvariTree tree_;
 };

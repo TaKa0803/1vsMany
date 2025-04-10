@@ -5,6 +5,8 @@
 #include"Game/ScoreSaveManager/ScoreSaveManager.h"
 #include"Game/CountKilledEnemies/CountKilledEnemies.h"
 #include"Game/Transition/Transition.h"
+#include"Game/Effect/FallDeadEnemies/EffectFallEnemies.h"
+#include"Camera/Camera.h"
 
 //クリアシーン
 class ClearScene : public IScene {
@@ -15,7 +17,7 @@ public://**パブリック関数**//
 	/// コンストラクタ
 	/// </summary>
 	ClearScene();
-	~ClearScene();
+	~ClearScene()=default;
 
 	/// <summary>
 	/// 初期化
@@ -85,6 +87,9 @@ private://**プライベート変数**//
 	//入力関係
 	Input* input_=nullptr;
 
+	//カメラ
+	Camera* camera_ = nullptr;
+
 	//背景
 	std::unique_ptr<Sprite>backScreen_;
 
@@ -94,6 +99,9 @@ private://**プライベート変数**//
 	//遷移クラス
 	std::unique_ptr<Transition>transition_;
 
+	//敵が落ちていく演出
+	std::unique_ptr<EffectFallEnemies>fallEnemies_;
+
 private://**プライベート変数**//
 
 	//スコアのデータ
@@ -101,5 +109,4 @@ private://**プライベート変数**//
 
 	//クリアBGMの配列番号
 	int bgmClear_;
-
 };

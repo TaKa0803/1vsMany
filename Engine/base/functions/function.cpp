@@ -388,15 +388,15 @@ ModelAllData LoadModelFile(const std::string& directoryPath, const std::string& 
 		//	//各頂点回析
 		//	for (uint32_t element = 0; element < face.mNumIndices; ++element) {
 		//		uint32_t vertexIndex = face.mIndices[element];
-		//		aiVector3D& position = mesh->mVertices[vertexIndex];
+		//		aiVector3D& transform = mesh->mVertices[vertexIndex];
 		//		aiVector3D& normal = mesh->mNormals[vertexIndex];
 		//		aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
 		//		VertexData vertex;
-		//		vertex.position = { position.x,position.y,position.z,1.0f };
+		//		vertex.transform = { transform.x,transform.y,transform.z,1.0f };
 		//		vertex.normal = { normal.x,normal.y,normal.z };
 		//		vertex.texcoord = { texcoord.x,texcoord.y };
 
-		//		vertex.position.x *= -1.0f;
+		//		vertex.transform.x *= -1.0f;
 		//		vertex.normal.x *= -1.0f;
 		//		modeldata.model.vertices.push_back(vertex);
 		//	}

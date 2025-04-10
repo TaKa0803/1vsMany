@@ -33,6 +33,13 @@ public://**パブリック関数**//
 	/// </summary>
 	void Draw();
 
+private://**デバッグ値**//
+
+	/// <summary>
+	/// デバッグImGuIの表示
+	/// </summary>
+	void Debug();
+
 private://**プライベート変数**//
 
 	//シーン

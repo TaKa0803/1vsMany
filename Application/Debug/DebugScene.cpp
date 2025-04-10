@@ -103,6 +103,9 @@ void DebugScnene::Update()
 	if (input_->PushKey(DIK_SPACE)) {
 		particleManager_->SpawnE({0,0,0});
 	} 
+
+	//fallEnemies_->EmitEnemies(0);
+	//fallEnemies_->Update();
 }
 
 

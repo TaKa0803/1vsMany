@@ -23,7 +23,10 @@
   "InstancingmodelPathFile": {
     "PlayerM3": [ "Object", "player.gltf", 1000 ],
     "PlayerM4": [ "Object", "player.gltf", 1000 ],
-    
+
+    "FallEnemy": [ "Object", "player.gltf", 100000 ],
+
+
     "Wall": [ "Wall", "Wall.obj", 100 ],
 
     "Debris": [ "Wall", "Wall.obj", 100 ],

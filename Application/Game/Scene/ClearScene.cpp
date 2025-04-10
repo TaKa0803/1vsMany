@@ -5,10 +5,14 @@
 #include"DeltaTimer/DeltaTimer.h"
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
 
+
 ClearScene::ClearScene()
 {
-	//入力クラス生成
+	//入力クラス取得
 	input_ = Input::GetInstance();
+
+	//カメラクラス取得
+	camera_ = Camera::GetInstance();
 
 	//スコアセーブマネージャ生成
 	std::unique_ptr<ScoreSaveManager>scoreSaveManager = std::make_unique<ScoreSaveManager>();
@@ -29,6 +33,9 @@ ClearScene::ClearScene()
 	//トランジションクラス生成
 	transition_ = std::make_unique<Transition>();
 
+	//敵が落ちていく演出クラス生成
+	fallEnemies_ = std::make_unique<EffectFallEnemies>();
+
 	//BGMの番号取得
 	bgmClear_ = AudioManager::LoadSoundNum("clear");
 
@@ -37,20 +44,23 @@ ClearScene::ClearScene()
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("ClearScene");
 	gvg->SetTreeData(countKilledEnemies_->GetTree());
 	gvg->SetTreeData(backScreen_->GetTree("黒背景"));
-
-}
-
-ClearScene::~ClearScene()
-{
+	gvg->SetTreeData(camera_->GetDebugTree());
 }
 
 void ClearScene::Initialize()
 {
+	//カメラの初期化
+	camera_->Initialize();
+	camera_->mainCamera_.parent_ = nullptr;
+
 	//透明度を0に設定
 	backScreen_->SetColorAlpha(0);
 
 	//討伐数カウントクラス初期化
 	countKilledEnemies_->Initialize(scoreData_.kill);
+
+	//討伐敵の落下演出の初期化
+	fallEnemies_->Initialize(scoreData_.kill);
 
 	//クリアBGMの再生
 	AudioManager::PlaySoundData(bgmClear_, 0.08f);
@@ -58,6 +68,8 @@ void ClearScene::Initialize()
 
 void ClearScene::Update()
 {
+	
+
 	//リクエストが存在しているなら処理
 	if (sceneRequest_) {
 		//リクエストの値を追加
@@ -69,15 +81,26 @@ void ClearScene::Update()
 
 	//更新処理
 	((this->*BehaviorUpdate[(int)scene_])());
+
+	//カメラ更新
+	camera_->Update();
 }
 
 void ClearScene::Draw()
 {
 	//黒背景描画
-	backScreen_->Draw();
+	//backScreen_->Draw();
+
+	//敵が落ちていくエフェクトの描画
+	fallEnemies_->Draw();
+
+	//インスタンシングモデル描画
+	InstancingModelManager::GetInstance()->DrawAllModel();
 
 	//数字描画
 	countKilledEnemies_->Draw();
+
+
 
 	//遷移時の時のみ描画
 	if (scene_ != ThisScene) {
@@ -115,6 +138,12 @@ void ClearScene::UpdateThis()
 {
 	//キルカウント処理
 	countKilledEnemies_->Update();
+
+	//敵が落ちていくエフェクトの生成
+	fallEnemies_->EmitEnemies();
+
+	//敵が落ちていくエフェクトの更新
+	fallEnemies_->Update();
 
 	//カウント処理が終了かつシーン遷移フラグが立っていない場合
 	if (countKilledEnemies_->CheckComplete()) {

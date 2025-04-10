@@ -12,7 +12,7 @@ public://**パブリック関数**//
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="position">出現位置</param>
+	/// <param name="transform">出現位置</param>
 	/// <param name="playerWorld">プレイヤーワールドポインタ</param>
 	/// <param name="param">パラメータ</param>
 	Enemy(const Vector3 position, const EulerWorldTransform* playerWorld, const EnemyParameters& param);

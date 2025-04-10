@@ -1,6 +1,6 @@
 #include"SceneManager/SceneManager.h"
 #include"GlobalVariable/Manager/GlobalVaribleManager.h"
-#include"GlobalVariable/Group/GlobalVariableGroup.h"
+#include"ImGuiManager/ImGuiManager.h"
 
 #include"SceneFactory/SceneFactory.h"
 
@@ -18,6 +18,9 @@ void SceneManager::Initialize()
 
 void SceneManager::Update()
 {
+	//デバッグウィンドウ処理
+	Debug();
+
 	//シーンチェック
 	prevSceneNo_ = currentSceneNo_;
 	currentSceneNo_ = static_cast<int>(IScene::GetSceneNo());
@@ -28,11 +31,6 @@ void SceneManager::Update()
 		//変更していたら		
 		//過去のデバッグデータをクリア
 		GlobalVariableManager::GetInstance()->ClearSetData();
-
-		//デバッグ用の値セット
-		std::unique_ptr<GlobalVariableGroup>gvg = std::make_unique<GlobalVariableGroup>("SceneManager");
-		gvg->SetValue("シーン番号", &IScene::GetSceneNo());
-		gvg->SetMonitorValue("シーン名", &scenename_);
 
 		//シーンを読み込み
 		scene_ = SceneFactory::CreateScene((SCENE)currentSceneNo_);
@@ -55,6 +53,18 @@ void SceneManager::Draw()
 {	
 	//描画処理
 	scene_->Draw();
+}
+
+void SceneManager::Debug()
+{
+#ifdef _DEBUG
+	ImGui::Begin("シーンマネージャー");
+	ImGui::SliderInt("シーン番号", &IScene::GetSceneNo(),0,(int)SCENE::SceneCount-1);
+	ImGui::Text("シーン名 : %s", scenename_.c_str());
+	ImGui::Text("フレームレート : %4.1f", ImGui::GetIO().Framerate);
+	ImGui::End();
+#endif // _DEBUG
+
 }
 
 

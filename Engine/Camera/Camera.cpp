@@ -41,6 +41,16 @@ void Camera::Initialize() {
 	projection_ = MakePerspectiveFovMatrix(0.45f, (float)WindowApp::kClientWidth / (float)WindowApp::kClientHeight, 0.1f, FarZ);
 	//ビュープロジェクション行列生成
 	viewProjection_ = view_ * projection_;
+
+	//ツリー作成
+	tree_.name_ = "カメラ";
+	tree_.SetValue("カメラのZの値", &farFeaturedPos_);
+	tree_.SetValue("カメラ位置", &mainCamera_.translate_);
+	tree_.SetValue("カメラ回転", &mainCamera_.rotate_);
+	tree_.SetValue("カメラ注目点", &CameraMotionSupport_.translate_);
+	tree_.SetValue("カメラ注目点の回転", &CameraMotionSupport_.rotate_);
+
+
 }
 
 void Camera::Update() {
