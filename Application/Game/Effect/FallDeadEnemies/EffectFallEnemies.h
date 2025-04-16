@@ -1,5 +1,6 @@
 #pragma once
 #include"InstancingModelManager/InstancingModelManager.h"
+#include"Game/Effect/FallDeadEnemies/FallEnemy/FallEnemy.h"
 #include<list>
 
 //敵が落ちまくるエフェクト
@@ -50,17 +51,8 @@ private://**プライベート変数**//
 	//生成間隔
 	float spawnSec_ = 0.0f;
 
-	struct Parameters {
-	
-		EulerWorldTransform transform = { 0,0,0 };	//位置
-		Vector3 velocity = { 0,-1.0f,0 };	//移動速度
-		Vector3 rotate = { 0,0,0 };	//回転速度
-		float deadSec = 0;	//死亡カウント
-		bool isDead = false;	//死亡フラグ
-	};
-
 	//座標群
-	std::list<std::unique_ptr<Parameters>> enemies_;
+	std::list<std::unique_ptr<FallEnemy>> enemies_;
 
 private://**パラメータ変数**//
 
@@ -73,6 +65,9 @@ private://**パラメータ変数**//
 	//最小最大移動速度
 	Vector2 speeds_ = { 0.01f,0.1f };
 
+	//最小最大落下速度
+	Vector2 fallSpeeds_ = { 0.1f,1.0f };
+
 	//最大回転速度
 	float rotateSpeed_ = 0.1f;
 
@@ -84,4 +79,16 @@ private://**パラメータ変数**//
 
 	//同時生成数
 	int spawnNum_ = 1;
+
+	//最小最大反発力
+	Vector2 repulsion_ = { 0.1f,0.8f };
+
+	//反発高度
+	float repulsionHeight_ = 0.1f;
+
+
+private://**デバッグ用
+
+	//敵を全削除
+	bool clearEnemy_ = false;
 };
