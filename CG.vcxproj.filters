@@ -412,6 +412,7 @@
     <ClCompile Include="Application\Game\Effect\FallDeadEnemies\EffectFallEnemies.cpp" />
     <ClCompile Include="Application\Game\CountKilledEnemies\CountKilledEnemies.cpp" />
     <ClCompile Include="Application\Game\Effect\FallDeadEnemies\FallEnemy\FallEnemy.cpp" />
+    <ClCompile Include="Application\Game\TitleUis\TitleUIs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -759,6 +760,7 @@
     <ClInclude Include="Application\Game\Effect\FallDeadEnemies\EffectFallEnemies.h" />
     <ClInclude Include="Application\Game\CountKilledEnemies\CountKilledEnemies.h" />
     <ClInclude Include="Application\Game\Effect\FallDeadEnemies\FallEnemy\FallEnemy.h" />
+    <ClInclude Include="Application\Game\TitleUis\TitleUIs.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">

@@ -143,6 +143,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Game\Scene\TitleScene.cpp" />
     <ClCompile Include="Application\Game\Scene\ClearScene.cpp" />
     <ClCompile Include="Application\Game\ScoreSaveManager\ScoreSaveManager.cpp" />
+    <ClCompile Include="Application\Game\TitleUis\TitleUIs.cpp" />
     <ClCompile Include="Application\Game\Transition\Transition.cpp" />
     <ClCompile Include="Application\SceneManager\SceneManager.cpp" />
     <ClCompile Include="Application\IScene\IScene.cpp" />
@@ -425,6 +426,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Game\Scene\TitleScene.h" />
     <ClInclude Include="Application\Game\Scene\ClearScene.h" />
     <ClInclude Include="Application\Game\ScoreSaveManager\ScoreSaveManager.h" />
+    <ClInclude Include="Application\Game\TitleUis\TitleUIs.h" />
     <ClInclude Include="Application\Game\Transition\Transition.h" />
     <ClInclude Include="Application\IScene\IScene.h" />
     <ClInclude Include="Application\SceneFactory\SceneFactory.h" />
