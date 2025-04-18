@@ -34,6 +34,8 @@ void CountKilledEnemies::Initialize(int killNum)
 
 	//カウント終了フラグをリセット
 	isSerchComplete_ = false;
+
+	SetUV(0);
 }
 
 void CountKilledEnemies::Update()
