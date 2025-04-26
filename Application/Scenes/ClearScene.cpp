@@ -39,7 +39,6 @@ ClearScene::ClearScene()
 	//BGMの番号取得
 	bgmClear_ = AudioManager::LoadSoundNum("clear");
 
-
 	//デバッグの値セット
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("ClearScene");
 	gvg->SetTreeData(countKilledEnemies_->GetTree());

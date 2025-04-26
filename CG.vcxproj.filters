@@ -349,10 +349,10 @@
     <ClCompile Include="Application\Game\FollowCamera\FollowCamera.cpp">
       <Filter>Application\Game\FollowCamera</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\Scene\ClearScene.cpp">
+    <ClCompile Include="Application\Scenes\ClearScene.cpp">
       <Filter>Application\Game\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\Scene\GameScene.cpp">
+    <ClCompile Include="Application\Scenes\GameScene.cpp">
       <Filter>Application\Game\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Application\Game\Effect\Impact\Impact.cpp">
@@ -403,7 +403,7 @@
     <ClCompile Include="Application\Game\ScoreSaveManager\ScoreSaveManager.cpp">
       <Filter>Application\Game\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\Scene\TitleScene.cpp">
+    <ClCompile Include="Application\Scenes\TitleScene.cpp">
       <Filter>Application\Game\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Application\Game\Transition\Transition.cpp">
@@ -412,7 +412,8 @@
     <ClCompile Include="Application\Game\Effect\FallDeadEnemies\EffectFallEnemies.cpp" />
     <ClCompile Include="Application\Game\CountKilledEnemies\CountKilledEnemies.cpp" />
     <ClCompile Include="Application\Game\Effect\FallDeadEnemies\FallEnemy\FallEnemy.cpp" />
-    <ClCompile Include="Application\Game\TitleUis\TitleUIs.cpp" />
+    <ClCompile Include="Application\Title\TitleUis\TitleUIs.cpp" />
+    <ClCompile Include="Application\Title\JumpEnemy\JumpEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -694,10 +695,10 @@
     <ClInclude Include="Application\Game\FollowCamera\FollowCamera.h">
       <Filter>Application\Game\FollowCamera</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Game\Scene\ClearScene.h">
+    <ClInclude Include="Application\Scenes\ClearScene.h">
       <Filter>Application\Game\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Game\Scene\GameScene.h">
+    <ClInclude Include="Application\Scenes\GameScene.h">
       <Filter>Application\Game\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Application\Game\Effect\Impact\Impact.h">
@@ -751,7 +752,7 @@
     <ClInclude Include="Application\Game\ScoreSaveManager\ScoreSaveManager.h">
       <Filter>Application\Game\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Game\Scene\TitleScene.h">
+    <ClInclude Include="Application\Scenes\TitleScene.h">
       <Filter>Application\Game\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Application\Game\Transition\Transition.h">
@@ -760,7 +761,8 @@
     <ClInclude Include="Application\Game\Effect\FallDeadEnemies\EffectFallEnemies.h" />
     <ClInclude Include="Application\Game\CountKilledEnemies\CountKilledEnemies.h" />
     <ClInclude Include="Application\Game\Effect\FallDeadEnemies\FallEnemy\FallEnemy.h" />
-    <ClInclude Include="Application\Game\TitleUis\TitleUIs.h" />
+    <ClInclude Include="Application\Title\TitleUis\TitleUIs.h" />
+    <ClInclude Include="Application\Title\JumpEnemy\JumpEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">

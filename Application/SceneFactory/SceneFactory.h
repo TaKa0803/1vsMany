@@ -3,14 +3,12 @@
 
 #pragma region 各シーンクラス
 #include"Debug/DebugScene.h"
-#include"Game/Scene/TitleScene.h"
-#include"Game/Scene/GameScene.h"
-#include"Game/Scene/ClearScene.h"
+#include"Scenes/TitleScene.h"
+#include"Scenes/GameScene.h"
+#include"Scenes/ClearScene.h"
 #pragma endregion
 
 #include<iostream>
-
-//**現在未使用。エンジンの調整後利用する。
 
 //番号に合ったシーンの生成処理
 class SceneFactory {
