@@ -24,10 +24,10 @@ EnemyManager::EnemyManager(const EulerWorldTransform& playerWorld)
 	num100_.reset(Sprite::Create(texture, { 640,90 }, { 64,90 }, { 90,90 }, { 540,90 }));
 
 	textBaseWorld_.translate_ = { 640,360 };
+	textBaseWorld_.UpdateMatrix();
 	num1_->SetParent(textBaseWorld_);
 	num10_->SetParent(textBaseWorld_);
 	num100_->SetParent(textBaseWorld_);
-
 
 
 	//デバッグ用に値を追加
@@ -55,8 +55,10 @@ EnemyManager::EnemyManager(const EulerWorldTransform& playerWorld)
 
 void EnemyManager::Init()
 {
-	//アニメーション関係のパラメータをセット
-	parameterManager_->SetAnimationParameter();
+	//行列更新
+	textBaseWorld_.UpdateMatrix();
+	//数字のUVを設定
+	SetTxetureUV();
 }
 
 void EnemyManager::Update()

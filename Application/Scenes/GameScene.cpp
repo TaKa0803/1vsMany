@@ -63,7 +63,7 @@ void GameScene::Initialize() {
 	player_->Initialize();
 
 	//出現マネージャの初期化
-	//enemyManager_->Initialize();
+	enemyManager_->Init();
 
 	//全ての音を止める
 	AudioManager::GetInstance()->StopAllSounds();

@@ -11,11 +11,11 @@ CountTimer::CountTimer()
 	num10_.reset(Sprite::Create(texture, { 640,90 }, { 64,90 }, { 90,90 }, { 610,90 }));
 
 
-	num1_->SetPosition({ 680,90 });
+	/*num1_->SetPosition({ 680,90 });
 	num1_->SetScale({ 90,90 });
 
 	num10_->SetPosition({ 610,90 });
-	num10_->SetScale({ 90,90 });
+	num10_->SetScale({ 90,90 });*/
 
 	currentCount_ += param_.maxCount;
 

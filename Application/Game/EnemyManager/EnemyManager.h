@@ -70,7 +70,7 @@ private://**プライベート関数**//
 
 private://**プライベート変数**//
 
-	//敵のステータス管理マネージャ(現在は未使用)
+	//敵のステータス管理マネージャ
 	std::unique_ptr<EnemyParameterManager>parameterManager_;
 	
 	//出現マネージャ
