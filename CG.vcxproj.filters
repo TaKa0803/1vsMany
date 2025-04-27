@@ -409,9 +409,9 @@
     <ClCompile Include="Application\Game\Transition\Transition.cpp">
       <Filter>Application\Game\Transition</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Game\Effect\FallDeadEnemies\EffectFallEnemies.cpp" />
-    <ClCompile Include="Application\Game\CountKilledEnemies\CountKilledEnemies.cpp" />
-    <ClCompile Include="Application\Game\Effect\FallDeadEnemies\FallEnemy\FallEnemy.cpp" />
+    <ClCompile Include="Application\Clear\FallDeadEnemies\EffectFallEnemies.cpp" />
+    <ClCompile Include="Application\Clear\CountKilledEnemies\CountKilledEnemies.cpp" />
+    <ClCompile Include="Application\Clear\FallDeadEnemies\FallEnemy\FallEnemy.cpp" />
     <ClCompile Include="Application\Title\TitleUis\TitleUIs.cpp" />
     <ClCompile Include="Application\Title\JumpEnemy\JumpEnemy.cpp" />
   </ItemGroup>
@@ -758,9 +758,9 @@
     <ClInclude Include="Application\Game\Transition\Transition.h">
       <Filter>Application\Game\Transition</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Game\Effect\FallDeadEnemies\EffectFallEnemies.h" />
-    <ClInclude Include="Application\Game\CountKilledEnemies\CountKilledEnemies.h" />
-    <ClInclude Include="Application\Game\Effect\FallDeadEnemies\FallEnemy\FallEnemy.h" />
+    <ClInclude Include="Application\Clear\FallDeadEnemies\EffectFallEnemies.h" />
+    <ClInclude Include="Application\Clear\CountKilledEnemies\CountKilledEnemies.h" />
+    <ClInclude Include="Application\Clear\FallDeadEnemies\FallEnemy\FallEnemy.h" />
     <ClInclude Include="Application\Title\TitleUis\TitleUIs.h" />
     <ClInclude Include="Application\Title\JumpEnemy\JumpEnemy.h" />
   </ItemGroup>

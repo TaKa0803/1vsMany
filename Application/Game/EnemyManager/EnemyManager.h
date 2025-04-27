@@ -2,8 +2,9 @@
 #include"Game/EnemyManager/Enemy/Enemy.h"
 #include"Game/EnemyManager/SpawnManager/EnemySpawnManager.h"
 #include"Game/EnemyManager/ParameterManager/EnemyParameterManager.h"
-
+#include"Sprite/Sprite.h"
 #include"Game/BrokenBody/BrokenBody.h"
+#include<memory>
 
 //敵データの総合管理クラス
 class EnemyManager {
@@ -32,6 +33,11 @@ public://**パブリック関数**//
 	void Draw();
 
 	/// <summary>
+	/// UIの描画
+	/// </summary>
+	void DrawUI();
+
+	/// <summary>
 	/// 敵の当たり判定処理
 	/// </summary>
 	/// <param name="collider">プレイヤーコライダー</param>
@@ -57,6 +63,11 @@ private://**プライベート関数**//
 	/// </summary>
 	void UpdateEnemies();
 
+	/// <summary>
+	/// 数字スプライトのUVを設定
+	/// </summary>
+	void SetTxetureUV();
+
 private://**プライベート変数**//
 
 	//敵のステータス管理マネージャ(現在は未使用)
@@ -70,6 +81,13 @@ private://**プライベート変数**//
 
 	//敵のデータ群
 	std::list<std::unique_ptr<Enemy>>enemies_;
+
+	EulerWorldTransform textBaseWorld_;
+
+	//各数字
+	std::unique_ptr<Sprite>num1_;
+	std::unique_ptr<Sprite>num10_;
+	std::unique_ptr<Sprite>num100_;
 
 private://**パラメータ変数**//
 

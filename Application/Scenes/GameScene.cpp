@@ -94,6 +94,7 @@ void GameScene::Update() {
 	//更新処理
 	((this->*BehaviorUpdate[(int)scene_])());
 
+	
 	//モデル更新
 	countTimer_->SpriteUpdate();
 	player_->ObjectUpdate();
@@ -131,6 +132,8 @@ void GameScene::Draw() {
 	if (Count >= 200) {
 		PostEffectManager::GetInstance()->PostEffectDraw(PostEffectManager::kRadialBlur, true);
 	}
+
+
 
 	//シーン変更前
 	if (isSceneChange_) {
@@ -207,6 +210,9 @@ void GameScene::UIDraw() {
 
 	//プレイヤーUIの描画
 	player_->DrawUI();
+
+	//キルカウント描画
+	enemyManager_->DrawUI();
 }
 
 void GameScene::InitOther2This()

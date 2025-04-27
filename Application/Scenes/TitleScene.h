@@ -1,7 +1,7 @@
 #pragma once
 #include "IScene/IScene.h"
 #include"Input/Input.h"
-#include"Game/TitleUis/TitleUIs.h"
+#include"Title/TitleUis/TitleUIs.h"
 
 class TitleScene : public IScene {
 

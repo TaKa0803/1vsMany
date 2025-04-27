@@ -3,9 +3,9 @@
 #include"Input/Input.h"
 #include"Sprite/Sprite.h"
 #include"Game/ScoreSaveManager/ScoreSaveManager.h"
-#include"Game/CountKilledEnemies/CountKilledEnemies.h"
+#include"Clear/CountKilledEnemies/CountKilledEnemies.h"
 #include"Game/Transition/Transition.h"
-#include"Game/Effect/FallDeadEnemies/EffectFallEnemies.h"
+#include"Clear/FallDeadEnemies/EffectFallEnemies.h"
 #include"Camera/Camera.h"
 
 //クリアシーン

@@ -59,7 +59,7 @@ Player::Player() {
 	gvg->SetTreeData(behaviors_[(size_t)State::Move]->tree_);
 	gvg->SetTreeData(behaviors_[(size_t)State::ATK]->tree_);
 	gvg->SetTreeData(soundManager_->GetTree());
-
+	gvg->SetTreeData(collider_->GetDebugTree());
 }
 
 

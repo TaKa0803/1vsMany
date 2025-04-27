@@ -1,6 +1,6 @@
 #pragma once
 #include"InstancingModelManager/InstancingModelManager.h"
-#include"Game/Effect/FallDeadEnemies/FallEnemy/FallEnemy.h"
+#include"Clear/FallDeadEnemies/FallEnemy/FallEnemy.h"
 #include<list>
 
 //敵が落ちまくるエフェクト
