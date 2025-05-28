@@ -22,11 +22,25 @@ public://**パブリック関数**//
 	/// </summary>
 	void Draw();
 
-private:
+private://**プライベート変数**//
 
 	//敵の数
 	int enemyNum_ = 3;
 
+	//時間
+	float sec_ = 0;
+
 	//ジャンプする敵の配列
 	std::vector<std::unique_ptr<JumpEnemy>> jumpEnemies_;
+
+private://**パラメータ変数**//
+
+	//ジャンプする敵のデータ
+	JumpEnemyData jumpEnemyData_;
+
+	//ジャンプする動きの間隔
+	float jumpWaitSec_ = 1.0f;
+
+	//ジャンプ処理を行うかどうか
+	bool isJump_ = true;
 };
