@@ -36,7 +36,7 @@ void EffectImpact::Update()
 void EffectImpact::Draw()
 {
 
-	//InstancingGameObject::Draw();
+	//InstancingGameObject::DrawBack();
 	for (auto& data : datas_) {
 		IMM_->SetData(tag_, data->pos);
 	}

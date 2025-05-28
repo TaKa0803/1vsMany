@@ -3,6 +3,7 @@
 #include"AudioManager/AudioManager.h"
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
 #include"PostEffect/PostEffectManager/PostEffectManager.h"
+#include"Camera/Camera.h"
 
 TitleScene::TitleScene() {
 
@@ -11,6 +12,9 @@ TitleScene::TitleScene() {
 
 	//UIのインスタンス生成
 	uis_ = std::make_unique<TitleUIs>(select_);
+
+	//ジャンプ敵の生成
+	jumpEnemyManager_ = std::make_unique<JumpEnemyManager>();
 
 	//遷移テクスチャ
 	int texture = TextureManager::LoadTex(white);
@@ -39,13 +43,17 @@ void TitleScene::Initialize() {
 
 	AudioManager::GetInstance()->StopAllSounds();
 	AudioManager::PlaySoundData(titleSound_, 0.08f);
+
+	Camera::GetInstance()->Initialize();
+	
 }
 
 void TitleScene::Update() {
 
+	//カメラ更新
+	Camera::GetInstance()->Update();
 
-	Debug();
-
+	//入力更新
 	if (!isSceneChange_) {
 		float stickX = input_->GetjoyStickL().x;
 
@@ -57,55 +65,54 @@ void TitleScene::Update() {
 		}
 	}
 
+	//ジャンプしている敵の更新
+	jumpEnemyManager_->Update();
+
+	//UIの更新
 	uis_->Update();
 
+	//シーン変更処理
 	SceneChange();
 
 }
 
 void TitleScene::Draw() {
 
-	uis_->Draw();
+	//背景描画
+	uis_->DrawBack();
 
+	//ジャンプする敵の描画
+	jumpEnemyManager_->Draw();
+
+	//Instancingモデル描画
+	InstancingModelManager::GetInstance()->DrawAllModel();
+
+	//UI描画
+	uis_->DrawUI();
+
+	//遷移画像描画
 	sceneC_->Draw();
 
+	//ポストエフェクトの描画
 	PostEffectManager::GetInstance()->PostEffectDraw(PostEffectManager::kLightOutline, true);
-
-
-}
-
-void TitleScene::Debug() {
-
-	//Vector3 pos = pressSp_->GetPosition();
-	//Vector3 scale = pressSp_->GetScale();
-
-//#ifdef _DEBUG
-//	ImGui::Begin("sprite");
-//	ImGui::DragFloat3("pos", &pos.x);
-//	ImGui::DragFloat3("scale", &scale.x);
-//	ImGui::End();
-//#endif // _DEBUG
-//
-//	pressSp_->SetPosition(pos);
-//	pressSp_->SetScale(scale);
-
 }
 
 void TitleScene::SceneChange()
 {
+	//入力で遷移開始
 	if (input_->TriggerKey(DIK_SPACE)) {
 		isSceneChange_ = true;
 	}
-
+	//コントローラー入力で遷移開始
 	if (input_->IsControllerActive() && input_->IsTriggerButton(kButtonB)) {
 		isSceneChange_ = true;
 	}
-
+	//入力でゲーム終了
 	if (input_->TriggerKey(DIK_ESCAPE)) {
 		leaveGame = true;
 	}
 
-
+	//遷移処理
 	if (isSceneChange_) {
 
 		//シーン変更時選択物

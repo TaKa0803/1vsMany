@@ -143,6 +143,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Scenes\TitleScene.cpp" />
     <ClCompile Include="Application\Scenes\ClearScene.cpp" />
     <ClCompile Include="Application\Game\ScoreSaveManager\ScoreSaveManager.cpp" />
+    <ClCompile Include="Application\Title\JumpEnemyManager\JumpEnemyManager.cpp" />
     <ClCompile Include="Application\Title\JumpEnemy\JumpEnemy.cpp" />
     <ClCompile Include="Application\Title\TitleUis\TitleUIs.cpp" />
     <ClCompile Include="Application\Game\Transition\Transition.cpp" />
@@ -427,6 +428,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Scenes\TitleScene.h" />
     <ClInclude Include="Application\Scenes\ClearScene.h" />
     <ClInclude Include="Application\Game\ScoreSaveManager\ScoreSaveManager.h" />
+    <ClInclude Include="Application\Title\JumpEnemyManager\JumpEnemyManager.h" />
     <ClInclude Include="Application\Title\JumpEnemy\JumpEnemy.h" />
     <ClInclude Include="Application\Title\TitleUis\TitleUIs.h" />
     <ClInclude Include="Application\Game\Transition\Transition.h" />
@@ -526,7 +528,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <None Include="resources\GlobalVariables\StageWall.json" />
     <None Include="resources\jsonfile\enemyPopData.json" />
-    <None Include="resources\jsonfile\PlayerATKData.json" />
     <None Include="resources\jsonfile\resourcePath.json" />
     <None Include="resources\jsonfile\modelPathFile.json" />
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli" />

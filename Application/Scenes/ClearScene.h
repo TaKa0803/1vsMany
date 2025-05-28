@@ -36,15 +36,7 @@ public://**パブリック関数**//
 
 private://**プライベート関数**//
 
-	/// <summary>
-	/// 文字が段々浮かんでくる処理
-	/// </summary>
-	//void FadeIn();
 
-	/// <summary>
-	/// 画面が暗くなって行く処理
-	/// </summary>
-	//void BlackOut();
 
 private://**シーン関係**//
 

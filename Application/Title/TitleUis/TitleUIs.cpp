@@ -86,10 +86,13 @@ void TitleUIs::Update()
 
 }
 
-void TitleUIs::Draw()
+void TitleUIs::DrawBack()
 {
 	titleText_->Draw();
+}
 
+void TitleUIs::DrawUI()
+{
 	//ウィンドウタブ描画
 	windowTab_->Draw();
 

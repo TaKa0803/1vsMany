@@ -26,7 +26,7 @@ void Camera::Initialize() {
 	FeaturedWorldTransform_ = nullptr;
 
 	//ポイントカメラの回転の設定
-	CameraMotionSupport_.rotate_ = { 0.6f,0.0f,0.0f };
+	CameraMotionSupport_.rotate_ = { 0.0f,0.0f,0.0f };
 
 	//親子関係の処理
 	mainCamera_.parent_ = (&CameraMotionSupport_);

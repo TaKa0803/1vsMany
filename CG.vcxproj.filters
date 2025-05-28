@@ -414,6 +414,7 @@
     <ClCompile Include="Application\Clear\FallDeadEnemies\FallEnemy\FallEnemy.cpp" />
     <ClCompile Include="Application\Title\TitleUis\TitleUIs.cpp" />
     <ClCompile Include="Application\Title\JumpEnemy\JumpEnemy.cpp" />
+    <ClCompile Include="Application\Title\JumpEnemyManager\JumpEnemyManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -763,6 +764,7 @@
     <ClInclude Include="Application\Clear\FallDeadEnemies\FallEnemy\FallEnemy.h" />
     <ClInclude Include="Application\Title\TitleUis\TitleUIs.h" />
     <ClInclude Include="Application\Title\JumpEnemy\JumpEnemy.h" />
+    <ClInclude Include="Application\Title\JumpEnemyManager\JumpEnemyManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">
@@ -793,9 +795,6 @@
       <Filter>resources\json</Filter>
     </None>
     <None Include="resources\jsonfile\enemyPopData.json">
-      <Filter>resources\json</Filter>
-    </None>
-    <None Include="resources\jsonfile\PlayerATKData.json">
       <Filter>resources\json</Filter>
     </None>
   </ItemGroup>

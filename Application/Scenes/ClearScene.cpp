@@ -67,8 +67,6 @@ void ClearScene::Initialize()
 
 void ClearScene::Update()
 {
-	
-
 	//リクエストが存在しているなら処理
 	if (sceneRequest_) {
 		//リクエストの値を追加
@@ -88,7 +86,7 @@ void ClearScene::Update()
 void ClearScene::Draw()
 {
 	//黒背景描画
-	//backScreen_->Draw();
+	//backScreen_->DrawBack();
 
 	//敵が落ちていくエフェクトの描画
 	fallEnemies_->Draw();

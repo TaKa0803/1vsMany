@@ -114,7 +114,7 @@ void Enemy::Draw() {
 	circleShadow->Draw();
 
 	//コライダーは当たり判定に違和感があった時だけ描画
-	//collider_->Draw();
+	//collider_->DrawBack();
 }
 
 

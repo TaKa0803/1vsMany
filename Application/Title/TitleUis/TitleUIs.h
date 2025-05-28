@@ -22,7 +22,12 @@ public://**パブリック関数**//
 	//更新
 	void Update();
 	//描画
-	void Draw();
+	void DrawBack();
+
+	/// <summary>
+	/// UIの描画
+	/// </summary>
+	void DrawUI();
 
 	/// <summary>
 	/// デバッグツリー取得

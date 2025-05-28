@@ -24,6 +24,7 @@
     "PlayerM3": [ "Object", "player.gltf", 1000 ],
     "PlayerM4": [ "Object", "player.gltf", 1000 ],
 
+    "TitleEnemy": [ "Object", "player.gltf", 1000 ],
     "FallEnemy": [ "FallEnemy", "fallEnemy.gltf", 100000 ],
 
 

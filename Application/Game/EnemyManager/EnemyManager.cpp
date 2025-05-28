@@ -23,7 +23,6 @@ EnemyManager::EnemyManager(const EulerWorldTransform& playerWorld)
 	num10_.reset(Sprite::Create(texture, { 640,90 }, { 64,90 }, { 90,90 }, { 540,90 }));
 	num100_.reset(Sprite::Create(texture, { 640,90 }, { 64,90 }, { 90,90 }, { 540,90 }));
 
-	textBaseWorld_.translate_ = { 640,360 };
 	textBaseWorld_.UpdateMatrix();
 	num1_->SetParent(textBaseWorld_);
 	num10_->SetParent(textBaseWorld_);

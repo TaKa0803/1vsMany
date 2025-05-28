@@ -159,7 +159,6 @@ void Sprite::Initialize(int texture,
 void Sprite::Draw(int texture) {
 
 	//PSO
-	//仮で変更、後で修正するように
 	SpriteManager::PreDraw();
 
 	//uv更新
