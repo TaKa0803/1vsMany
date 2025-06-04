@@ -40,17 +40,24 @@ private://**プライベート変数**//
 
 	const TitleSelect2Input* select_;
 	
+	//タイトル背景
 	std::unique_ptr<Sprite> titleText_;
 
+	//スタートのアイコン
 	std::unique_ptr<Sprite>startIcon_;
 
+	//終了のアイコン
 	std::unique_ptr<Sprite>dengenIcon_;
 
+	//ウィンドウスプライト
 	std::unique_ptr<Sprite>windowTab_;
 
+	//選択スプライト
 	std::unique_ptr<Sprite>selectWindow_;
 
+	//はじめる文字スプライト
 	std::unique_ptr<Sprite>text_hajimeru_;
+	//おわる文字スプライト
 	std::unique_ptr<Sprite>text_owaru_;
 
 
@@ -66,6 +73,4 @@ private://**デバッグ用**//
 
 	//デバッグ用ツリー
 	GvariTree tree_;
-
-
 };

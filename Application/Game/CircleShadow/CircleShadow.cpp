@@ -3,7 +3,7 @@
 CircleShadow::CircleShadow(const EulerWorldTransform& world)
 {
 	//初期化
-	Initialize("DZone");
+	Initialize("SircleShadow");
 	//親ワールドを設定
 	parents_ = &world;
 	//色を黒色に設定

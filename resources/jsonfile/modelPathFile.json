@@ -1,55 +1,20 @@
 {
   "modelPathFile": {
-    "Boss": [ "boss", "boss.gltf" ],
-    "human": [ "human", "player.gltf" ],
-
-    "box": [ "ALPlayer", "ALPlayer.obj" ],
-    "wall": [ "Stage", "Stage.obj" ],
-    "ALPlayer": [ "ALPlayer", "ALPlayer.obj" ],
-    "plane": [ "plane", "plane.obj" ],
-    "player": [ "player", "player.obj" ],
+    "z+Plane": [ "SystemResources/normalZ+Plane", "normalZ+Plane.obj" ],
     "sphere": [ "SystemResources/sphere", "sphere.obj" ],
     "terrain": [ "terrain", "terrain.obj" ],
-    "AnimeCube": [ "AnimatedCube", "AnimatedCube.gltf" ],
-    "sWalk": [ "walk", "sneakWalk.gltf" ],
-    "walk": [ "walk", "walk.gltf" ],
-    "flag": [ "moveflag", "flag.gltf" ],
-    "Flag": [ "Flag", "Flag.obj" ],
-    "Wall": [ "Wall", "Wall.obj" ],
     "Player": [ "Object", "player.gltf" ],
-
-    "z+Plane": [ "SystemResources/normalZ+Plane", "normalZ+Plane.obj" ]
+    "plane": [ "plane", "plane.obj" ]
   },
   "InstancingmodelPathFile": {
-    "PlayerM3": [ "Object", "player.gltf", 1000 ],
-    "PlayerM4": [ "Object", "player.gltf", 1000 ],
-
+    "EnemyWait": [ "Object", "player.gltf", 1000 ],
+    "EnemyMove": [ "Object", "player.gltf", 1000 ],
     "TitleEnemy": [ "Object", "player.gltf", 1000 ],
-    "FallEnemy": [ "FallEnemy", "fallEnemy.gltf", 100000 ],
-
-
-    "Wall": [ "Wall", "Wall.obj", 100 ],
-
-    "Debris": [ "Wall", "Wall.obj", 100 ],
-    "smallDebris": [ "Wall", "Wall.obj", 1000 ],
-    "BossBullet": [ "Wall", "Wall.obj", 100 ],
-    "weapon": [ "Weapon", "Weapon.obj", 64 ],
-    "wall": [ "Stage", "Stage.obj", 5 ],
-
+    "FallEnemy": [ "FallEnemy", "fallEnemy.gltf", 10000 ],
+    "Impact": [ "Impact", "Impact.obj", 100 ],
+    "EBox": [ "Particle/EBox", "EBox.obj", 50000 ],
     "sphere": [ "SystemResources/sphere", "sphere.obj", 10000 ],
     "z+Plane": [ "SystemResources/normalZ+Plane", "normalZ+Plane.obj", 1000 ],
-    "plane": [ "plane", "plane.obj", 10 ],
-
-    "box": [ "ALPlayer", "ALPlayer.obj", 1000 ],
-
-    "player": [ "player", "player.obj", 100 ],
-
-    "Flag": [ "Object/Flag", "Flag.obj", 10 ],
-    "EBox": [ "Particle/EBox", "EBox.obj", 50000 ],
-    "SkyDome": [ "Skydome", "Skydome.obj", 5 ],
-    "Impact": [ "Impact", "Impact.obj", 100 ],
-    "DZone": [ "dangerSphere", "dangerSphere.obj", 1000 ],
-    "AnimeCube": [ "AnimatedCube", "AnimatedCube.gltf", 50000 ],
-    "sWalk": [ "walk", "sneakWalk.gltf", 1000 ]
+    "SircleShadow": [ "SircleShadow", "dangerZone.obj",1000 ]
   }
 }

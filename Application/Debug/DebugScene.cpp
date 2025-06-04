@@ -43,9 +43,8 @@ void DebugScnene::Initialize()
 	//動きチェック用で複数のモデルタグの初期化パターンをコメントとして残す
 	//object->Initialize("AnimeCube");
 	//object->Initialize("sphere");
-	//object->Initialize("walk");
 	object->Initialize("Player");
-	//object->Initialize("Boss");
+
 
 	//山初期化
 	terrain->Initialize("terrain");

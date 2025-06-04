@@ -106,9 +106,9 @@ private://**プライベート変数**//
 	std::unique_ptr<CircleShadow>circleShadow;
 
 	//待機状態animationモデルタグ
-	std::string waitAnimationTag_ = "PlayerM3";
+	std::string waitAnimationTag_ = "EnemyWait";
 	//移動状態アニメーションモデルタグ
-	std::string moveAnimationTag_ = "PlayerM4";
+	std::string moveAnimationTag_ = "EnemyMove";
 
 	//移動速度
 	Vector3 velocity_{};

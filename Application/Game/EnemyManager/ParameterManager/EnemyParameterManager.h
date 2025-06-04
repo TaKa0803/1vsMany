@@ -68,8 +68,8 @@ private://**プライベート変数**//
 	float moveAnimationMultiplySpeed = 5.0f;
 
 	//移動用インスタンシングモデルtag
-	std::string stayAnimationModelTag_ = "PlayerM3";
+	std::string stayAnimationModelTag_ = "EnemyWait";
 	//停止用インスタンシングモデルtag
-	std::string moveAnimationModelTag_ = "PlayerM4";
+	std::string moveAnimationModelTag_ = "EnemyMove";
 
 };
