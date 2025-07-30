@@ -76,9 +76,6 @@ void DebugScnene::Update()
 	//デバッグ処理
 	Debug();
 
-	//パーティクルデバッグ
-	particleManager_->Debug("particle");
-
 	//移動入力取得
 	Vector3 move = input_->GetAllArrowKey();
 	move.y = input_->GetWASD().z;

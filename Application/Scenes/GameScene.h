@@ -77,7 +77,7 @@ private://**遷移処理**//
 		ThisScene,			//現在のシーン更新
 		This2Other,			//現在のシーンから他へ
 		CountScene
-	}scene_;
+	}scene_=Other2ThisScene;
 
 	//状態リクエスト
 	std::optional<GameSceneBehavior>sceneRequest_ = std::nullopt;
@@ -107,8 +107,6 @@ private://**プライベート変数**//
 
 	//キー入力
 	Input* input_ = nullptr;
-	//カメラクラス
-	Camera* camera_=nullptr;
 
 	//プレイヤー
 	std::unique_ptr<Player>player_;
@@ -131,8 +129,7 @@ private://**プライベート変数**//
 	//遷移クラス
 	std::unique_ptr<Transition>transition_;
 
-	//攻撃エフェクトクラス
-	std::unique_ptr<ParticleManager>AttackHitPerticle_;
+
 	
 	//シーン転換処理をするか否か
 	bool isSceneChange_ = false;

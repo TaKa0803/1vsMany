@@ -16,16 +16,8 @@ GameScene::GameScene() {
 	//入力インスタンス取得
 	input_ = Input::GetInstance();
 
-	//カメラのインスタンス取得
-	camera_ = Camera::GetInstance();
-	//初期化
-	camera_->Initialize();
-
 	//プレイヤー生成
 	player_ = std::make_unique<Player>();
-
-	//プレイヤーをターゲットに指定
-	camera_->SetTarget(&player_->world_);
 
 	//地面
 	plane_ = std::make_unique<Plane>();
@@ -37,7 +29,7 @@ GameScene::GameScene() {
 	enemyManager_ = std::make_unique<EnemyManager>(player_->world_);
 
 	//カメラ関係クラス生成
-	followCamera_ = std::make_unique<FollowCamera>();
+	followCamera_ = std::make_unique<FollowCamera>(&player_->world_);
 
 	//スコアの保存マネジャ
 	scoreSaveManager_ = std::make_unique<ScoreSaveManager>();
@@ -48,13 +40,7 @@ GameScene::GameScene() {
 	//BGM読み込み
 	bgmGame_ = AudioManager::LoadSoundNum("game");
 
-	//攻撃ヒットエフェクトの生成と初期化
-	AttackHitPerticle_ = std::make_unique<ParticleManager>();
-	AttackHitPerticle_->Initialize(TextureManager::LoadTex("resources/Texture/CG/circle.png"));
-	AttackHitPerticle_->SetOnlyImpact(true);
-	EmiterSphere* emit = AttackHitPerticle_->GetEmiterData();
-	emit->speed = { 0.1f,1.5f };
-	emit->color = { 0,0,1,1 };
+
 }
 
 void GameScene::Initialize() {
@@ -79,9 +65,6 @@ void GameScene::Update() {
 	//デバッグウィンドウ表示
 	DebugWindows();
 
-	//エフェクトマネージャ追加
-	AttackHitPerticle_->Update();
-
 	//リクエストが存在しているなら処理
 	if (sceneRequest_) {
 		//リクエストの値を追加
@@ -98,7 +81,7 @@ void GameScene::Update() {
 	//モデル更新
 	countTimer_->SpriteUpdate();
 	player_->ObjectUpdate();
-	camera_->Update();
+	followCamera_->Update();
 
 }
 
@@ -116,8 +99,7 @@ void GameScene::Draw() {
 	//インスタンシングのモデルを全描画
 	InstancingModelManager::GetInstance()->DrawAllModel();
 
-	//パーティクル描画
-	AttackHitPerticle_->Draw();
+
 	player_->DrawParticle();
 
 	//ポストプロセス処理
@@ -132,8 +114,6 @@ void GameScene::Draw() {
 	if (Count >= 200) {
 		PostEffectManager::GetInstance()->PostEffectDraw(PostEffectManager::kRadialBlur, true);
 	}
-
-
 
 	//シーン変更前
 	if (isSceneChange_) {
@@ -150,7 +130,6 @@ void GameScene::Draw() {
 		//遷移描画
 		transition_->Draw();
 	}
-
 }
 
 void GameScene::DebugWindows() {
@@ -159,7 +138,6 @@ void GameScene::DebugWindows() {
 	//ポストエフェクトのデバッグを描画
 	PostEffectManager::GetInstance()->Debug();
 #endif // _DEBUG
-
 }
 
 void GameScene::Collision() {
@@ -170,9 +148,8 @@ void GameScene::Collision() {
 		//カメラシェイク処理
 		followCamera_->SetShake();
 		//エフェクトを発生
-		AttackHitPerticle_->SpawnE(player_->world_.GetWorldTranslate());
+		//AttackHitPerticle_->SpawnE(player_->world_.GetWorldTranslate());
 	}
-
 }
 
 void GameScene::SceneChange() {
@@ -215,6 +192,21 @@ void GameScene::UIDraw() {
 	enemyManager_->DrawUI();
 }
 
+//各処理の関数セット
+//初期化
+void (GameScene::* GameScene::BehaviorInitialize[])() {
+	&GameScene::InitOther2This,
+	& GameScene::InitThis,
+	& GameScene::InitThis2Other
+};
+
+//更新
+void (GameScene::* GameScene::BehaviorUpdate[])() {
+	&GameScene::UpdateOther2This,
+	& GameScene::UpdateThis,
+	& GameScene::UpdateThis2Other
+};
+
 void GameScene::InitOther2This()
 {
 	//遷移の初期化
@@ -237,7 +229,7 @@ void GameScene::UpdateOther2This()
 {
 	//遷移が終了時
 	if (transition_->Update()) {
-		//
+		//状態を終了
 		sceneRequest_ = ThisScene;
 	}
 }
@@ -253,9 +245,6 @@ void GameScene::UpdateThis()
 	//敵関係更新
 	enemyManager_->Update();
 
-	//追従カメラ更新
-	followCamera_->Update();
-
 	//当たり判定処理
 	Collision();
 
@@ -265,6 +254,7 @@ void GameScene::UpdateThis()
 
 void GameScene::UpdateThis2Other()
 {
+	//遷移終了時
 	if (transition_->Update()) {
 		//スコアを保存する
 		scoreSaveManager_->SaveScore(enemyManager_->GetKillCount(), 0);
@@ -273,19 +263,6 @@ void GameScene::UpdateThis2Other()
 	}
 }
 
-//各処理の関数セット
-//初期化
-void (GameScene::* GameScene::BehaviorInitialize[])() {
-	& GameScene::InitOther2This,
-	& GameScene::InitThis,
-	& GameScene::InitThis2Other
-};
 
-//更新
-void (GameScene::* GameScene::BehaviorUpdate[])() {
-	& GameScene::UpdateOther2This,
-	& GameScene::UpdateThis,
-	& GameScene::UpdateThis2Other
-};
 
 

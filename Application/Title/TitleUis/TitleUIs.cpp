@@ -28,7 +28,7 @@ TitleUIs::TitleUIs(TitleSelect2Input& select)
 	texture = TextureManager::LoadTex("resources/Texture/Game/text_owaru.png");
 	text_owaru_.reset(Sprite::Create(texture, { 64,32 }, { 64,32 }, { 64,32 }));
 
-
+#pragma region デバッグ用の値設定
 	tree_.name_ = "UIスプライト";
 	tree_.SetTreeData(titleText_->GetTree("タイトルと背景"));
 	tree_.SetTreeData(startIcon_->GetTree("スタートアイコン"));
@@ -37,6 +37,7 @@ TitleUIs::TitleUIs(TitleSelect2Input& select)
 	tree_.SetTreeData(selectWindow_->GetTree("選択ウィンドウ"));
 	tree_.SetTreeData(text_hajimeru_->GetTree("始める"));
 	tree_.SetTreeData(text_owaru_->GetTree("終わる"));
+#pragma endregion
 }
 
 void TitleUIs::Initialize()
@@ -45,44 +46,13 @@ void TitleUIs::Initialize()
 
 void TitleUIs::Update()
 {
+	//点滅の更新
+	BlinkingUpdate();
 
-	if (!Inverse_) {
-		tenmetuSec_ += (float)DeltaTimer::deltaTime_;
-		if (tenmetuSec_ >= maxTermetuSec_) {
-			tenmetuSec_ = maxTermetuSec_;
-			Inverse_ = true;
-		}
-	}
-	else {
-		tenmetuSec_ -= (float)DeltaTimer::deltaTime_;
-		if (tenmetuSec_ <= 0) {
-			tenmetuSec_ = 0;
-			Inverse_ = false;
-		}
-	}
+	//選択によってスプライト座標変更
+	SelectPositionUpdate();
 
-	//点滅処理
-	float t = tenmetuSec_ / maxTermetuSec_;
-	//透明度の設定
-	selectWindow_->SetColorAlpha(t);
-
-	//選択物で座標位置変更
-	if (*select_ == TitleSelect2Input::Start) {
-		startIcon_->SetColorAlpha(1);
-		dengenIcon_->SetColorAlpha(0.5f);
-
-		//座標合わせる
-		selectWindow_->SetPosition(startIcon_->GetPosition());
-		selectWindow_->SetScale(startIcon_->GetScale() * 1.2f);
-	}
-	else if (*select_ == TitleSelect2Input::Leave) {
-		startIcon_->SetColorAlpha(0.5f);
-		dengenIcon_->SetColorAlpha(1);
-
-		//座標合わせる
-		selectWindow_->SetPosition(dengenIcon_->GetPosition());
-		selectWindow_->SetScale(dengenIcon_->GetScale()*1.2f);
-	}
+	
 
 }
 
@@ -109,5 +79,66 @@ void TitleUIs::DrawUI()
 	}
 	else if (*select_ == TitleSelect2Input::Leave) {
 		text_owaru_->Draw();
+	}
+}
+
+void TitleUIs::BlinkingUpdate()
+{
+	//反転フラグがOFFの場合
+	if (!Inverse_) {
+		//時間を加算
+		blinkingSec_ += (float)DeltaTimer::deltaTime_;
+		//最大時間を超えたら反転フラグをONにする
+		if (blinkingSec_ >= maxBlinkingSec_) {
+			//時間を最大時間にセット
+			blinkingSec_ = maxBlinkingSec_;
+			//反転フラグをONにする
+			Inverse_ = true;
+		}
+	}
+	else {
+		//反転フラグがONの場合は時間を減算
+		blinkingSec_ -= (float)DeltaTimer::deltaTime_;
+		//時間が0以下になったら反転フラグをOFFにする
+		if (blinkingSec_ <= 0) {
+			//時間を0にセット
+			blinkingSec_ = 0;
+			//反転フラグをOFFにする
+			Inverse_ = false;
+		}
+	}
+
+	//進行割合取得
+	float t = blinkingSec_ / maxBlinkingSec_;
+	//透明度の設定
+	selectWindow_->SetColorAlpha(t);
+}
+
+void TitleUIs::SelectPositionUpdate()
+{
+	///選択物で座標位置変更
+	//スタートアイコンを選択している場合
+	if (*select_ == TitleSelect2Input::Start) {
+		//アイコンの透明度を変更
+		startIcon_->SetColorAlpha(1);
+		//電源アイコンの透明度を変更
+		dengenIcon_->SetColorAlpha(0.5f);
+
+		//座標合わせる
+		selectWindow_->SetPosition(startIcon_->GetPosition());
+		//サイズを変更
+		selectWindow_->SetScale(startIcon_->GetScale() * 1.2f);
+	}
+	else if (*select_ == TitleSelect2Input::Leave) {
+		//電源アイコンを選択している場合
+		//アイコンの透明度を変更
+		startIcon_->SetColorAlpha(0.5f);
+		//電源アイコンの透明度を変更
+		dengenIcon_->SetColorAlpha(1);
+
+		//座標合わせる
+		selectWindow_->SetPosition(dengenIcon_->GetPosition());
+		//サイズを変更
+		selectWindow_->SetScale(dengenIcon_->GetScale() * 1.2f);
 	}
 }

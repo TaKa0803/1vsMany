@@ -60,7 +60,7 @@ public://**パブリック関数**//
 	/// デバッグ処理
 	/// </summary>
 	/// <param name="name"></param>
-	void Debug(const std::string name);
+	GvariTree& GetTree(const std::string name);
 
 	/// <summary>
 	/// エフェクトの出現

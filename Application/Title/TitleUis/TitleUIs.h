@@ -17,11 +17,19 @@ public://**パブリック関数**//
 	TitleUIs(TitleSelect2Input&select);
 	//デストラクタ
 	~TitleUIs() = default;
-	//初期化
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize();
-	//更新
+	
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
-	//描画
+	
+	/// <summary>
+	/// 背景描画
+	/// </summary>
 	void DrawBack();
 
 	/// <summary>
@@ -35,9 +43,21 @@ public://**パブリック関数**//
 	/// <returns></returns>
 	GvariTree& GetTree() { return tree_; }
 
+private://**プライベート関数**//
+
+	/// <summary>
+	/// 選択物の点滅処理
+	/// </summary>
+	void BlinkingUpdate();
+
+	/// <summary>
+	/// 選択箇所のスプライト更新
+	/// </summary>
+	void SelectPositionUpdate();
+
 private://**プライベート変数**//
 
-
+	//入力のポインタ
 	const TitleSelect2Input* select_;
 	
 	//タイトル背景
@@ -62,9 +82,10 @@ private://**プライベート変数**//
 
 
 	//点滅時間
-	float tenmetuSec_ = 0;
+	float blinkingSec_ = 0;
 
-	float maxTermetuSec_ = 1.0f;
+	//点滅時間の最大時間
+	float maxBlinkingSec_ = 1.0f;
 
 	//逆算フラグ
 	bool Inverse_ = false;

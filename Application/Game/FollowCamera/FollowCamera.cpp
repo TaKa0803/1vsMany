@@ -3,12 +3,18 @@
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
 #include"DeltaTimer/DeltaTimer.h"
 
-FollowCamera::FollowCamera()
+FollowCamera::FollowCamera(const EulerWorldTransform* target)
 {
+	//カメラのコンストラクタ取得
 	camera_ = Camera::GetInstance();
+	//初期化
+	camera_->Initialize();
+	//ターゲットの座標をセット
+	camera_->SetTarget(target);
+	//入力のコンストラクタ取得
 	input_ = Input::GetInstance();
 
-	//デバッグ用にパラメータ設定
+#pragma region デバッグ用にパラメータセット
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Camera");
 	gvg->SetTreeData(camera_->mainCamera_.GetDebugTree("メインカメラ座標"));
 
@@ -29,17 +35,18 @@ FollowCamera::FollowCamera()
 	//シェイクのパラメータをツリーに設定
 	GvariTree tree;
 	tree.name_ = "カメラシェイク";
-	tree.SetMonitorValue("元の座標", &tempP_);	
-	tree.SetValue("最大振動時間",&maxSecond_);
+	tree.SetMonitorValue("元の座標", &tempP_);
+	tree.SetValue("最大振動時間", &maxSecond_);
 	tree.SetValue("振動幅", &shakeWide_);
 
 	//ツリーをセット
 	gvg->SetTreeData(tree);
+#pragma endregion
 }
 
 void FollowCamera::Init()
 {
-
+	//カメラの角度を設定
 	camera_->SetFocusPointRotate(stRotate_);
 }
 
@@ -59,6 +66,8 @@ void FollowCamera::Update()
 
 	//カメラシェイクの更新
 	UpdateShake();
+
+	camera_->Update();
 }
 
 void FollowCamera::SetShake()

@@ -2,19 +2,33 @@
 #include"Camera/Camera.h"
 #include"Input/Input.h"
 
+//追従カメラ
 class FollowCamera {
-public:
 
-	FollowCamera();
+public://**パブリック関数**//
+
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	FollowCamera(const EulerWorldTransform*target);
 	~FollowCamera()=default;
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Init();
 
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// カメラを揺らす
+	/// </summary>
 	void SetShake();
 
-private:
+private://**プライベート関数**//
 
 	/// <summary>
 	/// カメラ操作入力取得
@@ -26,13 +40,16 @@ private:
 	/// カメラシェイク更新
 	/// </summary>
 	void UpdateShake();
-private:
 
+private://**プライベート変数**//
+
+	//カメラのポインタ
 	Camera* camera_;
 
+	//入力のポインタ
 	Input* input_;
 
-	//カメラの最初の回転量
+	//カメラの最初の傾き
 	Vector3 stRotate_{ 0,0,0 };
 
 	//各角度での加算量
@@ -44,7 +61,6 @@ private:
 	
 	//振動時間
 	float currentShakeSec_ = 0;
-
 
 	//カメラの元の座標
 	Vector3 tempP_;

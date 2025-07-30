@@ -25,7 +25,7 @@ ClearScene::ClearScene()
 
 	//黒背景生成
 	texture = TextureManager::LoadTex("resources/Texture/AL/black.png");
-	backScreen_.reset(Sprite::Create(texture, { 64,64 }, { 64,64 }, { 1280,720 }));
+	beforeScene_.reset(Sprite::Create(texture, { 64,64 }, { 64,64 }, { 1280,720 }));
 
 	//討伐数カウントクラス生成
 	countKilledEnemies_ = std::make_unique<CountKilledEnemies>();
@@ -42,7 +42,7 @@ ClearScene::ClearScene()
 	//デバッグの値セット
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("ClearScene");
 	gvg->SetTreeData(countKilledEnemies_->GetTree());
-	gvg->SetTreeData(backScreen_->GetTree("黒背景"));
+	gvg->SetTreeData(beforeScene_->GetTree("黒背景"));
 	gvg->SetTreeData(camera_->GetDebugTree());
 }
 
@@ -50,10 +50,8 @@ void ClearScene::Initialize()
 {
 	//カメラの初期化
 	camera_->Initialize();
+	//カメラの親子関係初期化
 	camera_->mainCamera_.parent_ = nullptr;
-
-	//透明度を0に設定
-	backScreen_->SetColorAlpha(0);
 
 	//討伐数カウントクラス初期化
 	countKilledEnemies_->Initialize(scoreData_.kill);
@@ -85,8 +83,8 @@ void ClearScene::Update()
 
 void ClearScene::Draw()
 {
-	//黒背景描画
-	//backScreen_->DrawBack();
+	//前シーン画像描画
+	beforeScene_->Draw(PostEffectManager::GetInstance()->GetSceneTexture());
 
 	//敵が落ちていくエフェクトの描画
 	fallEnemies_->Draw();
@@ -105,6 +103,21 @@ void ClearScene::Draw()
 	}
 }
 
+
+//各処理の関数セット
+//初期化
+void (ClearScene::* ClearScene::BehaviorInitialize[])() {
+	&ClearScene::InitOther2This,
+	& ClearScene::InitThis,
+	& ClearScene::InitThis2Other
+};
+
+//更新
+void (ClearScene::* ClearScene::BehaviorUpdate[])() {
+	&ClearScene::UpdateOther2This,
+	& ClearScene::UpdateThis,
+	& ClearScene::UpdateThis2Other
+};
 
 void ClearScene::InitOther2This()
 {
@@ -159,17 +172,3 @@ void ClearScene::UpdateThis2Other()
 	}
 }
 
-//各処理の関数セット
-//初期化
-void (ClearScene::* ClearScene::BehaviorInitialize[])() {
-	&ClearScene::InitOther2This,
-	& ClearScene::InitThis,
-	& ClearScene::InitThis2Other
-};
-
-//更新
-void (ClearScene::* ClearScene::BehaviorUpdate[])() {
-	&ClearScene::UpdateOther2This,
-	& ClearScene::UpdateThis,
-	& ClearScene::UpdateThis2Other
-};

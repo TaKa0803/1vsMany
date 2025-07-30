@@ -90,12 +90,12 @@ public:	//**パブリック関数**//
 	/// <summary>
 	/// シーン情報を画像として保存するフラグON
 	/// </summary>
-	void LoadScene2TexFlagActive() { loadScene2Tex_ = true; }
+	void LoadScene2TexFlagActive() { LoadScene2Texture(); }
 
 public://**ゲッター**//
 
 	/// <summary>
-	/// シーンの画像handleを取得
+	/// 保存したシーンの画像handleを取得
 	/// </summary>
 	/// <returns></returns>
 	D3D12_GPU_DESCRIPTOR_HANDLE GetSceneTexture() { return extractionScene_->GetTexHandle(); }

@@ -42,7 +42,7 @@ private://**シーン関係**//
 
 	//ゲームシーン内の状態
 	enum ClearSceneBehavior {
-		Other2ThisScene,	//他シーンからここ
+		Other2ThisScene,	//他シーンからここへ
 		ThisScene,			//現在のシーン更新
 		This2Other,			//現在のシーンから他へ
 		CountScene
@@ -83,7 +83,7 @@ private://**プライベート変数**//
 	Camera* camera_ = nullptr;
 
 	//背景
-	std::unique_ptr<Sprite>backScreen_;
+	std::unique_ptr<Sprite>beforeScene_;
 
 	//敵の討伐数をカウントするクラス
 	std::unique_ptr<CountKilledEnemies>countKilledEnemies_;

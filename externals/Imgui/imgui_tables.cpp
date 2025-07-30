@@ -60,7 +60,7 @@ Index of this file:
 // - TableSetColumnIndex() / TableNextColumn()  user begin into a cell
 //    | TableEndCell()                          - close existing column/cell
 //    | TableBeginCell()                        - enter into current column/cell
-// - [...]                                      user emit contents
+// - [...]                                      user emit_ contents
 //-----------------------------------------------------------------------------
 // - EndTable()                                 user ends the table
 //    | TableDrawBorders()                      - draw outer borders, inner vertical borders

@@ -279,30 +279,23 @@ void ParticleManager::Draw()
 
 }
 
-void ParticleManager::Debug(const std::string name)
+GvariTree& ParticleManager::GetTree(const std::string name)
 {
-#ifdef _DEBUG
-	ImGui::Begin(name.c_str());
-	ImGui::DragFloat3("座標", &emiterData_->translate.x, 0.01f);
-	ImGui::DragFloat2("最小/最大:出現半径", &emiterData_->radius.x, 0.01f);
-	ImGui::DragFloat2("最小/最大:一度の生成量", &emiterData_->count.x,0.01f);
+	tree_.name_ = name;
+	tree_.SetValue("色", &emiterData_->color);
+	tree_.SetValue("生成範囲" ,&emiterData_->radius);
+	tree_.SetValue("生成量", &emiterData_->count);
+	tree_.SetValue("再送最大速度", &emiterData_->speed);
+	tree_.SetValue("X軸の最小最大飛翔方向", &emiterData_->veloX);
+	tree_.SetValue("Y軸の最小最大飛翔方向", &emiterData_->veloY);
+	tree_.SetValue("Z軸の最小最大飛翔方向", &emiterData_->veloZ);
+	tree_.SetValue("生成間隔/Sec", &emiterData_->frequency);
+	tree_.SetValue("生成時間", &emiterData_->lifetime);
 
-	ImGui::DragFloat2("最小/最大:速度", &emiterData_->speed.x, 0.01f);
-	ImGui::DragFloat2("最小/最大:X軸の飛翔方向", &emiterData_->veloX.x, 0.01f);
-	ImGui::DragFloat2("最小/最大:Y軸の飛翔方向", &emiterData_->veloY.x, 0.01f);
-	ImGui::DragFloat2("最小/最大:Z軸の飛翔方向", &emiterData_->veloZ.x, 0.01f);
-
-	ImGui::Text("Flag %d", emiterData_->emit);
-
-	ImGui::Checkbox("onlyInput", &onlyImpact_);
-
-	ImGui::DragFloat("生成間隔(秒)", &emiterData_->frequency, 0.01f);
-
-	ImGui::End();
-
-#endif // _DEBUG
-
+	return tree_;
 }
+
+
 
 void ParticleManager::SpawnE(const Vector3& pos)
 {

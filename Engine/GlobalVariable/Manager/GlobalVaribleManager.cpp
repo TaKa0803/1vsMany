@@ -5,20 +5,6 @@
 #include<fstream>
 #include <iostream>
 
-
-
-const char** CreateCStringArray(const std::vector<std::string>& strings) {
-	//文字列サイズ取得
-	size_t size = strings.size();
-	const char** cStrings = new const char* [size]; // 動的メモリ確保
-
-	for (size_t i = 0; i < size; ++i) {
-		cStrings[i] = strings[i].c_str(); // std::string を const char* に変換
-	}
-
-	return cStrings;
-}
-
 //アイテムのImGui表記
 void ItemImGui(const std::string name, std::variant<bool*,int32_t*, float*,Vector2*, Vector3*, Vector4*> value) {
 	value;
@@ -62,7 +48,7 @@ void MonitorItemImGui(const std::string name, MonitorItemData&data) {
 #ifdef _DEBUG
 
 	//値を参照
-	std::variant<bool*, int32_t*, float*, Vector3*, std::string*>& value = data.value;
+	std::variant<bool*, int32_t*, float*, Vector2*, Vector3*, std::string*>& value = data.value;
 
 	//アイテムの値がからの時
 	if (data.items.empty()) {
@@ -82,6 +68,11 @@ void MonitorItemImGui(const std::string name, MonitorItemData&data) {
 			float* ptr = *std::get_if<float*>(&value);
 			std::string text = name + " : %4.1f";
 			ImGui::Text(text.c_str(), *ptr, 0.01f);
+		}//Vector2の場合
+		else if (std::holds_alternative<Vector2*>(value)) {
+			Vector2* ptr = *std::get_if<Vector2*>(&value);
+			std::string text = name + " :  %4.1f / %4.1f";
+			ImGui::Text(text.c_str(), *reinterpret_cast<float*>(ptr), 0.01f);
 		}//Vector3の場合
 		else if (std::holds_alternative<Vector3*>(value)) {
 			Vector3* ptr = *std::get_if<Vector3*>(&value);
@@ -473,6 +464,10 @@ void SaveItemData(
 			// int32_t型の値を登録
 			root[itemName] = *std::get<float*>(item.value);
 		}
+		else if (std::holds_alternative<Vector2*>(item.value)) {//Vector2型の値を保持していれば
+			Vector2 value = *std::get<Vector2*>(item.value);
+			root[itemName] = nlohmann::json::array({ value.x, value.y });
+		}
 		else if (std::holds_alternative<Vector3*>(item.value)) {//Vector3型の値を保持していれば
 			Vector3 value = *std::get<Vector3*>(item.value);
 			root[itemName] = nlohmann::json::array({ value.x, value.y, value.z });
@@ -588,6 +583,11 @@ void SetLoadTreeData(TreeData& groupData, SavedTreeData& saveData) {
 				float* dataPtr = *std::get_if<float*>(&dataV);
 				*dataPtr = savePtr;
 			}
+			else if (std::holds_alternative<Vector2>(saveV) && std::holds_alternative<Vector2*>(dataV)) {	//vector2型
+				Vector2 savePtr = *std::get_if<Vector2>(&saveV);
+				Vector2* dataPtr = *std::get_if<Vector2*>(&dataV);
+				*dataPtr = savePtr;
+			}
 			else if (std::holds_alternative<Vector3>(saveV) && std::holds_alternative<Vector3*>(dataV)) {	//vector3型
 				Vector3 savePtr = *std::get_if<Vector3>(&saveV);
 				Vector3* dataPtr = *std::get_if<Vector3*>(&dataV);
@@ -655,6 +655,11 @@ void GlobalVariableManager::SetLoadGroupData(const std::string& groupName)
 				float* dataPtr = *std::get_if<float*>(&dataV);
 				*dataPtr = savePtr;
 			}
+			else if (std::holds_alternative<Vector2>(saveV) && std::holds_alternative<Vector2*>(dataV)) {	//vector3型
+				Vector2 savePtr = *std::get_if<Vector2>(&saveV);
+				Vector2* dataPtr = *std::get_if<Vector2*>(&dataV);
+				*dataPtr = savePtr;
+			}
 			else if (std::holds_alternative<Vector3>(saveV) && std::holds_alternative<Vector3*>(dataV)) {	//vector3型
 				Vector3 savePtr = *std::get_if<Vector3>(&saveV);
 				Vector3* dataPtr = *std::get_if<Vector3*>(&dataV);
@@ -714,6 +719,10 @@ void LoadTreeData(SavedTreeData& treeData, const nlohmann::json& jsonNode) {
 			float value = itItem->get<float>();
 			data.value = value;
 
+		}// Vector2 (2 要素の配列) を保持している場合
+		else if (itItem->is_array() && itItem->size() == 2) {
+			Vector2 value = { itItem->at(0).get<float>(), itItem->at(1).get<float>() };
+			data.value = value;
 		}// Vector3 (3 要素の配列) を保持している場合
 		else if (itItem->is_array() && itItem->size() == 3) {
 			Vector3 value = { itItem->at(0).get<float>(), itItem->at(1).get<float>(), itItem->at(2).get<float>() };
@@ -785,6 +794,11 @@ void GlobalVariableManager::LoadGroupData(const std::string& groupName)
 
 			data.value = value;
 		}
+		else if (itItem->is_array() && itItem->size() == 2) { // 要素数2の配列であれば
+			Vector2 value = { itItem->at(0), itItem->at(1)};
+
+			data.value = value;
+		}
 		else if (itItem->is_array() && itItem->size() == 3) { // 要素数３の配列であれば
 			Vector3 value = { itItem->at(0), itItem->at(1), itItem->at(2) };
 
@@ -834,6 +848,4 @@ void GlobalVariableManager::SetLoadAllData()
 
 		SetLoadGroupData(name);
 	}
-
-
 }
