@@ -202,8 +202,8 @@ void DirectXFunc::SwapChainInit()
 {
 #pragma region SwapChainを生成する
 	//スワップチェーンを生成する	
-	swapChainDesc.Width = WindowApp::kClientWidth;
-	swapChainDesc.Height = WindowApp::kClientHeight;
+	swapChainDesc.Width = WindowApp::kClientWidth_;
+	swapChainDesc.Height = WindowApp::kClientHeight_;
 	swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	swapChainDesc.SampleDesc.Count = 1;
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
@@ -306,8 +306,8 @@ void DirectXFunc::PreDraw()
 	//ビューポート
 	D3D12_VIEWPORT viewport{};
 	//クライアント領域のサイズと一緒にして画面全体に表示
-	viewport.Width = (FLOAT)WindowApp::kClientWidth;
-	viewport.Height = (FLOAT)WindowApp::kClientHeight;
+	viewport.Width = (FLOAT)WindowApp::kClientWidth_;
+	viewport.Height = (FLOAT)WindowApp::kClientHeight_;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -317,9 +317,9 @@ void DirectXFunc::PreDraw()
 	D3D12_RECT scissorRect{};
 	//基本的にビューポートと同じ短形が構成されるようにする
 	scissorRect.left = 0;
-	scissorRect.right = WindowApp::kClientWidth;
+	scissorRect.right = WindowApp::kClientWidth_;
 	scissorRect.top = 0;
-	scissorRect.bottom = WindowApp::kClientHeight;
+	scissorRect.bottom = WindowApp::kClientHeight_;
 
 	commandList->RSSetViewports(1, &viewport);
 	commandList->RSSetScissorRects(1, &scissorRect);
@@ -354,8 +354,8 @@ void DirectXFunc::PostDraw()
 	//ビューポート
 	D3D12_VIEWPORT viewport{};
 	//クライアント領域のサイズと一緒にして画面全体に表示
-	viewport.Width = (FLOAT)WindowApp::kClientWidth;
-	viewport.Height = (FLOAT)WindowApp::kClientHeight;
+	viewport.Width = (FLOAT)WindowApp::kClientWidth_;
+	viewport.Height = (FLOAT)WindowApp::kClientHeight_;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -365,9 +365,9 @@ void DirectXFunc::PostDraw()
 	D3D12_RECT scissorRect{};
 	//基本的にビューポートと同じ短形が構成されるようにする
 	scissorRect.left = 0;
-	scissorRect.right = WindowApp::kClientWidth;
+	scissorRect.right = WindowApp::kClientWidth_;
 	scissorRect.top = 0;
-	scissorRect.bottom = WindowApp::kClientHeight;
+	scissorRect.bottom = WindowApp::kClientHeight_;
 
 	commandList->RSSetViewports(1, &viewport);
 	commandList->RSSetScissorRects(1, &scissorRect);
@@ -445,8 +445,8 @@ ID3D12Resource* DirectXFunc::CreateRenderTextureResource(DXGI_FORMAT format, con
 {
 	//リソースのデスク作成
 	D3D12_RESOURCE_DESC resourceDesc{};
-	resourceDesc.Width = winApp_->kClientWidth;							//Textureの幅
-	resourceDesc.Height = winApp_->kClientHeight;						//Textureの高さ
+	resourceDesc.Width = winApp_->kClientWidth_;							//Textureの幅
+	resourceDesc.Height = winApp_->kClientHeight_;						//Textureの高さ
 	resourceDesc.MipLevels = 1;											//mipmapの数
 	resourceDesc.DepthOrArraySize = 1;									//奥行き　or 配列Textureの配列数
 	resourceDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;					//DepthStencilとして利用可能なフォーマット

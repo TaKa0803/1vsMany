@@ -4,32 +4,27 @@
 
 //ウィンドウ関係の処理クラス
 class WindowApp {
-public://シングルトンパターン
-	static WindowApp* GetInstance();
-private://シングルトンパターン
-	WindowApp() = default;
-	~WindowApp() = default;
-	WindowApp(const WindowApp& o) = delete;
-	const WindowApp& operator=(const WindowApp& o) = delete;
+public://
+
+	WindowApp()=default;
+	~WindowApp();
 
 public://静的メンバ変数
 	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
+	//ウィンドウ名
+	static LPCWSTR windowName_;
+
 	//画面サイズ
-	static int kClientWidth;
-	static int kClientHeight;
+	static int kClientWidth_;
+	static int kClientHeight_;
 
 public://パブリック関数**//
 
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(LPCWSTR windowName, int clientwidth = 1280, int clientHeight = 720);
-
-	/// <summary>
-	/// 消す前の処理
-	/// </summary>
-	void Finalize();
+	void Initialize();
 
 	/// <summary>
 	/// プロセスメッセージ

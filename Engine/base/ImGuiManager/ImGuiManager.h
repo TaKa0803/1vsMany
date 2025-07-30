@@ -10,17 +10,10 @@
 //ImGuiの処理クラス
 class ImGuiManager
 {
-public:	//**シングルトンパターン**//
-	/// <summary>
-	/// インスタンス取得
-	/// </summary>
-	/// <returns></returns>
-	static ImGuiManager* GetInstance();
-private://シングルトンパターン
+public:	
+
 	ImGuiManager() = default;
-	~ImGuiManager() = default;
-	ImGuiManager(const ImGuiManager& o) = delete;
-	const ImGuiManager& operator=(const ImGuiManager& o) = delete;
+	~ImGuiManager();
 
 public:	//**パブリック関数**//
 
@@ -50,10 +43,6 @@ public:	//**パブリック関数**//
 	/// </summary>
 	void PostDraw();
 
-	/// <summary>
-	/// 開放処理
-	/// </summary>
-	void Finalize();
 
 private: //**プライベート変数**//
 

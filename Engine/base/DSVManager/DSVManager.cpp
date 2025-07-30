@@ -19,7 +19,7 @@ void DSVManager::Initialize()
 	descriptorSize_ = DXF_->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 #pragma region DSV
 	//DepthStencilTextureをウィンドウサイズで作成
-	depthStencilResource = CreateDepthStencilTextureResource(DXF_->GetDevice(), WindowApp::kClientWidth, WindowApp::kClientHeight);
+	depthStencilResource = CreateDepthStencilTextureResource(DXF_->GetDevice(), WindowApp::kClientWidth_, WindowApp::kClientHeight_);
 	//DSVの設定
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
 	dsvDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;	//Format基本的にはResourceに合わせる

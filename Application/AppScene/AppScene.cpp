@@ -12,6 +12,7 @@ void AppScene::Initialize()
 	//シーンマネージャの初期化
 	sceneManager->Initialize();
 
+	//全てのセーブデータ読み込み
 	GlobalVariableManager::GetInstance()->LoadAllSaveData();
 
 	//セットされたデータに保存したものがあればそれを適応する

@@ -38,7 +38,7 @@ void Camera::Initialize() {
 	//各種更新に必要な処理
 	view_ = Inverse(mainCamera_.matWorld_);
 	//プロジェクション生成
-	projection_ = MakePerspectiveFovMatrix(0.45f, (float)WindowApp::kClientWidth / (float)WindowApp::kClientHeight, 0.1f, FarZ);
+	projection_ = MakePerspectiveFovMatrix(0.45f, (float)WindowApp::kClientWidth_ / (float)WindowApp::kClientHeight_, 0.1f, FarZ);
 	//ビュープロジェクション行列生成
 	viewProjection_ = view_ * projection_;
 
@@ -103,11 +103,11 @@ void Camera::Update() {
 	//各種更新に必要な処理
 	view_ = Inverse(mainCamera_.matWorld_);
 	//プロジェクション更新
-	projection_ = MakePerspectiveFovMatrix(0.45f, (float)WindowApp::kClientWidth / (float)WindowApp::kClientHeight, 0.1f, FarZ);
+	projection_ = MakePerspectiveFovMatrix(0.45f, (float)WindowApp::kClientWidth_ / (float)WindowApp::kClientHeight_, 0.1f, FarZ);
 	//ビュープロジェクション更新
 	viewProjection_ = view_ * projection_;
 	//ビューポート更新
-	viewPort_ = MakeViewPortMatrix(0, 0, (float)WindowApp::kClientWidth, (float)WindowApp::kClientHeight, 0, 1);
+	viewPort_ = MakeViewPortMatrix(0, 0, (float)WindowApp::kClientWidth_, (float)WindowApp::kClientHeight_, 0, 1);
 
 #pragma region Segment設定
 	//カメラ位置計算
@@ -130,7 +130,7 @@ void Camera::UpdateMatrixes() {
 	//ビュー更新
 	view_ = Inverse(mainCamera_.matWorld_);
 	//プロジェクション更新
-	projection_ = MakePerspectiveFovMatrix(0.45f, (float)WindowApp::kClientWidth / (float)WindowApp::kClientHeight, 0.1f, FarZ);
+	projection_ = MakePerspectiveFovMatrix(0.45f, (float)WindowApp::kClientWidth_ / (float)WindowApp::kClientHeight_, 0.1f, FarZ);
 	//ビュープロジェクション更新
 	viewProjection_ = view_ * projection_;
 }

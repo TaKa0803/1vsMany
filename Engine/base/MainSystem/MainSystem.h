@@ -12,15 +12,13 @@
 #include"DeltaTimer/DeltaTimer.h"
 
 class MainSystem {
-public://**シングルトンパターン**//
-	static MainSystem* GetInstance();
-private:
-	MainSystem() = default;
-	~MainSystem() = default;
-	MainSystem(const MainSystem& o) = delete;
-	const MainSystem& operator=(const MainSystem& o) = delete;
+
+
 
 public://**パブリック関数**//
+
+	MainSystem() = default;
+	~MainSystem() = default;
 
 	/// <summary>
 	/// 処理の開始
@@ -49,13 +47,13 @@ private://**プライベート変数**//
 #pragma region 基板初期化
 
 	//windowsアプリケーション
-	WindowApp* winApp_;
+	std::unique_ptr<WindowApp> winApp_;
 
 	//DirectX
 	DirectXFunc* DXF_;
 
 	//ImGui
-	ImGuiManager* imguiManager_;
+	std::unique_ptr<ImGuiManager> imguiManager_;
 
 	//texture
 	TextureManager* textureManager_;

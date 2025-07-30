@@ -7,11 +7,11 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg
 #pragma endregion
 #include<cassert>
 
-ImGuiManager* ImGuiManager::GetInstance()
-{
-	//インスタンス取得
-	static ImGuiManager Instance;
-	return &Instance;
+ImGuiManager::~ImGuiManager() {
+	//ImGui開放
+	ImGui_ImplDX12_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
 }
 
 void ImGuiManager::Initialize(WindowApp* winApp, DirectXFunc* DXF)
@@ -76,13 +76,4 @@ void ImGuiManager::PostDraw()
 {
 	//実際のcommandListのImGuiの描画コマンドを積む
 	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), DXF_->GetCMDList());
-}
-
-void ImGuiManager::Finalize()
-{
-	//ImGui開放
-	ImGui_ImplDX12_Shutdown();
-	ImGui_ImplWin32_Shutdown();
-	ImGui::DestroyContext();
-
 }

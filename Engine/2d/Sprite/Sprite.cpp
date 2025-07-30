@@ -171,7 +171,7 @@ void Sprite::Draw(int texture) {
 	Matrix4x4 World = world_.matWorld_;
 
 	//スプライト用データ
-	Matrix4x4 projectionMatrixSprite = MakeOrthographicMatrix(0.0f, 0.0f, float(WindowApp::kClientWidth), float(WindowApp::kClientHeight), 0.0f, 100.0f);
+	Matrix4x4 projectionMatrixSprite = MakeOrthographicMatrix(0.0f, 0.0f, float(WindowApp::kClientWidth_), float(WindowApp::kClientHeight_), 0.0f, 100.0f);
 	Matrix4x4 VPSprite = viewMatrix * projectionMatrixSprite;
 	Matrix4x4 WVP = World * VPSprite;
 	//データ代入
@@ -214,7 +214,7 @@ void Sprite::Draw(D3D12_GPU_DESCRIPTOR_HANDLE tex)
 	Matrix4x4 World = world_.matWorld_;
 
 	//スプライト用データ
-	Matrix4x4 projectionMatrixSprite = MakeOrthographicMatrix(0.0f, 0.0f, float(WindowApp::kClientWidth), float(WindowApp::kClientHeight), 0.0f, 100.0f);
+	Matrix4x4 projectionMatrixSprite = MakeOrthographicMatrix(0.0f, 0.0f, float(WindowApp::kClientWidth_), float(WindowApp::kClientHeight_), 0.0f, 100.0f);
 	Matrix4x4 VPSprite = viewMatrix * projectionMatrixSprite;
 	Matrix4x4 WVP = World * VPSprite;
 	//データ代入

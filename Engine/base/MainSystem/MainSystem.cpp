@@ -12,14 +12,6 @@
 #include"UAVManager/UAVManager.h"
 #include"GlobalVariable/Manager/GlobalVaribleManager.h"
 
-
-
-MainSystem* MainSystem::GetInstance() {
-	//インスタンス取得
-	static MainSystem instance;
-	return &instance;
-}
-
 void MainSystem::Run() {
 	HRESULT hr;
 	hr= CoInitializeEx(0, COINIT_MULTITHREADED);
@@ -39,8 +31,8 @@ void MainSystem::Run() {
 
 void MainSystem::Initializes() {
 	//windowsアプリケーション
-	winApp_ = WindowApp::GetInstance();
-	winApp_->Initialize(L"ウイルス討伐作戦！",1280,720);
+	winApp_ = std::make_unique<WindowApp>();
+	winApp_->Initialize();
 
 	//DXCマネージャ
 	DXCManager* DXC = DXCManager::GetInstance();
@@ -48,13 +40,11 @@ void MainSystem::Initializes() {
 
 	//DirectXマネージャ初期化
 	DXF_ = DirectXFunc::GetInstance();
-	DXF_->Initialize(winApp_);
+	DXF_->Initialize(winApp_.get());
 
 	//SRVインスタンス取得
 	SRVM_ = SRVManager::GetInstance();
 	UAVManager::GetInstance()->Initialize();
-
-	//RTVManager::GetInstance()->Initialize();
 
 	//画像関係
 	textureManager_= TextureManager::GetInstance();
@@ -64,12 +54,12 @@ void MainSystem::Initializes() {
 	PostEffectManager::GetInstance()->Initialize();
 
 	//imgui
-	imguiManager_ = ImGuiManager::GetInstance();
-	imguiManager_->Initialize(winApp_, DXF_);
+	imguiManager_ = std::make_unique<ImGuiManager>();
+	imguiManager_->Initialize(winApp_.get(), DXF_);
 
 	//入力
 	input_ = Input::GetInstance();
-	input_->Initialize(winApp_);
+	input_->Initialize(winApp_.get());
 	
 	//インスタンシングモデル
 	instancingMM_ = InstancingModelManager::GetInstance();
@@ -103,9 +93,9 @@ void MainSystem::MainRoop() {
 	instancingMM_->Initialize(true);
 
 	//ゲームシーン初期化
-	std::unique_ptr<AppScene> gameScene_;
-	gameScene_ = std::make_unique<AppScene>();
-	gameScene_->Initialize();
+	std::unique_ptr<AppScene> appScene;
+	appScene = std::make_unique<AppScene>();
+	appScene->Initialize();
 
 	//メインループ
 	while (winApp_->ProcessMessage()) {
@@ -126,7 +116,7 @@ void MainSystem::MainRoop() {
 		GlobalVariableManager::GetInstance()->Update();
 
 		//ゲームシーン更新
-		gameScene_->Update();
+		appScene->Update();
 
 
 		//==更新終わり==//
@@ -142,7 +132,7 @@ void MainSystem::MainRoop() {
 		imguiManager_->PreDraw();
 
 		//==以下描画==//	
-		gameScene_->Draw();
+		appScene->Draw();
 		//==描画終わり==//
 
 		///描画あと処理
@@ -179,9 +169,7 @@ void MainSystem::Finalize() {
 	PostEffectManager::GetInstance()->Finalize();
 
 	textureManager_->Finalize();
-	imguiManager_->Finalize();
 	DXF_->Finalize();
-	winApp_->Finalize();
 
 }
 

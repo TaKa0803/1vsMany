@@ -10,13 +10,13 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg
 #pragma endregion
 
 
-int WindowApp::kClientWidth = 1280;
-int WindowApp::kClientHeight = 720;
 
-WindowApp* WindowApp::GetInstance()
+int WindowApp::kClientWidth_ = 1280;
+int WindowApp::kClientHeight_ = 720;
+
+WindowApp::~WindowApp()
 {
-	static WindowApp instance;
-	return &instance;
+	CloseWindow(hwnd_);
 }
 
 //ウィンドウプロシーシャ
@@ -33,15 +33,9 @@ LRESULT CALLBACK WindowApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARA
 	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
-void WindowApp::Initialize(LPCWSTR windowName,int clientwidth,int clientHeight)
+void WindowApp::Initialize()
 {
-
-
 #pragma region ウィンドウ生成 
-	
-	kClientWidth = clientwidth;
-	kClientHeight = clientHeight;
-
 
 	wc.lpfnWndProc = WindowProc;
 	wc.lpszClassName = L"A";
@@ -51,13 +45,13 @@ void WindowApp::Initialize(LPCWSTR windowName,int clientwidth,int clientHeight)
 	RegisterClass(&wc);
 
 	
-	RECT wrc = { 0,0,kClientWidth,kClientHeight };
+	RECT wrc = { 0,0,kClientWidth_,kClientHeight_ };
 
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
 	hwnd_ = CreateWindow(
 		wc.lpszClassName,
-		windowName,
+		windowName_,
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
@@ -73,11 +67,6 @@ void WindowApp::Initialize(LPCWSTR windowName,int clientwidth,int clientHeight)
 	ShowWindow(hwnd_, SW_SHOW);
 #pragma endregion
 	Log("Complete WinAppInitialize\n");
-}
-
-void WindowApp::Finalize()
-{
-	CloseWindow(hwnd_);
 }
 
 bool WindowApp::ProcessMessage()
