@@ -37,7 +37,13 @@ Vector3 GetAllScale(const EulerWorldTransform& world);
 
 Vector3 GetClosestPoint(const Vector3& p, const Vector3& min, const Vector3& max);
 
+//入れ替わりチェック
+void CheckswitchAABB(AABB& a);
+
 //AABBと円
 bool InCollision(const AABB& a, const Sphere& s, Vector3& v);
 //AABBと線
 bool InCollision(const AABB& AA, const Segment& S);
+
+//AABB同士
+bool InCollision(const AABB& a, const AABB& b);

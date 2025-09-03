@@ -88,6 +88,20 @@ Vector3 GetClosestPoint(const Vector3& p, const Vector3& min, const Vector3& max
 	};
 }
 
+void CheckswitchAABB(AABB& a) {
+	Vector3 max, min;
+	min.x = (std::min)(a.minV.x, a.maxV.x);
+	min.y = (std::min)(a.minV.y, a.maxV.y);
+	min.z = (std::min)(a.minV.z, a.maxV.z);
+
+	max.x = (std::max)(a.minV.x, a.maxV.x);
+	max.y = (std::max)(a.minV.y, a.maxV.y);
+	max.z = (std::max)(a.minV.z, a.maxV.z);
+	a.maxV = max;
+	a.minV = min;
+
+}
+
 //AABBと円の当たり判定処理(重なっているか否か
 bool InCollision(const AABB& a, const Sphere& s, Vector3& v) {
 	//最近接点を求める
@@ -240,5 +254,15 @@ bool InCollision(const AABB& AA, const Segment& S) {
 		return true;//早期リターン
 	}
 	*/
+	return false;
+}
+
+bool InCollision(const AABB& a, const AABB& b) {
+	if ((a.minV.x <= b.maxV.x && a.maxV.x >= b.minV.x) &&//x軸
+		(a.minV.y <= b.maxV.y && a.maxV.y >= b.minV.y) &&
+		(a.minV.z <= b.maxV.z && a.maxV.z >= b.minV.z)
+		) {
+		return true;
+	}
 	return false;
 }

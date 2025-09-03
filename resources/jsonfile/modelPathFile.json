@@ -7,6 +7,7 @@
     "plane": [ "plane", "plane.obj" ]
   },
   "InstancingmodelPathFile": {
+    "box": ["box","box.obj",10000],
     "EnemyWait": [ "Object", "player.gltf", 1000 ],
     "EnemyMove": [ "Object", "player.gltf", 1000 ],
     "TitleEnemy": [ "Object", "player.gltf", 1000 ],
@@ -15,6 +16,6 @@
     "EBox": [ "Particle/EBox", "EBox.obj", 50000 ],
     "sphere": [ "SystemResources/sphere", "sphere.obj", 10000 ],
     "z+Plane": [ "SystemResources/normalZ+Plane", "normalZ+Plane.obj", 1000 ],
-    "SircleShadow": [ "SircleShadow", "dangerZone.obj",1000 ]
+    "SircleShadow": [ "SircleShadow", "dangerZone.obj", 1000 ]
   }
 }

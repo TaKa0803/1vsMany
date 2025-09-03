@@ -2,7 +2,6 @@
 #include<imgui.h>
 #include"SphereCollider/SphereCollider.h"
 
-
 bool OBBCollider::isDraw_ = true;
 
 void OBBCollider::Initialize(const std::string& tag, const EulerWorldTransform& parent)
@@ -211,6 +210,8 @@ bool OBBCollider::IsCollision(const Segment& seg) {
 
 	return InCollision(aabb_, seg);
 }
+
+
 
 
 void OBBCollider::SetColor(bool hit)

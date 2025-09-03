@@ -4,6 +4,7 @@
 
 GlobalVariableTree& InstancingGameObject::GetDebugTree(const std::string& name)
 {
+	tree_.name_ = name;
 	//ワールドのツリー追加
 	tree_.SetTreeData(world_.GetDebugTree());
 	//マテリアル関係追加

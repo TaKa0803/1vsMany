@@ -416,6 +416,7 @@
     <ClCompile Include="Application\Title\JumpEnemy\JumpEnemy.cpp" />
     <ClCompile Include="Application\Title\JumpEnemyManager\JumpEnemyManager.cpp" />
     <ClCompile Include="Application\Game\Player\EffectHitAttack\EffectPlayerHitAttack.cpp" />
+    <ClCompile Include="Engine\3d\Collider\AABBCollider\AABBCollidier.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\base\AudioManager\AudioManager.h">
@@ -767,6 +768,7 @@
     <ClInclude Include="Application\Title\JumpEnemy\JumpEnemy.h" />
     <ClInclude Include="Application\Title\JumpEnemyManager\JumpEnemyManager.h" />
     <ClInclude Include="Application\Game\Player\EffectHitAttack\EffectPlayerHitAttack.h" />
+    <ClInclude Include="Engine\3d\Collider\AABBCollider\AABBCollidier.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\PostEffect\CopyImage.hlsli">

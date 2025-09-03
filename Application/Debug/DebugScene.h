@@ -7,6 +7,7 @@
 #include"SkyBoxModel/SkyBoxModel.h"
 #include"ParticleData/ParticleManager.h"
 
+#include"AABBCollider/AABBCollidier.h"
 
 //　デバッグ用シーン
 //  主に技術検証用のシーン
@@ -72,4 +73,10 @@ private: //**プライベート変数**//
 
 	//パーティクルマネージャ
 	std::unique_ptr<ParticleManager>particleManager_;
+
+	float spd_ = 1.0f;;
+
+	std::unique_ptr<AABBCollider>aabb1_;
+	std::unique_ptr<AABBCollider>aabb2_;
+	std::unique_ptr<AABBCollider>aabb3_;
 };

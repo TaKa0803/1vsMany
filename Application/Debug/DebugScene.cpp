@@ -29,20 +29,14 @@ DebugScnene::DebugScnene()
 	//パーティクルマネージャ生成
 	particleManager_ = std::make_unique<ParticleManager>();
 	particleManager_->Initialize(TextureManager::LoadTex("resources/Texture/CG/circle.png"));
-}
 
-DebugScnene::~DebugScnene() { 
-	//解放処理
-	delete terrain;
-	delete skybox_; 
-}
-
-void DebugScnene::Initialize()
-{
+	aabb1_ = std::make_unique<AABBCollider>();
+	aabb2_ = std::make_unique<AABBCollider>();
+	aabb3_ = std::make_unique<AABBCollider>();
 
 	//動きチェック用で複数のモデルタグの初期化パターンをコメントとして残す
-	//object->Initialize("AnimeCube");
-	//object->Initialize("sphere");
+//object->Initialize("AnimeCube");
+//object->Initialize("sphere");
 	object->Initialize("Player");
 
 
@@ -68,7 +62,32 @@ void DebugScnene::Initialize()
 	//デバッグ用にパラメータ設定
 	std::unique_ptr<GlobalVariableGroup>gvg = std::make_unique<GlobalVariableGroup>("DebugScene");
 	gvg->SetTreeData(object->model_->SetDebugParam());
-	gvg->SetValue("オブジェクト回転",&object->world_.rotate_);
+	gvg->SetValue("オブジェクト回転", &object->world_.rotate_);
+
+	gvg->SetValue("速度", &spd_);
+
+	aabb1_->Initialize("aabb");
+	aabb1_->world_.translate_.x = 5;
+	aabb2_->Initialize("aabb");
+	aabb3_->Initialize("aabb");
+	aabb3_->world_.translate_.x = -5;
+
+	gvg->SetTreeData(aabb1_->GetDebugTree("AABB1"));
+	gvg->SetTreeData(aabb2_->GetDebugTree("AABB2"));
+	gvg->SetTreeData(aabb3_->GetDebugTree("AABB3"));
+
+}
+
+DebugScnene::~DebugScnene() { 
+	//解放処理
+	delete terrain;
+	delete skybox_; 
+}
+
+void DebugScnene::Initialize()
+{
+
+
 }
 
 void DebugScnene::Update()
@@ -102,6 +121,28 @@ void DebugScnene::Update()
 
 	//fallEnemies_->EmitEnemies(0);
 	//fallEnemies_->Update();
+
+	Vector3 mov = input_->GetAllArrowKey();
+
+	mov = { mov.x,mov.z,0 };
+
+	aabb1_->world_.translate_ += mov * spd_;;
+
+	aabb1_->Update();
+	aabb2_->Update();
+	aabb3_->Update();
+
+
+	Vector3 backV{0,0,0};
+	if (aabb1_->isCollision(aabb2_.get(), backV)) {
+		aabb1_->world_.translate_ += backV;
+		aabb1_->UpdateMatrix();
+//		backV.SetZero();
+	}
+	if (aabb1_->isCollision(aabb3_.get(), backV)) {
+		aabb1_->world_.translate_ += backV;
+		aabb1_->UpdateMatrix();
+	}
 }
 
 
@@ -109,18 +150,23 @@ void DebugScnene::Update()
 void DebugScnene::Draw()
 {
 	
-	skybox_->Draw();	
+	//skybox_->Draw();	
 
-	terrain->Draw();
+	//terrain->Draw();
 	//モデル描画
-	object->Draw();
+	//object->Draw();
+
+	aabb1_->Draw();
+	aabb2_->Draw();
+	aabb3_->Draw();
+
 
 	//MapLoader::GetInstance()->DrawLevelData();
 	//現在のすべてのインスタンシングモデル描画
 	InstancingModelManager::GetInstance()->DrawAllModel();
 
 	//パーティクル描画
-	particleManager_->Draw();
+	//particleManager_->Draw();
 	
 	//現在のすべてのインスタンシングモデル描画
 	PostEffectManager::GetInstance()->PostEffectDraw(PostEffectManager::kBloom, true);
@@ -150,6 +196,8 @@ void DebugScnene::Debug()
 	ImGui::DragFloat("d light intencity", &dLight_.intensity, 0.01f);
 	ImGui::ColorEdit4("light color", &dLight_.color.x);
 	ImGui::DragFloat3("d direction", &dLight_.direction.x, 0.1f);
+
+	ImGui::DragFloat3("aabb1", &aabb1_->world_.translate_.x,0.01f);
 
 	ImGui::End();
 

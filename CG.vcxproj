@@ -152,6 +152,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\IScene\IScene.cpp" />
     <ClCompile Include="Engine\2d\SpriteManager\SpriteManager.cpp" />
     <ClCompile Include="Engine\2d\SpritePSO\SpritePSO.cpp" />
+    <ClCompile Include="Engine\3d\Collider\AABBCollider\AABBCollidier.cpp" />
     <ClCompile Include="Engine\3d\Collider\ColliderOBB\OBBCollider.cpp" />
     <ClCompile Include="Engine\3d\Collider\IsCollisions.cpp" />
     <ClCompile Include="Engine\3d\SkyBoxModel\SkyBoxModel.cpp" />
@@ -439,6 +440,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\SceneManager\SceneManager.h" />
     <ClInclude Include="Engine\2d\SpriteManager\SpriteManager.h" />
     <ClInclude Include="Engine\2d\SpritePSO\SpritePSO.h" />
+    <ClInclude Include="Engine\3d\Collider\AABBCollider\AABBCollidier.h" />
     <ClInclude Include="Engine\3d\Collider\ColliderOBB\OBBCollider.h" />
     <ClInclude Include="Engine\3d\Collider\IsCollisions.h" />
     <ClInclude Include="Engine\3d\SkyBoxModel\SkyBoxModel.h" />
